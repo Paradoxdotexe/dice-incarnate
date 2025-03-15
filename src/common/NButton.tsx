@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { lighten, opacify } from "polished";
-import { ReactNode, useEffect, useRef } from "react";
+import { CSSProperties, ReactNode, useRef } from "react";
 
 type NButtonProps = {
   children: ReactNode;
@@ -9,22 +9,11 @@ type NButtonProps = {
   disabled?: boolean;
   onClick?: () => void;
   onRightClick?: () => void;
+  style?: CSSProperties;
 };
 
 export const NButton: React.FC<NButtonProps> = (props) => {
   const ref = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const onContextMenu = (event: MouseEvent) => {
-      event?.preventDefault();
-    };
-
-    ref.current?.addEventListener("contextmenu", onContextMenu);
-
-    return () => {
-      ref.current?.removeEventListener("contextmenu", onContextMenu);
-    };
-  }, []);
 
   return (
     <button
@@ -34,7 +23,7 @@ export const NButton: React.FC<NButtonProps> = (props) => {
       })}
       css={`
         outline: none;
-        font-family: "Saira Condensed";
+        font-family: "Saira Semi Condensed";
         font-size: 16px;
         border-radius: 6px;
         min-height: 0;
@@ -42,9 +31,10 @@ export const NButton: React.FC<NButtonProps> = (props) => {
         cursor: pointer;
         padding-inline: 6px;
         color: white;
-        background: ${props.type === "solid" ? props.color : "none"};
+        background: ${props.type === "solid" ? props.color : opacify(-0.8, props.color)};
         border: 1px solid ${props.color};
         transition: all 150ms ease;
+        white-space: nowrap;
 
         &.NButton--disabled {
           cursor: auto;
@@ -54,7 +44,7 @@ export const NButton: React.FC<NButtonProps> = (props) => {
         &:hover:not(.NButton--disabled) {
           background: ${props.type === "solid"
             ? lighten(0.1, props.color)
-            : opacify(-0.8, props.color)};
+            : opacify(-0.6, props.color)};
           border-color: ${props.type === "solid"
             ? lighten(0.1, props.color)
             : ""};
@@ -66,6 +56,7 @@ export const NButton: React.FC<NButtonProps> = (props) => {
           props.onRightClick?.();
         }
       }}
+      style={props.style}
     >
       {props.children}
     </button>

@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { NFlex } from "./common/NFlex";
-import {
-  Ascension,
-  CharacterClassCard,
-  CharacterClassLevel,
-  Transcendence,
-} from "./components/CharacterClassCard";
+import { CharacterClassCard } from "./components/CharacterClassCard";
 import { CharacterAbilityScore } from "./components/CharacterAbilityScore";
 
 function App() {
-  const [sageClassLevel, setSageClassLevel] = useState<CharacterClassLevel>({
-    transcendence: 0,
-    ascension: 0,
-  });
+  const [stormSageAcquired, setStormSageAcquired] = useState(0);
+  const [stormSageAscension, setStormSageAscension] = useState(0);
+  const [strongAcquired, setStrongAcquired] = useState(0);
+
+  useEffect(() => {
+    const onContextMenu = (event: MouseEvent) => {
+      event?.preventDefault();
+    };
+
+    document.addEventListener("contextmenu", onContextMenu);
+
+    return () => {
+      document.removeEventListener("contextmenu", onContextMenu);
+    };
+  }, []);
 
   return (
     <NFlex
@@ -32,31 +38,29 @@ function App() {
           <CharacterAbilityScore
             name="Intelligence"
             score={
-              10 + sageClassLevel.transcendence + sageClassLevel.ascension * 2
+              10 + strongAcquired + stormSageAcquired + stormSageAscension * 2
             }
           />
           <CharacterClassCard
+            class={{ name: "Intelligent", color: "#5F5F5F" }}
+            acquired={strongAcquired}
+            maxAcquired={6}
+            ascension={0}
+            maxAscension={0}
+            onAcquire={(change) => setStrongAcquired(strongAcquired + change)}
+          />
+          <CharacterClassCard
             class={{ name: "Storm Sage", color: "#3799d1" }}
-            classLevel={sageClassLevel}
-            onTranscend={(increment) => {
-              const newTranscendence = (sageClassLevel.transcendence +
-                increment) as Transcendence;
-              setSageClassLevel({
-                ...sageClassLevel,
-                transcendence: newTranscendence,
-                ascension:
-                  newTranscendence === 0 ? 0 : sageClassLevel.ascension,
-              });
-            }}
-            onAscend={(increment) => {
-              const newAscension = (sageClassLevel.ascension +
-                increment) as Ascension;
-              setSageClassLevel({
-                ...sageClassLevel,
-                ascension: newAscension,
-              });
-            }}
-            ascendDisabled={sageClassLevel.transcendence === 0}
+            acquired={stormSageAcquired}
+            maxAcquired={3}
+            ascension={stormSageAscension}
+            maxAscension={2}
+            onAcquire={(change) =>
+              setStormSageAcquired(stormSageAcquired + change)
+            }
+            onAscend={(change) =>
+              setStormSageAscension(stormSageAscension + change)
+            }
           />
         </NFlex>
       </div>

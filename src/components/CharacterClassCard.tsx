@@ -10,25 +10,20 @@ type CharacterClass = {
   color: string;
 };
 
-export type Transcendence = 0 | 1 | 2 | 3;
-export type Ascension = 0 | 1 | 2;
-
-export type CharacterClassLevel = {
-  transcendence: Transcendence;
-  ascension: Ascension;
-};
-
-const getAscensionDie = (ascension: Ascension) => {
+const getAscensionDie = (ascension: number) => {
   return { 0: 6, 1: 12, 2: 20 }[ascension];
 };
 
 type CharacterClassCardProps = {
   class: CharacterClass;
-  classLevel: CharacterClassLevel;
+  acquired: number;
+  maxAcquired: number;
+  ascension: number;
+  maxAscension: number;
   onClick?: () => void;
-  onTranscend?: (increment: 1 | -1) => void;
-  transcendDisabled?: boolean;
-  onAscend?: (increment: 1 | -1) => void;
+  onAcquire?: (change: number) => void;
+  acquireDisabled?: boolean;
+  onAscend?: (change: number) => void;
   ascendDisabled?: boolean;
 };
 
@@ -37,14 +32,12 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 ) => {
   const classColor = props.class.color;
 
-  const ascensionDie = getAscensionDie(props.classLevel.ascension);
-  const minTranscendence = props.classLevel.transcendence === 0;
-  const minAscension = props.classLevel.ascension === 0;
-  const maxTranscendence = props.classLevel.transcendence === 3;
-  const maxAscension = props.classLevel.ascension === 2;
+  const ascensionDie = getAscensionDie(props.ascension);
+  const hasMaxAcquired = props.acquired === props.maxAcquired;
+  const hasMaxAscension = props.ascension === props.maxAscension;
 
   const gradientStart = opacify(-0.95, classColor);
-  const gradientEnd = opacify(-0.10, classColor);
+  const gradientEnd = opacify(-0.1, classColor);
   const gradient = `linear-gradient(to bottom right, ${gradientStart} 15%, ${gradientEnd})`;
   // second gradient is used to avoid choppiness
   const gradientSmoother = `linear-gradient(${gradientStart}, ${gradientStart})`;
@@ -84,14 +77,16 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
             {props.class.name}
           </div>
 
-          <NFlex gap={6}>
-            {arrayOf(props.classLevel.transcendence).map(() => (
-              <NFlex gap={3}>
-                <CharacterAbilityIcon color={classColor}>
-                  {ascensionDie}
-                </CharacterAbilityIcon>
+          <NFlex gap={3}>
+            {arrayOf(props.acquired).map(() => (
+              <>
+                {!!props.maxAscension && (
+                  <CharacterAbilityIcon color={classColor}>
+                    {ascensionDie}
+                  </CharacterAbilityIcon>
+                )}
                 <CharacterAbilityIcon color={classColor} />
-              </NFlex>
+              </>
             ))}
           </NFlex>
         </NFlex>
@@ -100,21 +95,47 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           <NButton
             type="solid"
             color={classColor}
-            disabled={props.transcendDisabled || maxTranscendence}
-            onClick={() => props.onTranscend?.(1)}
-            onRightClick={() => !minTranscendence && props.onTranscend?.(-1)}
+            disabled={props.acquireDisabled}
+            onClick={() => {
+              if (!hasMaxAcquired) {
+                props.onAcquire?.(1);
+              }
+            }}
+            onRightClick={() => {
+              if (!!props.acquired) {
+                props.onAcquire?.(-1);
+                // if acquisition is reduced to zero, reduce ascension to zero too
+                if (props.acquired === 1) {
+                  props.onAscend?.(-props.ascension);
+                }
+              }
+            }}
+            style={{
+              width: 104,
+            }}
           >
-            {maxTranscendence ? "Max Transcendence" : "Transcend"}
+            {hasMaxAcquired ? "Max Acquired" : "Acquire"}
           </NButton>
-          <NButton
-            type="outline"
-            color={classColor}
-            disabled={props.ascendDisabled || maxAscension}
-            onClick={() => props.onAscend?.(1)}
-            onRightClick={() => !minAscension && props.onAscend?.(-1)}
-          >
-            {maxAscension ? "Max Ascension" : "Ascend"}
-          </NButton>
+          {!!props.maxAscension && (
+            <NButton
+              type="outline"
+              color={classColor}
+              disabled={props.ascendDisabled || !props.acquired}
+              onClick={() => {
+                if (!hasMaxAscension) {
+                  props.onAscend?.(1);
+                }
+              }}
+              onRightClick={() => {
+                if (!!props.ascension) {
+                  props.onAscend?.(-1);
+                }
+              }}
+              style={{ width: 113 }}
+            >
+              {hasMaxAscension ? "Max Ascension" : "Ascend"}
+            </NButton>
+          )}
         </NFlex>
       </NFlex>
 
