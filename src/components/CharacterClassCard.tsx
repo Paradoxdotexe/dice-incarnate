@@ -1,6 +1,6 @@
 import { opacify } from "polished";
 import React from "react";
-import { AbilityToken } from "./AbilityToken";
+import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { arrayOf } from "../utils/arrayOf";
 import { NButton } from "../common/NButton";
 import { NFlex } from "../common/NFlex";
@@ -43,6 +43,12 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   const maxTranscendence = props.classLevel.transcendence === 3;
   const maxAscension = props.classLevel.ascension === 3;
 
+  const gradientStart = opacify(-0.95, classColor);
+  const gradientEnd = opacify(-0.10, classColor);
+  const gradient = `linear-gradient(to bottom right, ${gradientStart} 15%, ${gradientEnd})`;
+  // second gradient is used to avoid choppiness
+  const gradientSmoother = `linear-gradient(${gradientStart}, ${gradientStart})`;
+
   return (
     <NFlex
       align="center"
@@ -51,11 +57,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
         height: 150,
         border: `2px solid ${classColor}`,
         borderRadius: 12,
-        background: `linear-gradient(to bottom right, ${opacify(
-          -1,
-          classColor
-        )} 10%, ${classColor})`,
-
+        background: `${gradient}, ${gradientSmoother}`,
         position: "relative",
         padding: 12,
         cursor: "pointer",
@@ -85,8 +87,10 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           <NFlex gap={6}>
             {arrayOf(props.classLevel.transcendence).map(() => (
               <NFlex gap={3}>
-                <AbilityToken color={classColor}>{ascensionDie}</AbilityToken>
-                <AbilityToken color={classColor} />
+                <CharacterAbilityIcon color={classColor}>
+                  {ascensionDie}
+                </CharacterAbilityIcon>
+                <CharacterAbilityIcon color={classColor} />
               </NFlex>
             ))}
           </NFlex>

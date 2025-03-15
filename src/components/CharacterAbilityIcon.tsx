@@ -3,12 +3,12 @@ import ShieldIcon from "../assets/icons/Shield.svg?react";
 import StarIcon from "../assets/icons/Star.svg?react";
 import { NFlex } from "../common/NFlex";
 
-type AbilityTokenProps = {
+type CharacterAbilityIconProps = {
   color: string;
   children?: ReactNode;
 };
 
-export const AbilityToken: React.FC<AbilityTokenProps> = (props) => {
+export const CharacterAbilityIcon: React.FC<CharacterAbilityIconProps> = (props) => {
   return (
     <NFlex align="center" justify="center">
       <ShieldIcon style={{ width: 26, color: props.color }} />
