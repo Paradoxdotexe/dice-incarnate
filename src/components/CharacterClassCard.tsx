@@ -11,7 +11,7 @@ type CharacterClass = {
 };
 
 export type Transcendence = 0 | 1 | 2 | 3;
-export type Ascension = 1 | 2 | 3;
+export type Ascension = 0 | 1 | 2;
 
 export type CharacterClassLevel = {
   transcendence: Transcendence;
@@ -19,7 +19,7 @@ export type CharacterClassLevel = {
 };
 
 const getAscensionDie = (ascension: Ascension) => {
-  return { 1: 6, 2: 12, 3: 20 }[ascension];
+  return { 0: 6, 1: 12, 2: 20 }[ascension];
 };
 
 type CharacterClassCardProps = {
@@ -39,9 +39,9 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 
   const ascensionDie = getAscensionDie(props.classLevel.ascension);
   const minTranscendence = props.classLevel.transcendence === 0;
-  const minAscension = props.classLevel.ascension === 1;
+  const minAscension = props.classLevel.ascension === 0;
   const maxTranscendence = props.classLevel.transcendence === 3;
-  const maxAscension = props.classLevel.ascension === 3;
+  const maxAscension = props.classLevel.ascension === 2;
 
   const gradientStart = opacify(-0.95, classColor);
   const gradientEnd = opacify(-0.10, classColor);

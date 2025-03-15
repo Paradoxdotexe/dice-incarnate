@@ -7,11 +7,12 @@ import {
   CharacterClassLevel,
   Transcendence,
 } from "./components/CharacterClassCard";
+import { CharacterAbilityScore } from "./components/CharacterAbilityScore";
 
 function App() {
   const [sageClassLevel, setSageClassLevel] = useState<CharacterClassLevel>({
     transcendence: 0,
-    ascension: 1,
+    ascension: 0,
   });
 
   return (
@@ -28,6 +29,12 @@ function App() {
         `}
       >
         <NFlex gap={24}>
+          <CharacterAbilityScore
+            name="Intelligence"
+            score={
+              10 + sageClassLevel.transcendence + sageClassLevel.ascension * 2
+            }
+          />
           <CharacterClassCard
             class={{ name: "Storm Sage", color: "#3799d1" }}
             classLevel={sageClassLevel}
@@ -38,7 +45,7 @@ function App() {
                 ...sageClassLevel,
                 transcendence: newTranscendence,
                 ascension:
-                  newTranscendence === 0 ? 1 : sageClassLevel.ascension,
+                  newTranscendence === 0 ? 0 : sageClassLevel.ascension,
               });
             }}
             onAscend={(increment) => {
@@ -50,11 +57,6 @@ function App() {
               });
             }}
             ascendDisabled={sageClassLevel.transcendence === 0}
-          />
-
-          <CharacterClassCard
-            class={{ name: "Blood Barbarian", color: "#d13737" }}
-            classLevel={{ transcendence: 1, ascension: 3 }}
           />
         </NFlex>
       </div>
