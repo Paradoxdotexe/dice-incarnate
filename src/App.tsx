@@ -3,9 +3,7 @@ import { CharacterClassCard } from "./components/CharacterClassCard";
 
 function App() {
   return (
-    <CharacterClassCard
-      class={{ name: "Storm Sage", color: "#80C1D7", icon: "StormSage" }}
-    />
+    <CharacterClassCard class={{ name: "Storm Sage", color: "#3799d1" }} />
   );
 }
 

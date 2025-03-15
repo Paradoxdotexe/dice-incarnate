@@ -1,12 +1,12 @@
-import { lighten } from "polished";
+import { lighten, opacify } from "polished";
 import { playSound } from "../utils/playSound";
 import { useState } from "react";
 import React from "react";
+import { AbilityToken } from "./AbilityToken";
 
 type CharacterClass = {
   name: string;
   color: string;
-  icon: string;
 };
 
 type CharacterClassCardProps = {
@@ -16,70 +16,73 @@ type CharacterClassCardProps = {
 export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   props
 ) => {
-  const lightColor = lighten(0.15, props.class.color);
-  const darkColor = lighten(-0.1, props.class.color);
-
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-      <div
-        style={{
-          width: 192,
-          height: 192,
-          border: `5px solid ${lightColor}`,
-          borderRadius: 24,
-          background: `radial-gradient(${lightColor}, ${darkColor})`,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 8,
-          paddingTop: 16,
-        }}
-      >
-        <img src={`/icons/${props.class.icon}.svg`} style={{ width: 125 }} />
-        <div style={{ color: lightColor, fontSize: 20 }}>
-          {props.class.name}
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 13,
-        }}
-      >
-        {[...new Array(5)].map((_, i) => (
-          <CharacterClassLevelChip key={i} color={lightColor} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-type CharacterClassLevelChipProps = {
-  color: string;
-};
-
-const CharacterClassLevelChip: React.FC<CharacterClassLevelChipProps> = (
-  props
-) => {
-  const [toggled, setToggled] = useState(false);
-
+  const classColor = props.class.color;
   return (
     <div
       style={{
-        width: 22,
-        height: 22,
-        background: toggled ? props.color : "black",
-        border: `2px solid ${props.color}`,
-        borderRadius: 3,
-        transform: "rotateZ(45deg)",
-        cursor: "pointer",
+        width: 300,
+        height: 150,
+        border: `2px solid ${classColor}`,
+        borderRadius: 12,
+        background: `linear-gradient(to bottom right, ${opacify(
+          -1,
+          classColor
+        )} 10%, ${classColor})`,
+        display: "flex",
+        alignItems: "center",
+        position: "relative",
+        padding: 12,
+        overflow: "hidden",
       }}
-      onClick={() =>
-        playSound("/sounds/LevelUp.mp3").then(() => setToggled(!toggled))
-      }
-    ></div>
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          zIndex: 1
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <div
+            style={{
+              fontFamily: "Grenze",
+              fontSize: 26,
+              color: "white",
+              fontWeight: 500,
+            }}
+          >
+            {props.class.name}
+          </div>
+          <div style={{ display: "flex", gap: 4 }}>
+            <AbilityToken color={classColor}>12</AbilityToken>
+            <AbilityToken color={classColor} />
+            <AbilityToken color={classColor}>12</AbilityToken>
+            <AbilityToken color={classColor} />
+            <AbilityToken color={classColor}>12</AbilityToken>
+            <AbilityToken color={classColor} />
+          </div>
+        </div>
+
+        <div style={{ display: "flex", gap: 4 }}>
+          <button style={{ background: classColor, borderColor: classColor }}>
+            Transcend
+          </button>
+          <button style={{ background: "none", borderColor: classColor }}>
+            Ascend
+          </button>
+        </div>
+      </div>
+      <img
+        style={{
+          position: "absolute",
+          right: 12,
+          height: "calc(100% - 24px)",
+          opacity: 0.06,
+        }}
+        src={`/icons/${props.class.name.replace(" ", "")}.svg`}
+      />
+    </div>
   );
 };
