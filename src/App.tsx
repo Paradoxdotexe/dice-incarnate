@@ -1,8 +1,19 @@
+import { useState } from "react";
 import "./App.css";
 import { NFlex } from "./common/NFlex";
-import { CharacterClassCard } from "./components/CharacterClassCard";
+import {
+  Ascension,
+  CharacterClassCard,
+  CharacterClassLevel,
+  Transcendence,
+} from "./components/CharacterClassCard";
 
 function App() {
+  const [sageClassLevel, setSageClassLevel] = useState<CharacterClassLevel>({
+    transcendence: 0,
+    ascension: 1,
+  });
+
   return (
     <NFlex
       vertical
@@ -19,8 +30,28 @@ function App() {
         <NFlex gap={24}>
           <CharacterClassCard
             class={{ name: "Storm Sage", color: "#3799d1" }}
-            classLevel={{ transcendence: 3, ascension: 2 }}
+            classLevel={sageClassLevel}
+            onTranscend={(increment) => {
+              const newTranscendence = (sageClassLevel.transcendence +
+                increment) as Transcendence;
+              setSageClassLevel({
+                ...sageClassLevel,
+                transcendence: newTranscendence,
+                ascension:
+                  newTranscendence === 0 ? 1 : sageClassLevel.ascension,
+              });
+            }}
+            onAscend={(increment) => {
+              const newAscension = (sageClassLevel.ascension +
+                increment) as Ascension;
+              setSageClassLevel({
+                ...sageClassLevel,
+                ascension: newAscension,
+              });
+            }}
+            ascendDisabled={sageClassLevel.transcendence === 0}
           />
+
           <CharacterClassCard
             class={{ name: "Blood Barbarian", color: "#d13737" }}
             classLevel={{ transcendence: 1, ascension: 3 }}

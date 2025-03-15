@@ -8,6 +8,7 @@ type NFlexProps = {
   gap?: number | string;
   style?: CSSProperties;
   className?: string;
+  onClick?: () => void;
 };
 
 export const NFlex: React.FC<NFlexProps> = (props) => {
@@ -21,6 +22,7 @@ export const NFlex: React.FC<NFlexProps> = (props) => {
       `}
       style={{ gap: props.gap, ...props.style }}
       className={props.className}
+      onClick={props.onClick}
     >
       {props.children}
     </div>

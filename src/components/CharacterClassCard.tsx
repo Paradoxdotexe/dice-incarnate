@@ -1,5 +1,4 @@
 import { opacify } from "polished";
-import { playSound } from "../utils/playSound";
 import React from "react";
 import { AbilityToken } from "./AbilityToken";
 import { arrayOf } from "../utils/arrayOf";
@@ -11,10 +10,10 @@ type CharacterClass = {
   color: string;
 };
 
-type Transcendence = 0 | 1 | 2 | 3;
-type Ascension = 1 | 2 | 3;
+export type Transcendence = 0 | 1 | 2 | 3;
+export type Ascension = 1 | 2 | 3;
 
-type CharacterClassLevel = {
+export type CharacterClassLevel = {
   transcendence: Transcendence;
   ascension: Ascension;
 };
@@ -27,9 +26,9 @@ type CharacterClassCardProps = {
   class: CharacterClass;
   classLevel: CharacterClassLevel;
   onClick?: () => void;
-  onTranscend?: () => void;
+  onTranscend?: (increment: 1 | -1) => void;
   transcendDisabled?: boolean;
-  onAscend?: () => void;
+  onAscend?: (increment: 1 | -1) => void;
   ascendDisabled?: boolean;
 };
 
@@ -39,6 +38,8 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   const classColor = props.class.color;
 
   const ascensionDie = getAscensionDie(props.classLevel.ascension);
+  const minTranscendence = props.classLevel.transcendence === 0;
+  const minAscension = props.classLevel.ascension === 1;
   const maxTranscendence = props.classLevel.transcendence === 3;
   const maxAscension = props.classLevel.ascension === 3;
 
@@ -59,6 +60,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
         padding: 12,
         cursor: "pointer",
       }}
+      onClick={props.onClick}
     >
       <NFlex
         vertical
@@ -95,7 +97,8 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
             type="solid"
             color={classColor}
             disabled={props.transcendDisabled || maxTranscendence}
-            onClick={props.onTranscend}
+            onClick={() => props.onTranscend?.(1)}
+            onRightClick={() => !minTranscendence && props.onTranscend?.(-1)}
           >
             {maxTranscendence ? "Max Transcendence" : "Transcend"}
           </NButton>
@@ -103,7 +106,8 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
             type="outline"
             color={classColor}
             disabled={props.ascendDisabled || maxAscension}
-            onClick={props.onAscend}
+            onClick={() => props.onAscend?.(1)}
+            onRightClick={() => !minAscension && props.onAscend?.(-1)}
           >
             {maxAscension ? "Max Ascension" : "Ascend"}
           </NButton>
