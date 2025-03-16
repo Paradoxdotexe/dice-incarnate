@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { NFlex } from "./common/NFlex";
 import { CharacterClassCard } from "./components/CharacterClassCard";
-import { CharacterAbilityScore } from "./components/CharacterAbilityScore";
+import { CharacterAttributeScore } from "./components/CharacterAttributeScore";
 import { CHARACTER_CLASSES } from "./appendix/CharacterClass";
+import { CharacterClassPanel } from "./components/CharacterClassPanel";
 
 function App() {
   const [characterState, setCharacterState] = useState<{
@@ -20,6 +21,7 @@ function App() {
       },
     },
   });
+  const [selectedClassKey, setSelectedClassKey] = useState<string>();
 
   useEffect(() => {
     const onContextMenu = (event: MouseEvent) => {
@@ -35,36 +37,29 @@ function App() {
 
   return (
     <NFlex
-      vertical
-      align="center"
+      justify="center"
       css={`
         padding: 48px;
       `}
     >
-      <div
-        css={`
-          width: 1000px;
-        `}
-      >
-        <NFlex gap={24}>
-          <CharacterAbilityScore
-            name="Intelligence"
-            score={
-              10 +
-              Object.entries(characterState.classes)
-                .filter(([key]) => key.startsWith("INT"))
-                .reduce(
-                  (count, [_, classState]) =>
-                    count +
-                    classState.acquiredTraits.length +
-                    classState.ascension * 2,
-                  0
-                )
-            }
-          />
-          {CHARACTER_CLASSES.filter(
-            (cc) => cc.attribute === "INTELLIGENCE"
-          ).map((cc) => {
+      <NFlex gap={24} style={{ width: 1122, height: 150 }}>
+        <CharacterAttributeScore
+          name="Intelligence"
+          score={
+            10 +
+            Object.entries(characterState.classes)
+              .filter(([key]) => key.startsWith("INT"))
+              .reduce(
+                (count, [_, classState]) =>
+                  count +
+                  classState.acquiredTraits.length +
+                  classState.ascension * 2,
+                0
+              )
+          }
+        />
+        {CHARACTER_CLASSES.filter((cc) => cc.attribute === "INTELLIGENCE").map(
+          (cc) => {
             const classState = characterState.classes[cc.key];
             return (
               <CharacterClassCard
@@ -88,11 +83,18 @@ function App() {
                   characterState.classes[cc.key].ascension += change;
                   setCharacterState({ ...characterState });
                 }}
+                onClick={() => setSelectedClassKey(cc.key)}
               />
             );
-          })}
-        </NFlex>
-      </div>
+          }
+        )}
+      </NFlex>
+      {selectedClassKey && (
+        <CharacterClassPanel
+          class={CHARACTER_CLASSES.find((cc) => cc.key === selectedClassKey)!}
+          {...characterState.classes[selectedClassKey]}
+        />
+      )}
     </NFlex>
   );
 }

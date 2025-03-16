@@ -23,7 +23,7 @@ export const NButton: React.FC<NButtonProps> = (props) => {
       })}
       css={`
         outline: none;
-        font-family: "Saira Semi Condensed";
+        font-family: "Reddit Sans Condensed";
         font-size: 16px;
         border-radius: 6px;
         min-height: 0;
@@ -31,7 +31,9 @@ export const NButton: React.FC<NButtonProps> = (props) => {
         cursor: pointer;
         padding-inline: 6px;
         color: white;
-        background: ${props.type === "solid" ? props.color : opacify(-0.8, props.color)};
+        background: ${props.type === "solid"
+          ? props.color
+          : opacify(-0.8, props.color)};
         border: 1px solid ${props.color};
         transition: all 150ms ease;
         white-space: nowrap;

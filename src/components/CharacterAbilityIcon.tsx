@@ -8,10 +8,12 @@ type CharacterAbilityIconProps = {
   children?: ReactNode;
 };
 
-export const CharacterAbilityIcon: React.FC<CharacterAbilityIconProps> = (props) => {
+export const CharacterAbilityIcon: React.FC<CharacterAbilityIconProps> = (
+  props
+) => {
   return (
     <NFlex align="center" justify="center">
-      <ShieldIcon style={{ width: 26, color: props.color }} />
+      <ShieldIcon style={{ width: 24, color: props.color }} />
       <div
         style={{
           position: "absolute",
@@ -21,15 +23,16 @@ export const CharacterAbilityIcon: React.FC<CharacterAbilityIconProps> = (props)
         {props.children ? (
           <div
             style={{
-              fontFamily: "Saira Extra Condensed",
+              fontFamily: "Reddit Sans Condensed",
               fontWeight: 600,
-              fontSize: 18,
+              fontSize: 15,
+              marginTop: -1,
             }}
           >
             {props.children}
           </div>
         ) : (
-          <StarIcon style={{ width: 16 }} />
+          <StarIcon style={{ width: 14, marginTop: 1 }} />
         )}
       </div>
     </NFlex>

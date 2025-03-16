@@ -5,10 +5,9 @@ import { arrayOf } from "../utils/arrayOf";
 import { NButton } from "../common/NButton";
 import { NFlex } from "../common/NFlex";
 import { CharacterClass } from "../appendix/CharacterClass";
-import { groupBy } from "lodash-es";
 
-const getAscensionDie = (ascension: number) => {
-  return { 0: 6, 1: 12, 2: 20 }[ascension];
+export const getAscensionDie = (ascension: number) => {
+  return { 0: 6, 1: 12, 2: 20 }[ascension] as number;
 };
 
 type CharacterClassCardProps = {
@@ -35,11 +34,13 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   const hasMaxAcquired = props.acquired === maxAcquired;
   const hasMaxAscension = props.ascension === maxAscension;
 
-  const gradientStart = opacify(-0.95, color);
+  const gradientStart = opacify(-1, color);
   const gradientEnd = opacify(-0.1, color);
-  const gradient = `linear-gradient(to bottom right, ${gradientStart} 15%, ${gradientEnd})`;
+  const gradient = `linear-gradient(to bottom right, ${gradientStart} 18%, ${gradientEnd})`;
+
   // second gradient is used to avoid choppiness
-  const gradientSmoother = `linear-gradient(${gradientStart}, ${gradientStart})`;
+  const antiChopGradientEnd = opacify(-0.95, color);
+  const antiChopGradient = `linear-gradient(${gradientStart} 14%, ${antiChopGradientEnd})`;
 
   return (
     <NFlex
@@ -49,7 +50,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
         height: 150,
         border: `2px solid ${color}`,
         borderRadius: 12,
-        background: `${gradient}, ${gradientSmoother}`,
+        background: `${gradient}, ${antiChopGradient}`,
         position: "relative",
         padding: 12,
         cursor: "pointer",
@@ -110,7 +111,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
               }
             }}
             style={{
-              width: 104,
+              width: 101,
             }}
           >
             {hasMaxAcquired ? "Max Acquired" : "Acquire"}
@@ -130,7 +131,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
                   props.onAscend?.(-1);
                 }
               }}
-              style={{ width: 113 }}
+              style={{ width: 108 }}
             >
               {hasMaxAscension ? "Max Ascension" : "Ascend"}
             </NButton>

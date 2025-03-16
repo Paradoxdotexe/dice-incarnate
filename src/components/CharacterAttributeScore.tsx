@@ -1,12 +1,12 @@
 import React from "react";
 import { NFlex } from "../common/NFlex";
 
-type CharacterAbilityScoreProps = {
+type CharacterAttributeScoreProps = {
   name: string;
   score: number;
 };
 
-export const CharacterAbilityScore: React.FC<CharacterAbilityScoreProps> = (
+export const CharacterAttributeScore: React.FC<CharacterAttributeScoreProps> = (
   props
 ) => {
   return (
@@ -28,7 +28,7 @@ export const CharacterAbilityScore: React.FC<CharacterAbilityScoreProps> = (
       </div>
       <div
         css={`
-          font-family: "Saira Condensed";
+          font-family: "Reddit Sans Condensed";
           font-weight: 700;
           font-size: 60px;
         `}
