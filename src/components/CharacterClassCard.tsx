@@ -4,11 +4,8 @@ import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { arrayOf } from "../utils/arrayOf";
 import { NButton } from "../common/NButton";
 import { NFlex } from "../common/NFlex";
-
-type CharacterClass = {
-  name: string;
-  color: string;
-};
+import { CharacterClass } from "../appendix/CharacterClass";
+import { groupBy } from "lodash-es";
 
 const getAscensionDie = (ascension: number) => {
   return { 0: 6, 1: 12, 2: 20 }[ascension];
@@ -17,9 +14,7 @@ const getAscensionDie = (ascension: number) => {
 type CharacterClassCardProps = {
   class: CharacterClass;
   acquired: number;
-  maxAcquired: number;
   ascension: number;
-  maxAscension: number;
   onClick?: () => void;
   onAcquire?: (change: number) => void;
   acquireDisabled?: boolean;
@@ -30,14 +25,18 @@ type CharacterClassCardProps = {
 export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   props
 ) => {
-  const classColor = props.class.color;
+  const color = props.class.color;
 
+  const ascensionEnabled = !!props.class.traits[0].ability;
   const ascensionDie = getAscensionDie(props.ascension);
-  const hasMaxAcquired = props.acquired === props.maxAcquired;
-  const hasMaxAscension = props.ascension === props.maxAscension;
 
-  const gradientStart = opacify(-0.95, classColor);
-  const gradientEnd = opacify(-0.1, classColor);
+  const maxAcquired = props.class.traits.length;
+  const maxAscension = ascensionEnabled ? 2 : 0;
+  const hasMaxAcquired = props.acquired === maxAcquired;
+  const hasMaxAscension = props.ascension === maxAscension;
+
+  const gradientStart = opacify(-0.95, color);
+  const gradientEnd = opacify(-0.1, color);
   const gradient = `linear-gradient(to bottom right, ${gradientStart} 15%, ${gradientEnd})`;
   // second gradient is used to avoid choppiness
   const gradientSmoother = `linear-gradient(${gradientStart}, ${gradientStart})`;
@@ -48,7 +47,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
       style={{
         width: 300,
         height: 150,
-        border: `2px solid ${classColor}`,
+        border: `2px solid ${color}`,
         borderRadius: 12,
         background: `${gradient}, ${gradientSmoother}`,
         position: "relative",
@@ -80,12 +79,12 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           <NFlex gap={3}>
             {arrayOf(props.acquired).map(() => (
               <>
-                {!!props.maxAscension && (
-                  <CharacterAbilityIcon color={classColor}>
+                {ascensionEnabled && (
+                  <CharacterAbilityIcon color={color}>
                     {ascensionDie}
                   </CharacterAbilityIcon>
                 )}
-                <CharacterAbilityIcon color={classColor} />
+                <CharacterAbilityIcon color={color} />
               </>
             ))}
           </NFlex>
@@ -94,7 +93,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
         <NFlex gap={6}>
           <NButton
             type="solid"
-            color={classColor}
+            color={color}
             disabled={props.acquireDisabled}
             onClick={() => {
               if (!hasMaxAcquired) {
@@ -116,11 +115,11 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           >
             {hasMaxAcquired ? "Max Acquired" : "Acquire"}
           </NButton>
-          {!!props.maxAscension && (
+          {ascensionEnabled && !!props.acquired && (
             <NButton
               type="outline"
-              color={classColor}
-              disabled={props.ascendDisabled || !props.acquired}
+              color={color}
+              disabled={props.ascendDisabled}
               onClick={() => {
                 if (!hasMaxAscension) {
                   props.onAscend?.(1);
