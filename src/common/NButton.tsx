@@ -52,7 +52,14 @@ export const NButton: React.FC<NButtonProps> = (props) => {
             : ""};
         }
       `}
-      onClick={props.disabled ? undefined : props.onClick}
+      onClick={
+        props.disabled
+          ? undefined
+          : (event) => {
+              event.stopPropagation();
+              props.onClick?.();
+            }
+      }
       onMouseUp={(event) => {
         if (event.button === 2) {
           props.onRightClick?.();

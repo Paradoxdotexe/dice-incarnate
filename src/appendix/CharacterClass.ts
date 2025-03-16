@@ -1,13 +1,8 @@
-type CharacterAttribute =
-  | "STRENGTH"
-  | "AGILITY"
-  | "INTELLIGENCE"
-  | "CHARISMA"
-  | "WISDOM";
+import { CharacterAttributeKey } from "./CharacterAttribute";
 
 export type CharacterClass = {
   key: string;
-  attribute: CharacterAttribute;
+  attributeKey: CharacterAttributeKey;
   name: string;
   color: string;
   traits: CharacterClassTrait[];
@@ -29,25 +24,25 @@ export type CharacterClassTrait = {
 
 export const CHARACTER_CLASSES: CharacterClass[] = [
   {
-    key: "INT_INTELLIGENT",
-    attribute: "INTELLIGENCE",
-    name: "Intelligent",
+    key: "INT_GENERAL",
+    attributeKey: "INT",
+    name: "Scholar",
     color: "#5d5d5d",
     traits: [
       {
-        key: "INT_INTELLIGENT_TRAIT_1",
+        key: "INT_GENERAL_TRAIT_1",
         perk: {
-          key: "INT_INTELLIGENT_PERK_1",
+          key: "INT_GENERAL_PERK_1",
           name: "Book Worm",
           description:
-            "You double your Intellect bonus on skill checks to comprehend written information.",
+            "You have advantage on  to comprehend written information.",
         },
       },
     ],
   },
   {
     key: "INT_SAGE_STORM",
-    attribute: "INTELLIGENCE",
+    attributeKey: "INT",
     name: "Storm Sage",
     color: "#3799d1",
     traits: [

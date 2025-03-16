@@ -2,7 +2,9 @@ import { opacify } from "polished";
 import { CharacterClass } from "../appendix/CharacterClass";
 import { NFlex } from "../common/NFlex";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
-import { getAscensionDie } from "./CharacterClassCard";
+import { CHARACTER_CLASS_CARD_WIDTH, getAscensionDie } from "./CharacterClassCard";
+
+const PANEL_WIDTH = CHARACTER_CLASS_CARD_WIDTH * 2 + 18;
 
 type CharacterClassPanelProps = {
   class: CharacterClass;
@@ -22,9 +24,8 @@ export const CharacterClassPanel: React.FC<CharacterClassPanelProps> = (
       vertical
       gap={12}
       style={{
-        background: opacify(-0.8, color),
-        width: 420,
-        height: 800,
+        background: opacify(-0.9, color),
+        width: PANEL_WIDTH,
         borderRadius: 12,
         border: `2px solid ${color}`,
         padding: 12,

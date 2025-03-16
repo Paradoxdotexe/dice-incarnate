@@ -6,6 +6,9 @@ import { NButton } from "../common/NButton";
 import { NFlex } from "../common/NFlex";
 import { CharacterClass } from "../appendix/CharacterClass";
 
+export const CHARACTER_CLASS_CARD_WIDTH = 243;
+export const CHARACTER_CLASS_CARD_HEIGHT = 129;
+
 export const getAscensionDie = (ascension: number) => {
   return { 0: 6, 1: 12, 2: 20 }[ascension] as number;
 };
@@ -46,8 +49,8 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
     <NFlex
       align="center"
       style={{
-        width: 300,
-        height: 150,
+        width: 243,
+        height: 129,
         border: `2px solid ${color}`,
         borderRadius: 12,
         background: `${gradient}, ${antiChopGradient}`,
