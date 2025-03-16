@@ -26,16 +26,13 @@ function App() {
   const [characterState, setCharacterState] = useState<{
     classes: { [key: string]: { acquiredTraits: string[]; ascension: number } };
   }>({
-    classes: {
-      INT_GENERAL: {
-        acquiredTraits: [],
-        ascension: 0,
-      },
-      INT_SAGE_STORM: {
-        acquiredTraits: [],
-        ascension: 0,
-      },
-    },
+    classes: CHARACTER_CLASSES.reduce(
+      (classes, cc) => ({
+        ...classes,
+        [cc.key]: { acquiredTraits: [], ascension: 0 },
+      }),
+      {}
+    ),
   });
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
 

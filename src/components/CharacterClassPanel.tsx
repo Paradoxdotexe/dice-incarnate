@@ -2,7 +2,12 @@ import { opacify } from "polished";
 import { CharacterClass } from "../appendix/CharacterClass";
 import { NFlex } from "../common/NFlex";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
-import { CHARACTER_CLASS_CARD_WIDTH, getAscensionDie } from "./CharacterClassCard";
+import {
+  CHARACTER_CLASS_CARD_WIDTH,
+  getAscensionDie,
+} from "./CharacterClassCard";
+import reactStringReplace from "react-string-replace";
+import { NTag } from "../common/NTag";
 
 const PANEL_WIDTH = CHARACTER_CLASS_CARD_WIDTH * 2 + 18;
 
@@ -51,7 +56,7 @@ export const CharacterClassPanel: React.FC<CharacterClassPanelProps> = (
             style={{
               padding: 12,
               borderRadius: 12,
-              opacity: isAcquired ? 1 : 0.5,
+              opacity: isAcquired ? 1 : 0.75,
               background: isAcquired
                 ? "rgba(255, 255, 255, 0.06)"
                 : `repeating-linear-gradient(45deg,rgba(255, 255, 255, 0.06),rgba(255, 255, 255, 0.06) 10px,rgba(255, 255, 255, 0.09) 10px,rgba(255, 255, 255, 0.09) 20px)`,
@@ -62,6 +67,7 @@ export const CharacterClassPanel: React.FC<CharacterClassPanelProps> = (
                 color={color}
                 name={trait.ability.name}
                 description={trait.ability.description}
+                type="ABILITY"
                 ascensionDie={ascensionDie}
               />
             )}
@@ -70,6 +76,8 @@ export const CharacterClassPanel: React.FC<CharacterClassPanelProps> = (
               color={color}
               name={trait.perk.name}
               description={trait.perk.description}
+              type="PERK"
+              ascensionDie={ascensionDie}
             />
           </NFlex>
         );
@@ -82,7 +90,8 @@ type TraitEntryProps = {
   color: string;
   name: string;
   description: string;
-  ascensionDie?: number;
+  type: "PERK" | "ABILITY";
+  ascensionDie: number;
 };
 
 const TraitEntry: React.FC<TraitEntryProps> = (props) => {
@@ -90,24 +99,51 @@ const TraitEntry: React.FC<TraitEntryProps> = (props) => {
     <NFlex gap={6} align="start">
       {
         <CharacterAbilityIcon color={props.color}>
-          {props.ascensionDie}
+          {props.type === "ABILITY" && props.ascensionDie}
         </CharacterAbilityIcon>
       }
       <NFlex vertical gap={3}>
         <div style={{ fontSize: 20, fontWeight: 700, lineHeight: "25px" }}>
           {props.name}
         </div>
-        <div
-          style={{
-            lineHeight: 1.4,
-            opacity: 0.8,
-            fontFamily: "Reddit Sans",
-            fontWeight: 300,
-          }}
-        >
+        <TraitDescription ascensionDie={props.ascensionDie}>
           {props.description}
-        </div>
+        </TraitDescription>
       </NFlex>
     </NFlex>
+  );
+};
+
+type TraitDescriptionProps = {
+  children: string;
+  ascensionDie?: number;
+};
+
+const TraitDescription: React.FC<TraitDescriptionProps> = (props) => {
+  let description = reactStringReplace(props.children, /(\d+ft)/g, (str, i) => (
+    <NTag key={i}>{str}</NTag>
+  ));
+
+  description = reactStringReplace(description, /(\d Caro)/g, (str, i) => (
+    <NTag key={i}>{str}</NTag>
+  ));
+
+  if (props.ascensionDie) {
+    description = reactStringReplace(description, /(\ddX)/g, (str, i) => (
+      <NTag key={i}>{str.replace("X", props.ascensionDie!.toString())}</NTag>
+    ));
+  }
+
+  return (
+    <div
+      style={{
+        lineHeight: 1.5,
+        color: "rgba(255, 255, 255, 0.85)",
+        fontFamily: "Reddit Sans",
+        fontWeight: 300,
+      }}
+    >
+      {description}
+    </div>
   );
 };
