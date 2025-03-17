@@ -29,7 +29,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 ) => {
   const color = props.class.color;
 
-  const ascensionEnabled = !!props.class.traits[0].ability;
+  const ascensionEnabled = !!props.class.traits[0]?.ability;
   const ascensionDie = getAscensionDie(props.ascension);
 
   const maxAcquired = props.class.traits.length;

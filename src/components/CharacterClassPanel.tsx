@@ -9,7 +9,7 @@ import {
 import reactStringReplace from "react-string-replace";
 import { NTag } from "../common/NTag";
 
-const PANEL_WIDTH = CHARACTER_CLASS_CARD_WIDTH * 2 + 18;
+const PANEL_WIDTH = CHARACTER_CLASS_CARD_WIDTH * 2;
 
 type CharacterClassPanelProps = {
   class: CharacterClass;
