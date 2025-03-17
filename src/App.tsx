@@ -15,6 +15,7 @@ import {
   CHARACTER_ATTRIBUTES,
   CharacterAttributeKey,
 } from "./appendix/CharacterAttribute";
+import { NButton } from "./common/NButton";
 
 const ROW_GAP = 18;
 const ROW_WIDTH =
@@ -35,6 +36,7 @@ function App() {
     ),
   });
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
+  const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
     const onContextMenu = (event: MouseEvent) => {
@@ -61,16 +63,37 @@ function App() {
     }, {}) as { [key in CharacterAttributeKey]: number };
   }, [characterState]);
 
+  const [xpPoints, levelPoints] = useMemo(() => {
+    return [
+      Object.values(characterState.classes).reduce(
+        (count, cc) => count + cc.acquiredTraits.length,
+        0
+      ),
+      Object.values(characterState.classes).reduce(
+        (count, cc) => count + cc.ascension,
+        0
+      ),
+    ];
+  }, [characterState]);
+
   return (
     <NFlex
       justify="center"
       align="center"
+      vertical
       css={`
         padding: 24px;
         min-height: 100vh;
         overflow-x: hidden;
       `}
     >
+      <NButton
+        style={{ position: "absolute", right: 24, top: 24 }}
+        color={isEditing ? "#34A9FE" : undefined}
+        onClick={() => setIsEditing(!isEditing)}
+      >
+        {isEditing ? "Save" : "Edit"}
+      </NButton>
       <NFlex gap={ROW_GAP} style={{ width: ROW_WIDTH }}>
         <NFlex vertical justify="center" gap={24} style={{ flex: 1 }}>
           {CHARACTER_ATTRIBUTES.map((attribute) => (
@@ -80,7 +103,10 @@ function App() {
                 score={scoreByAttribute[attribute.key]}
               />
               {CHARACTER_CLASSES.filter(
-                (cc) => cc.attributeKey === attribute.key
+                (cc) =>
+                  cc.attributeKey === attribute.key &&
+                  (isEditing ||
+                    !!characterState.classes[cc.key].acquiredTraits.length)
               ).map((cc) => {
                 const classState = characterState.classes[cc.key];
                 return (
@@ -89,6 +115,8 @@ function App() {
                     class={cc}
                     acquired={classState.acquiredTraits.length}
                     ascension={classState.ascension}
+                    onClick={() => setSelectedClassKey(cc.key)}
+                    editable={isEditing}
                     onAcquire={(change) => {
                       if (change === 1) {
                         const count =
@@ -104,11 +132,12 @@ function App() {
                       }
                       setCharacterState({ ...characterState });
                     }}
+                    acquireDisabled={xpPoints >= 6}
                     onAscend={(change) => {
                       characterState.classes[cc.key].ascension += change;
                       setCharacterState({ ...characterState });
                     }}
-                    onClick={() => setSelectedClassKey(cc.key)}
+                    ascendDisabled={levelPoints >= 1}
                   />
                 );
               })}

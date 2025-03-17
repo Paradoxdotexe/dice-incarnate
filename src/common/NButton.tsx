@@ -4,8 +4,8 @@ import { CSSProperties, ReactNode, useRef } from "react";
 
 type NButtonProps = {
   children: ReactNode;
-  color: string;
-  type: "solid" | "outline";
+  color?: string;
+  type?: "solid" | "outline";
   disabled?: boolean;
   onClick?: () => void;
   onRightClick?: () => void;
@@ -14,6 +14,9 @@ type NButtonProps = {
 
 export const NButton: React.FC<NButtonProps> = (props) => {
   const ref = useRef<HTMLButtonElement>(null);
+
+  const color = props.color ?? "#424242";
+  const type = props.type ?? "solid";
 
   return (
     <button
@@ -31,10 +34,8 @@ export const NButton: React.FC<NButtonProps> = (props) => {
         cursor: pointer;
         padding-inline: 6px;
         color: white;
-        background: ${props.type === "solid"
-          ? props.color
-          : opacify(-0.8, props.color)};
-        border: 1px solid ${props.color};
+        background: ${type === "solid" ? color : opacify(-0.8, color)};
+        border: 1px solid ${color};
         transition: all 150ms ease;
         white-space: nowrap;
 
@@ -44,12 +45,10 @@ export const NButton: React.FC<NButtonProps> = (props) => {
         }
 
         &:hover:not(.NButton--disabled) {
-          background: ${props.type === "solid"
-            ? lighten(0.1, props.color)
-            : opacify(-0.6, props.color)};
-          border-color: ${props.type === "solid"
-            ? lighten(0.1, props.color)
-            : ""};
+          background: ${type === "solid"
+            ? lighten(0.1, color)
+            : opacify(-0.6, color)};
+          border-color: ${type === "solid" ? lighten(0.1, color) : ""};
         }
       `}
       onClick={

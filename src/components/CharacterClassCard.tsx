@@ -18,6 +18,7 @@ type CharacterClassCardProps = {
   acquired: number;
   ascension: number;
   onClick?: () => void;
+  editable?: boolean;
   onAcquire?: (change: number) => void;
   acquireDisabled?: boolean;
   onAscend?: (change: number) => void;
@@ -94,52 +95,54 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           </NFlex>
         </NFlex>
 
-        <NFlex gap={6}>
-          <NButton
-            type="solid"
-            color={color}
-            disabled={props.acquireDisabled}
-            onClick={() => {
-              if (!hasMaxAcquired) {
-                props.onAcquire?.(1);
-              }
-            }}
-            onRightClick={() => {
-              if (!!props.acquired) {
-                props.onAcquire?.(-1);
-                // if acquisition is reduced to zero, reduce ascension to zero too
-                if (props.acquired === 1) {
-                  props.onAscend?.(-props.ascension);
-                }
-              }
-            }}
-            style={{
-              width: 101,
-            }}
-          >
-            {hasMaxAcquired ? "Max Acquired" : "Acquire"}
-          </NButton>
-          {ascensionEnabled && !!props.acquired && (
+        {props.editable && (
+          <NFlex gap={6}>
             <NButton
-              type="outline"
+              type="solid"
               color={color}
-              disabled={props.ascendDisabled}
+              disabled={props.acquireDisabled}
               onClick={() => {
-                if (!hasMaxAscension) {
-                  props.onAscend?.(1);
+                if (!hasMaxAcquired) {
+                  props.onAcquire?.(1);
                 }
               }}
               onRightClick={() => {
-                if (!!props.ascension) {
-                  props.onAscend?.(-1);
+                if (!!props.acquired) {
+                  props.onAcquire?.(-1);
+                  // if acquisition is reduced to zero, reduce ascension to zero too
+                  if (props.acquired === 1) {
+                    props.onAscend?.(-props.ascension);
+                  }
                 }
               }}
-              style={{ width: 108 }}
+              style={{
+                width: 101,
+              }}
             >
-              {hasMaxAscension ? "Max Ascension" : "Ascend"}
+              {hasMaxAcquired ? "Max Acquired" : "Acquire"}
             </NButton>
-          )}
-        </NFlex>
+            {ascensionEnabled && !!props.acquired && (
+              <NButton
+                type="outline"
+                color={color}
+                disabled={props.ascendDisabled}
+                onClick={() => {
+                  if (!hasMaxAscension) {
+                    props.onAscend?.(1);
+                  }
+                }}
+                onRightClick={() => {
+                  if (!!props.ascension) {
+                    props.onAscend?.(-1);
+                  }
+                }}
+                style={{ width: 108 }}
+              >
+                {hasMaxAscension ? "Max Ascension" : "Ascend"}
+              </NButton>
+            )}
+          </NFlex>
+        )}
       </NFlex>
 
       <img

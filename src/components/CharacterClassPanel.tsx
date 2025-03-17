@@ -51,6 +51,7 @@ export const CharacterClassPanel: React.FC<CharacterClassPanelProps> = (
         const isAcquired = props.acquiredTraits.includes(trait.key);
         return (
           <NFlex
+            key={trait.key}
             vertical
             gap={12}
             style={{
@@ -121,16 +122,18 @@ type TraitDescriptionProps = {
 
 const TraitDescription: React.FC<TraitDescriptionProps> = (props) => {
   let description = reactStringReplace(props.children, /(\d+ft)/g, (str, i) => (
-    <NTag key={i}>{str}</NTag>
+    <NTag key={`ft#${i}`}>{str}</NTag>
   ));
 
   description = reactStringReplace(description, /(\d Caro)/g, (str, i) => (
-    <NTag key={i}>{str}</NTag>
+    <NTag key={`caro#${i}`}>{str}</NTag>
   ));
 
   if (props.ascensionDie) {
     description = reactStringReplace(description, /(\ddX)/g, (str, i) => (
-      <NTag key={i}>{str.replace("X", props.ascensionDie!.toString())}</NTag>
+      <NTag key={`dx#${i}`}>
+        {str.replace("X", props.ascensionDie!.toString())}
+      </NTag>
     ));
   }
 

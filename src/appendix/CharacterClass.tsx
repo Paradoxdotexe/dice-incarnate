@@ -240,7 +240,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_DRUID_1_ABILITY_2",
           name: "Guard Beast",
           description:
-            "Spend 2 Caro to command your tamed beast to defend you. The next time you are attacked, the attacker takes 1dX damage and your tamed beast deflects up to 1dX damage.",
+            "Spend 2 Caro to command your tamed beast to defend you. The next time you are attacked, your tamed beast deals 1dX damage and deflects up to 1dX damage.",
         },
         perk: {
           key: "WIS_DRUID_1_PERK_2",
