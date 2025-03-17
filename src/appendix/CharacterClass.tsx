@@ -28,7 +28,25 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     attributeKey: "STR",
     name: "Titan",
     color: "#5d5d5d",
-    traits: [],
+    traits: [
+      {
+        key: "STR_GENERAL_TRAIT_1",
+        perk: {
+          key: "STR_GENERAL_PERK_1",
+          name: "Big Brother",
+          description:
+            "*Hey! Pick on someone your own size.* When an ally within 5ft is hit with an attack, you can leap in to switch places, letting the attack hit you instead.",
+        },
+      },
+      {
+        key: "STR_GENERAL_TRAIT_2",
+        perk: {
+          key: "STR_GENERAL_PERK_2",
+          name: "Down to Scrap",
+          description: "*If they want a fight, they'll get one.* You add your Strength to your Initiative bonus.",
+        },
+      },
+    ],
   },
   {
     key: "STR_KNIGHT_1",
@@ -49,7 +67,44 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     attributeKey: "AGI",
     name: "Acrobat",
     color: "#5d5d5d",
-    traits: [],
+    traits: [
+      {
+        key: "AGI_GENERAL_TRAIT_1",
+        perk: {
+          key: "AGI_GENERAL_PERK_1",
+          name: "Spotter",
+          description:
+            "*Teaching is the best way to learn.* When you succeed on an Agility check, you can help one other character immediately succeed on the same check.",
+        },
+      },
+      {
+        key: "AGI_GENERAL_TRAIT_2",
+        perk: {
+          key: "AGI_GENERAL_PERK_2",
+          name: "Lone Wolf",
+          description:
+            "*Sometimes its easier to go it alone.* You have advantage on Agility checks while by yourself.",
+        },
+      },
+      {
+        key: "AGI_GENERAL_TRAIT_3",
+        perk: {
+          key: "AGI_GENERAL_PERK_3",
+          name: "Fleet Foot",
+          description:
+            "*You may be a distant descendent of mountain goats.* You are not impeded by Rough Terrain.",
+        },
+      },
+      {
+        key: "AGI_GENERAL_TRAIT_4",
+        perk: {
+          key: "AGI_GENERAL_PERK_4",
+          name: "Get Out of Dodge",
+          description:
+            "*Missed me!* Opportunity attacks against you have disadvantage.",
+        },
+      },
+    ],
   },
   {
     key: "AGI_MONK_1",
@@ -77,7 +132,16 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "INT_GENERAL_PERK_1",
           name: "Book Worm",
           description:
-            "You have advantage on Intelligence checks to comprehend written information.",
+            "*You are a voracious reader.* You have advantage on Intelligence checks to comprehend written information.",
+        },
+      },
+      {
+        key: "INT_GENERAL_TRAIT_2",
+        perk: {
+          key: "INT_GENERAL_PERK_2",
+          name: "Linguist",
+          description:
+            "*Some have called you a polyglot.* You have advantage on Intelligence checks to comprehend languages.",
         },
       },
     ],
@@ -101,7 +165,26 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     attributeKey: "CHA",
     name: "Influencer",
     color: "#5d5d5d",
-    traits: [],
+    traits: [
+      {
+        key: "CHA_GENERAL_TRAIT_1",
+        perk: {
+          key: "CHA_GENERAL_PERK_1",
+          name: "Method Actor",
+          description:
+            "*You never break character.* You have advantage on Charisma checks to deceive others while impersonating as someone else.",
+        },
+      },
+      {
+        key: "CHA_GENERAL_TRAIT_2",
+        perk: {
+          key: "CHA_GENERAL_PERK_2",
+          name: "Folk Hero",
+          description:
+            "*The world has heard of your accomplishments.* You have advantage on Charisma checks to persuade commoners.",
+        },
+      },
+    ],
   },
   {
     key: "CHA_HERALD_1",
@@ -129,7 +212,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_GENERAL_PERK_1",
           name: "Beast Speech",
           description:
-            'You can communicate with beasts through visual and auditory cues, effectively limited to single words or basic phrases, such as "protect" or "go that way".',
+            '*Did that bird just talk?* You can communicate with beasts through their unique visual and auditory cues. You are effectively limited to single words or basic phrases.',
         },
       },
       {
@@ -138,7 +221,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_GENERAL_PERK_2",
           name: "Environmentalist",
           description:
-            "You have advantage on Wisdom checks when dealing with natural phenomena, such animals or lands.",
+            "*Somewhat of a tree hugger.* You have advantage on Wisdom checks when dealing with natural phenomena, such animals or lands.",
         },
       },
       {
@@ -147,15 +230,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_GENERAL_PERK_3",
           name: "Sixth Sense",
           description:
-            "When your party is surprised, you do not lose your turn.",
-        },
-      },
-      {
-        key: "WIS_GENERAL_TRAIT_4",
-        perk: {
-          key: "WIS_GENERAL_PERK_4",
-          name: "Combat Conditioning",
-          description: "Your initiative bonus is doubled.",
+            "*What was that?* When your party is surprised, you are not. You do not lose your turn.",
         },
       },
     ],

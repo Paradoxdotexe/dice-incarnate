@@ -129,6 +129,10 @@ const TraitDescription: React.FC<TraitDescriptionProps> = (props) => {
     <NTag key={`caro#${i}`}>{str}</NTag>
   ));
 
+  description = reactStringReplace(description, /\*(.+?)\*/g, (str, i) => (
+    <em key={`em#${i}`}>{str}&nbsp;</em>
+  ));
+
   if (props.ascensionDie) {
     description = reactStringReplace(description, /(\ddX)/g, (str, i) => (
       <NTag key={`dx#${i}`}>

@@ -51,14 +51,7 @@ export const NButton: React.FC<NButtonProps> = (props) => {
           border-color: ${type === "solid" ? lighten(0.1, color) : ""};
         }
       `}
-      onClick={
-        props.disabled
-          ? undefined
-          : (event) => {
-              event.stopPropagation();
-              props.onClick?.();
-            }
-      }
+      onClick={props.disabled ? undefined : props.onClick}
       onMouseUp={(event) => {
         if (event.button === 2) {
           props.onRightClick?.();
