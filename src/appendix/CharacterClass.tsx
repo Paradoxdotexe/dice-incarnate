@@ -26,7 +26,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: "STR_GENERAL",
     attributeKey: "STR",
-    name: "Titan",
+    name: "Strong",
     color: "#5d5d5d",
     traits: [
       {
@@ -35,15 +35,52 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "STR_GENERAL_PERK_1",
           name: "Big Brother",
           description:
-            "*Hey! Pick on someone your own size.* When an ally within 5ft is hit with an attack, you can leap in to switch places, letting the attack hit you instead.",
+            "*Pick on someone your own size!* When a creature within 5ft is hit with an attack, you can leap in to switch places.",
         },
       },
       {
         key: "STR_GENERAL_TRAIT_2",
         perk: {
           key: "STR_GENERAL_PERK_2",
-          name: "Down to Scrap",
-          description: "*If they want a fight, they'll get one.* You add your Strength to your Initiative bonus.",
+          name: "Aggressor",
+          description:
+            "*Strike first, strike hard.* Add your Strength bonus to your Initiative bonus.",
+        },
+      },
+      {
+        key: "STR_GENERAL_TRAIT_3",
+        perk: {
+          key: "STR_GENERAL_PERK_3",
+          name: "Heavy Hitter",
+          description:
+            "*I was here first!* If you consume no movement on your turn, your melee attack damage is increased by one die.",
+        },
+      },
+      {
+        key: "STR_GENERAL_TRAIT_4",
+        perk: {
+          key: "STR_GENERAL_PERK_4",
+          name: "Pack Mule",
+          description:
+            "*Let me carry that for you!* Your carrying capacity is doubled.",
+        },
+      },
+      {
+        key: "STR_GENERAL_TRAIT_5",
+        perk: {
+          key: "STR_GENERAL_PERK_5",
+          name: "Iron Grip",
+          description:
+            "*You're not going anywhere.* You have advantage on Strength checks related to grappling",
+        },
+      },
+      {
+        key: "STR_GENERAL_TRAIT_6",
+        perk: {
+          key: "STR_GENERAL_PERK_6",
+          name: "Big Hands",
+          description:
+            "*You know what the say about big hands?* You can wield two-handed weapons with one hand.",
         },
       },
     ],
@@ -65,7 +102,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: "AGI_GENERAL",
     attributeKey: "AGI",
-    name: "Acrobat",
+    name: "Agile",
     color: "#5d5d5d",
     traits: [
       {
@@ -74,34 +111,52 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "AGI_GENERAL_PERK_1",
           name: "Spotter",
           description:
-            "*Teaching is the best way to learn.* When you succeed on an Agility check, you can help one other character immediately succeed on the same check.",
+            "*Watch your foot!* When you succeed on an Agility check, you can help another creature immediately succeed on the same check.",
         },
       },
       {
         key: "AGI_GENERAL_TRAIT_2",
         perk: {
           key: "AGI_GENERAL_PERK_2",
-          name: "Lone Wolf",
+          name: "Surefooted",
           description:
-            "*Sometimes its easier to go it alone.* You have advantage on Agility checks while by yourself.",
+            "*A distant descendent of mountain goats.* You are not impeded by Rough Terrain during combat.",
         },
       },
       {
         key: "AGI_GENERAL_TRAIT_3",
         perk: {
           key: "AGI_GENERAL_PERK_3",
-          name: "Fleet Foot",
+          name: "Slippery",
           description:
-            "*You may be a distant descendent of mountain goats.* You are not impeded by Rough Terrain.",
+            "*Missed me!* Opportunity attacks against you have disadvantage.",
         },
       },
       {
         key: "AGI_GENERAL_TRAIT_4",
         perk: {
           key: "AGI_GENERAL_PERK_4",
-          name: "Get Out of Dodge",
+          name: "Righting Reflex",
           description:
-            "*Missed me!* Opportunity attacks against you have disadvantage.",
+            "*Cats always land on their feet.* When you fall, you land on your feet and your fall damage is reduced by one die.",
+        },
+      },
+      {
+        key: "AGI_GENERAL_TRAIT_5",
+        perk: {
+          key: "AGI_GENERAL_PERK_5",
+          name: "Sneaky",
+          description:
+            "*Must have been the wind.* You advantage on Agility checks to move stealthily.",
+        },
+      },
+      {
+        key: "AGI_GENERAL_TRAIT_6",
+        perk: {
+          key: "AGI_GENERAL_PERK_6",
+          name: "Quick Draw",
+          description:
+            "*Do ya feel lucky, punk?* You can draw and stow weapons without a Bonus Action.",
         },
       },
     ],
@@ -109,7 +164,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: "AGI_MONK_1",
     attributeKey: "AGI",
-    name: "Momentum Monk",
+    name: "Control Monk",
     color: "#cac833",
     traits: [],
   },
@@ -123,7 +178,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: "INT_GENERAL",
     attributeKey: "INT",
-    name: "Scholar",
+    name: "Intelligent",
     color: "#5d5d5d",
     traits: [
       {
@@ -163,7 +218,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: "CHA_GENERAL",
     attributeKey: "CHA",
-    name: "Influencer",
+    name: "Charming",
     color: "#5d5d5d",
     traits: [
       {
@@ -203,7 +258,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: "WIS_GENERAL",
     attributeKey: "WIS",
-    name: "Oracle",
+    name: "Wise",
     color: "#5d5d5d",
     traits: [
       {
@@ -212,7 +267,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_GENERAL_PERK_1",
           name: "Beast Speech",
           description:
-            '*Did that bird just talk?* You can communicate with beasts through their unique visual and auditory cues. You are effectively limited to single words or basic phrases.',
+            "*Did that bird just talk?* You can communicate with beasts through their unique visual and auditory cues. You are effectively limited to single words or basic phrases.",
         },
       },
       {

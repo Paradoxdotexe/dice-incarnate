@@ -50,7 +50,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
     <NFlex
       align="center"
       style={{
-        width: 243,
+        width: CHARACTER_CLASS_CARD_WIDTH,
         height: 129,
         border: `2px solid ${color}`,
         borderRadius: 12,
@@ -152,7 +152,8 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           height: "calc(100% - 24px)",
           opacity: 0.06,
         }}
-        src={`/icons/${props.class.name.replace(" ", "")}.svg`}
+        src={`/icons/${props.class.key}.svg`}
+        alt=""
       />
     </NFlex>
   );
