@@ -25,7 +25,6 @@ function App() {
     ),
   });
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
-  const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
     const onContextMenu = (event: MouseEvent) => {
@@ -91,17 +90,14 @@ function App() {
                 score={scoreByAttribute[attribute.key]}
               />
               {CHARACTER_CLASSES.filter(
-                (cc) =>
-                  cc.attributeKey === attribute.key &&
-                  (isEditing ||
-                    !!characterState.classes[cc.key].acquiredTraits.length)
+                (cc) => cc.attributeKey === attribute.key
               ).map((cc) => {
                 const classState = characterState.classes[cc.key];
                 return (
                   <CharacterClassCard
                     key={cc.key}
                     class={cc}
-                    acquired={classState.acquiredTraits.length}
+                    acquiredTraits={classState.acquiredTraits}
                     ascension={classState.ascension}
                     onClick={() => setSelectedClassKey(cc.key)}
                   />
@@ -120,16 +116,20 @@ function App() {
             acquiredTraits={selectedClassState.acquiredTraits}
             ascension={selectedClassState.ascension}
             onClick={() => setSelectedClassKey(selectedClass.key)}
-            editable={isEditing}
             onAcquire={(traitKey) => {
               characterState.classes[selectedClass.key].acquiredTraits.push(
                 traitKey
               );
+              characterState.classes[selectedClass.key].acquiredTraits.sort(
+                (a, b) =>
+                  selectedClass.traits.findIndex((trait) => trait.key === a) -
+                  selectedClass.traits.findIndex((trait) => trait.key === b)
+              );
               setCharacterState({ ...characterState });
             }}
             acquireDisabled={xpPoints >= 6}
-            onAscend={(change) => {
-              characterState.classes[selectedClass.key].ascension += change;
+            onAscend={() => {
+              characterState.classes[selectedClass.key].ascension += 1;
               setCharacterState({ ...characterState });
             }}
             ascendDisabled={levelPoints >= 2}

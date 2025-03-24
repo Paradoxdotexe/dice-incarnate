@@ -39,24 +39,20 @@ export const NButton: React.FC<NButtonProps> = (props) => {
         transition: all 150ms ease;
         white-space: nowrap;
 
-        &.NButton--disabled {
+        &:disabled {
           cursor: auto;
           opacity: 0.5;
         }
 
-        &:hover:not(.NButton--disabled) {
+        &:hover:not(:disabled) {
           background: ${type === "solid"
             ? lighten(0.1, color)
             : opacify(-0.6, color)};
           border-color: ${type === "solid" ? lighten(0.1, color) : ""};
         }
       `}
-      onClick={props.disabled ? undefined : props.onClick}
-      onMouseUp={(event) => {
-        if (event.button === 2) {
-          props.onRightClick?.();
-        }
-      }}
+      onClick={props.onClick}
+      disabled={props.disabled}
       style={props.style}
     >
       {props.children}

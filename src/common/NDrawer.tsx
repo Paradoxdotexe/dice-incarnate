@@ -42,6 +42,7 @@ export const NDrawer: React.FC<NDrawerProps> = (props) => {
         .drawerContainer__drawer {
           width: ${`${props.width}px`};
           height: 100%;
+          background: #1b1b1b;
         }
 
         .drawerContainer__drawer-enter {
@@ -79,7 +80,6 @@ export const NDrawer: React.FC<NDrawerProps> = (props) => {
           className="drawerContainer__drawer"
           onMouseDown={(event) => event.stopPropagation()}
         >
-          {props.header && <div className="drawer__header">{props.header}</div>}
           {props.children}
         </div>
       </CSSTransition>

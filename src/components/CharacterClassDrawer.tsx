@@ -1,11 +1,15 @@
 import { opacify } from "polished";
-import { CharacterClass } from "../appendix/CharacterClass";
+import {
+  CharacterClass,
+  CharacterClassTrait,
+} from "../appendix/CharacterClass";
 import { NFlex } from "../common/NFlex";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { getAscensionDie } from "./CharacterClassCard";
 import reactStringReplace from "react-string-replace";
 import { NTag } from "../common/NTag";
 import { NDrawer } from "../common/NDrawer";
+import { NButton } from "../common/NButton";
 
 const PANEL_WIDTH = 600;
 
@@ -16,10 +20,9 @@ type CharacterClassDrawerProps = {
   acquiredTraits: string[];
   ascension: number;
   onClick?: () => void;
-  editable?: boolean;
   onAcquire: (traitKey: string) => void;
   acquireDisabled?: boolean;
-  onAscend?: (change: number) => void;
+  onAscend?: () => void;
   ascendDisabled?: boolean;
 };
 
@@ -30,28 +33,50 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
 
   const ascensionDie = getAscensionDie(props.ascension);
 
+  const ascendable = !!props.acquiredTraits.filter(
+    (traitKey) =>
+      props.class.traits.find((trait) => trait.key === traitKey)!.ascendable
+  ).length;
+
+  let className = props.class.name;
+  if (props.class.ascensionNames && ascendable) {
+    className += `: ${props.class.ascensionNames[props.ascension]}`;
+  }
+
   return (
     <NDrawer open={props.open} onClose={props.onClose} width={PANEL_WIDTH}>
       <NFlex
         vertical
         gap={24}
         style={{
-          background: opacify(-0.94, color),
+          background: opacify(-0.97, color),
           borderLeft: `2px solid ${color}`,
           height: "100%",
           padding: 24,
         }}
       >
-        <div
-          style={{
-            fontFamily: "Grenze",
-            fontSize: 32,
-            color: "white",
-            fontWeight: 500,
-          }}
-        >
-          {props.class.name}
-        </div>
+        <NFlex justify="space-between" align="center">
+          <div
+            style={{
+              fontFamily: "Grenze",
+              fontSize: 32,
+              color: "white",
+              fontWeight: 500,
+            }}
+          >
+            {className}
+          </div>
+
+          {ascendable && (
+            <NButton
+              color={color}
+              onClick={props.onAscend}
+              disabled={props.ascension == 2 || props.ascendDisabled}
+            >
+              {props.ascension == 2 ? "Max Ascension" : "Ascend"}
+            </NButton>
+          )}
+        </NFlex>
 
         <NFlex vertical gap={18}>
           {props.class.traits.map((trait) => {
@@ -75,21 +100,9 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
                   filter: !isAcquired ? "saturate(0)" : undefined,
                 }}
               >
-                {trait.ability && (
-                  <TraitEntry
-                    color={color}
-                    name={trait.ability.name}
-                    description={trait.ability.description}
-                    type="ABILITY"
-                    ascensionDie={ascensionDie}
-                  />
-                )}
-
                 <TraitEntry
                   color={color}
-                  name={trait.perk.name}
-                  description={trait.perk.description}
-                  type="PERK"
+                  trait={trait}
                   ascensionDie={ascensionDie}
                 />
               </NFlex>
@@ -102,10 +115,8 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
 };
 
 type TraitEntryProps = {
+  trait: CharacterClassTrait;
   color: string;
-  name: string;
-  description: string;
-  type: "PERK" | "ABILITY";
   ascensionDie: number;
 };
 
@@ -114,15 +125,15 @@ const TraitEntry: React.FC<TraitEntryProps> = (props) => {
     <NFlex gap={9} align="start">
       {
         <CharacterAbilityIcon color={props.color}>
-          {props.type === "ABILITY" && props.ascensionDie}
+          {props.trait.ascendable && props.ascensionDie}
         </CharacterAbilityIcon>
       }
       <NFlex vertical gap={3}>
         <div style={{ fontSize: 20, fontWeight: 700, lineHeight: "25px" }}>
-          {props.name}
+          {props.trait.name}
         </div>
         <TraitDescription ascensionDie={props.ascensionDie}>
-          {props.description}
+          {props.trait.description}
         </TraitDescription>
       </NFlex>
     </NFlex>
@@ -140,7 +151,7 @@ const TraitDescription: React.FC<TraitDescriptionProps> = (props) => {
   ));
 
   description = reactStringReplace(description, /(\d Mana)/g, (str, i) => (
-    <NTag key={`caro#${i}`}>{str}</NTag>
+    <NTag key={`mana#${i}`}>{str}</NTag>
   ));
 
   description = reactStringReplace(description, /\*(.+?)\*/g, (str, i) => (

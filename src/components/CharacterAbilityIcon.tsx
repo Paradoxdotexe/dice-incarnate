@@ -13,7 +13,7 @@ export const CharacterAbilityIcon: React.FC<CharacterAbilityIconProps> = (
 ) => {
   return (
     <NFlex align="center" justify="center">
-      <ShieldIcon style={{ width: 24, color: props.color }} />
+      <ShieldIcon style={{ width: 24, height: 24, color: props.color }} />
       <div
         style={{
           position: "absolute",
@@ -25,7 +25,7 @@ export const CharacterAbilityIcon: React.FC<CharacterAbilityIconProps> = (
             style={{
               fontFamily: "Reddit Sans Condensed",
               fontWeight: 600,
-              fontSize: 15,
+              fontSize: 13,
               marginTop: -1,
             }}
           >

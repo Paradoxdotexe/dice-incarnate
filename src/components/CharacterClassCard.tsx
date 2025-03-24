@@ -1,7 +1,6 @@
 import { opacify } from "polished";
 import React from "react";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
-import { arrayOf } from "../utils/arrayOf";
 import { NFlex } from "../common/NFlex";
 import { CharacterClass } from "../appendix/CharacterClass";
 
@@ -14,7 +13,7 @@ export const getAscensionDie = (ascension: number) => {
 
 type CharacterClassCardProps = {
   class: CharacterClass;
-  acquired: number;
+  acquiredTraits: string[];
   ascension: number;
   onClick?: () => void;
 };
@@ -24,7 +23,6 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 ) => {
   const color = props.class.color;
 
-  const ascensionEnabled = !!props.class.traits[0]?.ability;
   const ascensionDie = getAscensionDie(props.ascension);
 
   const gradientStart = opacify(-1, color);
@@ -34,6 +32,16 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   // second gradient is used to avoid choppiness
   const antiChopGradientEnd = opacify(-0.95, color);
   const antiChopGradient = `linear-gradient(${gradientStart} 14%, ${antiChopGradientEnd})`;
+
+  const ascendable = !!props.acquiredTraits.filter(
+    (traitKey) =>
+      props.class.traits.find((trait) => trait.key === traitKey)!.ascendable
+  ).length;
+
+  let className = props.class.name;
+  if (props.class.ascensionNames && ascendable) {
+    className += `: ${props.class.ascensionNames[props.ascension]}`;
+  }
 
   return (
     <NFlex
@@ -47,6 +55,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
         position: "relative",
         padding: 12,
         cursor: "pointer",
+        userSelect: "none",
       }}
       onClick={props.onClick}
     >
@@ -67,20 +76,21 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
               fontWeight: 500,
             }}
           >
-            {props.class.name}
+            {className}
           </div>
 
           <NFlex gap={3}>
-            {arrayOf(props.acquired).map(() => (
-              <>
-                {ascensionEnabled && (
-                  <CharacterAbilityIcon color={color}>
-                    {ascensionDie}
-                  </CharacterAbilityIcon>
-                )}
-                <CharacterAbilityIcon color={color} />
-              </>
-            ))}
+            {props.acquiredTraits.map((traitKey) => {
+              const trait = props.class.traits.find(
+                (trait) => trait.key === traitKey
+              )!;
+
+              return (
+                <CharacterAbilityIcon color={color}>
+                  {trait.ascendable && ascensionDie}
+                </CharacterAbilityIcon>
+              );
+            })}
           </NFlex>
         </NFlex>
       </NFlex>
