@@ -92,14 +92,29 @@ function App() {
         style={{
           width: 1280,
           paddingLeft: CHARACTER_ATTRIBUTE_SCORE_WIDTH + ROW_GAP,
-          fontWeight: '600',
-          fontSize: 14
+          fontWeight: "600",
+          fontSize: 14,
         }}
+        css={`
+          div {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            &::after, &::before {
+              content: "";
+              display: block;
+              width: 100%;
+              height: 1px;
+              background: #727272;
+            }
+          }
+        `}
         gap={ROW_GAP}
       >
         <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>PERKS</div>
         <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>WEAPONS</div>
-        <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>CLASSES</div>
+        <div style={{ flex: 1 }}>CLASSES</div>
       </NFlex>
       <NFlex gap={ROW_GAP} style={{ width: 1280 }}>
         <NFlex vertical justify="center" gap={24} style={{ flex: 1 }}>

@@ -22,7 +22,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     key: "STR_GENERAL",
     attributeKey: "STR",
     name: "Strong",
-    color: "#5d5d5d",
+    color: "#494949",
     traits: [
       {
         key: "STR_GENERAL_PERK_1",
@@ -97,7 +97,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     key: "AGI_GENERAL",
     attributeKey: "AGI",
     name: "Agile",
-    color: "#5d5d5d",
+    color: "#494949",
     traits: [
       {
         key: "AGI_GENERAL_PERK_1",
@@ -170,7 +170,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     key: "INT_GENERAL",
     attributeKey: "INT",
     name: "Intelligent",
-    color: "#5d5d5d",
+    color: "#494949",
     traits: [
       {
         key: "INT_GENERAL_PERK_1",
@@ -226,7 +226,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     key: "CHA_GENERAL",
     attributeKey: "CHA",
     name: "Charming",
-    color: "#5d5d5d",
+    color: "#494949",
     traits: [
       {
         key: "CHA_GENERAL_PERK_1",
@@ -276,7 +276,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     key: "WIS_GENERAL",
     attributeKey: "WIS",
     name: "Wise",
-    color: "#5d5d5d",
+    color: "#494949",
     traits: [
       {
         key: "WIS_GENERAL_PERK_1",
