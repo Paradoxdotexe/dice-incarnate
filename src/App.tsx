@@ -1,8 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { NFlex } from "./common/NFlex";
-import { CharacterClassCard } from "./components/CharacterClassCard";
-import { CharacterAttributeScore } from "./components/CharacterAttributeScore";
+import {
+  CHARACTER_CLASS_CARD_WIDTH,
+  CharacterClassCard,
+} from "./components/CharacterClassCard";
+import {
+  CHARACTER_ATTRIBUTE_SCORE_WIDTH,
+  CharacterAttributeScore,
+} from "./components/CharacterAttributeScore";
 import { CHARACTER_CLASSES } from "./appendix/CharacterClass";
 import { CharacterClassDrawer } from "./components/CharacterClassDrawer";
 import {
@@ -80,7 +86,21 @@ function App() {
         min-height: 100vh;
         overflow-x: hidden;
       `}
+      gap={12}
     >
+      <NFlex
+        style={{
+          width: 1280,
+          paddingLeft: CHARACTER_ATTRIBUTE_SCORE_WIDTH + ROW_GAP,
+          fontWeight: '600',
+          fontSize: 14
+        }}
+        gap={ROW_GAP}
+      >
+        <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>PERKS</div>
+        <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>WEAPONS</div>
+        <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>CLASSES</div>
+      </NFlex>
       <NFlex gap={ROW_GAP} style={{ width: 1280 }}>
         <NFlex vertical justify="center" gap={24} style={{ flex: 1 }}>
           {CHARACTER_ATTRIBUTES.map((attribute) => (

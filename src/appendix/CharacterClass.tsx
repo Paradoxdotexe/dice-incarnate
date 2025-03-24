@@ -132,8 +132,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
       {
         key: "AGI_GENERAL_PERK_6",
         name: "Quick Draw",
-        description:
-          "*Do ya feel lucky, punk?* You can draw and stow weapons without a Bonus Action.",
+        description: "You can draw and switch weapons without a Bonus Action.",
       },
     ],
   },
@@ -281,18 +280,12 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     traits: [
       {
         key: "WIS_GENERAL_PERK_1",
-        name: "Beast Speech",
-        description:
-          "*Did that bird just talk?* You can communicate with beasts through their unique visual and auditory cues. You are effectively limited to single words or basic phrases.",
-      },
-      {
-        key: "WIS_GENERAL_PERK_2",
         name: "Environmentalist",
         description:
           "*Somewhat of a tree hugger.* You have advantage on Wisdom checks when dealing with natural phenomena, such animals or lands.",
       },
       {
-        key: "WIS_GENERAL_PERK_3",
+        key: "WIS_GENERAL_PERK_2",
         name: "Sixth Sense",
         description:
           "*What was that?* When your party is surprised, you are not. You do not lose your turn.",
@@ -368,51 +361,42 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     name: "Beast Druid",
     color: "#d16337",
     traits: [
-      // {
-      //   key: "WIS_DRUID_1_TRAIT_1",
-      //   ability: {
-      //     key: "WIS_DRUID_1_ABILITY_1",
-      //     name: "Attack Beast",
-      //     description:
-      //       "Spend 1 Mana to command your tamed beast to attack a target within 30ft. The target takes 1dX damage and can be dragged 5ft in any direction.",
-      //   },
-      //   perk: {
-      //     key: "WIS_DRUID_1_PERK_1",
-      //     name: "Beast Companion",
-      //     description:
-      //       "You have a tamed beast that is always by your side. They either have the ability to fly, swim, or walk.",
-      //   },
-      // },
-      // {
-      //   key: "WIS_DRUID_1_TRAIT_2",
-      //   ability: {
-      //     key: "WIS_DRUID_1_ABILITY_2",
-      //     name: "Guard Beast",
-      //     description:
-      //       "Spend 2 Mana to command your tamed beast to defend you. The next time you are attacked, your tamed beast deals 1dX damage and deflects up to 1dX damage.",
-      //   },
-      //   perk: {
-      //     key: "WIS_DRUID_1_PERK_2",
-      //     name: "Beast Sight",
-      //     description:
-      //       "You can look through the eyes of your tamed beast while they are within 120ft.",
-      //   },
-      // },
-      // {
-      //   key: "WIS_DRUID_1_TRAIT_3",
-      //   ability: {
-      //     key: "WIS_DRUID_1_ABILITY_3",
-      //     name: "Mercy Beast",
-      //     description:
-      //       "Spend 4 Mana to command your tamed beast to stabilize an incapacitated ally within 60ft. The ally heals 3dX HP.",
-      //   },
-      //   perk: {
-      //     key: "WIS_DRUID_1_PERK_3",
-      //     name: "Beast Shape",
-      //     description:
-      //       "You can transform into the same animal as your tamed beast for up to 1 hour. You can only do this once per Rest.",
-      //   },
-      // },
+      {
+        key: "WIS_DRUID_1_ABILITY_1",
+        name: "Attack Beast",
+        description:
+          "Spend 1 Mana to command your tamed beast to attack a target within 30ft. The target takes 1dX damage and can be dragged 5ft in any direction.",
+      },
+      {
+        key: "WIS_DRUID_1_ABILITY_2",
+        name: "Guard Beast",
+        description:
+          "Spend 2 Mana to command your tamed beast to defend you. The next time you are attacked, your tamed beast deals 1dX damage and deflects up to 1dX damage.",
+      },
+      {
+        key: "WIS_DRUID_1_ABILITY_3",
+        name: "Mercy Beast",
+        description:
+          "Spend 4 Mana to command your tamed beast to stabilize an incapacitated ally within 60ft. The ally heals 3dX HP.",
+      },
+      {
+        key: "WIS_DRUID_1_PERK_1",
+        name: "Beast Speech",
+        description:
+          'You can communicate with beasts through their unique visual and auditory cues. You are effectively limited to single words or basic phrases, such as "threat" or "go that way".',
+      },
+      {
+        key: "WIS_DRUID_1_PERK_2",
+        name: "Beast Sight",
+        description:
+          "You can look through the eyes of your tamed beast while they are within 120ft.",
+      },
+      {
+        key: "WIS_DRUID_1_PERK_3",
+        name: "Beast Shape",
+        description:
+          "You can transform into the same animal as your tamed beast for up to 1 hour. You can only do this once per Rest.",
+      },
     ],
   },
 ];
