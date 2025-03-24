@@ -2,12 +2,11 @@ import { opacify } from "polished";
 import React from "react";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { arrayOf } from "../utils/arrayOf";
-import { NButton } from "../common/NButton";
 import { NFlex } from "../common/NFlex";
 import { CharacterClass } from "../appendix/CharacterClass";
 
-export const CHARACTER_CLASS_CARD_WIDTH = 243;
-export const CHARACTER_CLASS_CARD_HEIGHT = 129;
+export const CHARACTER_CLASS_CARD_WIDTH = 240;
+export const CHARACTER_CLASS_CARD_HEIGHT = 120;
 
 export const getAscensionDie = (ascension: number) => {
   return { 0: 6, 1: 12, 2: 20 }[ascension] as number;
@@ -18,11 +17,6 @@ type CharacterClassCardProps = {
   acquired: number;
   ascension: number;
   onClick?: () => void;
-  editable?: boolean;
-  onAcquire?: (change: number) => void;
-  acquireDisabled?: boolean;
-  onAscend?: (change: number) => void;
-  ascendDisabled?: boolean;
 };
 
 export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
@@ -32,11 +26,6 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 
   const ascensionEnabled = !!props.class.traits[0]?.ability;
   const ascensionDie = getAscensionDie(props.ascension);
-
-  const maxAcquired = props.class.traits.length;
-  const maxAscension = ascensionEnabled ? 2 : 0;
-  const hasMaxAcquired = props.acquired === maxAcquired;
-  const hasMaxAscension = props.ascension === maxAscension;
 
   const gradientStart = opacify(-1, color);
   const gradientEnd = opacify(-0.1, color);
@@ -51,7 +40,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
       align="center"
       style={{
         width: CHARACTER_CLASS_CARD_WIDTH,
-        height: 129,
+        height: CHARACTER_CLASS_CARD_HEIGHT,
         border: `2px solid ${color}`,
         borderRadius: 12,
         background: `${gradient}, ${antiChopGradient}`,
@@ -69,7 +58,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           zIndex: 1,
         }}
       >
-        <NFlex vertical gap={6}>
+        <NFlex vertical gap={12}>
           <div
             style={{
               fontFamily: "Grenze",
@@ -94,55 +83,6 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
             ))}
           </NFlex>
         </NFlex>
-
-        {props.editable && (
-          <NFlex gap={6}>
-            <NButton
-              type="solid"
-              color={color}
-              disabled={props.acquireDisabled}
-              onClick={() => {
-                if (!hasMaxAcquired) {
-                  props.onAcquire?.(1);
-                }
-              }}
-              onRightClick={() => {
-                if (!!props.acquired) {
-                  props.onAcquire?.(-1);
-                  // if acquisition is reduced to zero, reduce ascension to zero too
-                  if (props.acquired === 1) {
-                    props.onAscend?.(-props.ascension);
-                  }
-                }
-              }}
-              style={{
-                width: 101,
-              }}
-            >
-              {hasMaxAcquired ? "Max Acquired" : "Acquire"}
-            </NButton>
-            {ascensionEnabled && !!props.acquired && (
-              <NButton
-                type="outline"
-                color={color}
-                disabled={props.ascendDisabled}
-                onClick={() => {
-                  if (!hasMaxAscension) {
-                    props.onAscend?.(1);
-                  }
-                }}
-                onRightClick={() => {
-                  if (!!props.ascension) {
-                    props.onAscend?.(-1);
-                  }
-                }}
-                style={{ width: 108 }}
-              >
-                {hasMaxAscension ? "Max Ascension" : "Ascend"}
-              </NButton>
-            )}
-          </NFlex>
-        )}
       </NFlex>
 
       <img

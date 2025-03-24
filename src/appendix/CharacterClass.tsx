@@ -111,7 +111,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "AGI_GENERAL_PERK_1",
           name: "Spotter",
           description:
-            "*Watch your foot!* When you succeed on an Agility check, you can help another creature immediately succeed on the same check.",
+            "*Watch your step!* When you succeed on an Agility check, you can help one other creature immediately succeed on the same check.",
         },
       },
       {
@@ -197,6 +197,15 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           name: "Linguist",
           description:
             "*Some have called you a polyglot.* You have advantage on Intelligence checks to comprehend languages.",
+        },
+      },
+      {
+        key: "INT_GENERAL_TRAIT_3",
+        perk: {
+          key: "INT_GENERAL_PERK_3",
+          name: "Mastermind",
+          description:
+            "*There's always Plan B.* If you forgo your first turn in combat, your allies have advantage on their Initiative roll and all rolls made on their first turn.",
         },
       },
     ],
@@ -302,7 +311,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_SAGE_1_ABILITY_1",
           name: "Tempest Strike",
           description:
-            "Spend 1 Caro to channel wind into a weapon attack of you or an ally. This attack deals an additional 1dX damage.",
+            "Spend 1 Mana to channel wind into a weapon attack of you or an ally. This attack deals an additional 1dX damage.",
         },
         perk: {
           key: "WIS_SAGE_1_PERK_1",
@@ -317,7 +326,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_SAGE_1_ABILITY_2",
           name: "Tempest Surge",
           description:
-            "Spend 2 Caro to surge wind towards 2 targets within 15ft. Each target takes 1dX damage and is pushed back 15ft.",
+            "Spend 2 Mana to surge wind towards 2 targets within 15ft. Each target takes 1dX damage and is pushed back 15ft.",
         },
         perk: {
           key: "WIS_SAGE_1_PERK_2",
@@ -332,13 +341,13 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_SAGE_1_ABILITY_3",
           name: "Tempest Storm",
           description:
-            "Spend 4 Caro to envelope a target within 60ft in a wind vortex. That target takes 3dX damage and loses 1 Caro.",
+            "Spend 4 Mana to envelope a target within 60ft in a wind vortex. That target takes 3dX damage and loses 1 Mana.",
         },
         perk: {
           key: "WIS_SAGE_1_PERK_3",
           name: "Eye of the Storm",
           description:
-            "If you spend 0 Caro three turns in a row, the calm of the wind restores you. You heal 1dX health.",
+            "If you spend 0 Mana three turns in a row, the calm of the wind restores you. You heal 1dX health.",
         },
       },
     ],
@@ -355,7 +364,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_DRUID_1_ABILITY_1",
           name: "Attack Beast",
           description:
-            "Spend 1 Caro to command your tamed beast to attack a target within 30ft. The target takes 1dX damage and can be dragged 5ft in any direction.",
+            "Spend 1 Mana to command your tamed beast to attack a target within 30ft. The target takes 1dX damage and can be dragged 5ft in any direction.",
         },
         perk: {
           key: "WIS_DRUID_1_PERK_1",
@@ -370,7 +379,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_DRUID_1_ABILITY_2",
           name: "Guard Beast",
           description:
-            "Spend 2 Caro to command your tamed beast to defend you. The next time you are attacked, your tamed beast deals 1dX damage and deflects up to 1dX damage.",
+            "Spend 2 Mana to command your tamed beast to defend you. The next time you are attacked, your tamed beast deals 1dX damage and deflects up to 1dX damage.",
         },
         perk: {
           key: "WIS_DRUID_1_PERK_2",
@@ -385,7 +394,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
           key: "WIS_DRUID_1_ABILITY_3",
           name: "Mercy Beast",
           description:
-            "Spend 4 Caro to command your tamed beast to stabilize an incapacitated ally within 60ft. The ally heals 3dX HP.",
+            "Spend 4 Mana to command your tamed beast to stabilize an incapacitated ally within 60ft. The ally heals 3dX HP.",
         },
         perk: {
           key: "WIS_DRUID_1_PERK_3",
