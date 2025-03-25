@@ -4,7 +4,7 @@ import { CharacterAttribute } from "../appendix/CharacterAttribute";
 import { NTooltip } from "../common/NTooltip";
 import { CHARACTER_CLASS_CARD_HEIGHT } from "./CharacterClassCard";
 
-export const CHARACTER_ATTRIBUTE_SCORE_WIDTH = 115;
+export const CHARACTER_ATTRIBUTE_SCORE_WIDTH = 120;
 
 type CharacterAttributeScoreProps = {
   attribute: CharacterAttribute;

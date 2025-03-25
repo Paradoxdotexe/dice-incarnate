@@ -4,7 +4,6 @@ export type CharacterClass = {
   key: string;
   attributeKey: CharacterAttributeKey;
   name: string;
-  ascensionNames?: string[];
   color: string;
   traits: CharacterClassTrait[];
 };
@@ -64,17 +63,31 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     ],
   },
   {
-    key: "STR_WEAPON_1",
+    key: "STR_ARMOR",
     attributeKey: "STR",
-    name: "Sword",
-    ascensionNames: ["Shortsword", "Longsword", "Greatsword"],
+    name: "Plate",
     color: "#888888",
     traits: [
       {
-        key: "STR_WEAPON_1_ABILITY_1",
+        key: "STR_ARMOR_PERK_1",
+        name: "Heavy Armor",
+        description:
+          "Your AC is increased to 15, you have resistance against Bludgeoning damage, and you have disadvantage on all Agility checks.",
+        ascendable: true,
+      },
+    ],
+  },
+  {
+    key: "STR_WEAPON",
+    attributeKey: "STR",
+    name: "Sword",
+    color: "#888888",
+    traits: [
+      {
+        key: "STR_WEAPON_ABILITY_1",
         name: "Sword Strike",
         description:
-          "Roll a Strength check to attack a creature within 5ft. On a success, the target takes 3dX damage.",
+          "Roll a Strength check to attack a creature within 5ft. On a success, the target takes 3dX Slashing damage.",
         ascendable: true,
       },
     ],
@@ -137,17 +150,31 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     ],
   },
   {
-    key: "AGI_WEAPON_1",
+    key: "AGI_ARMOR",
     attributeKey: "AGI",
-    name: "Bow",
-    ascensionNames: ["Shortbow", "Crossbow", "Longbow"],
+    name: "Leathers",
     color: "#888888",
     traits: [
       {
-        key: "AGI_WEAPON_1_ABILITY_1",
+        key: "AGI_ARMOR_PERK_1",
+        name: "Light Armor",
+        description:
+          "Your AC is increased to 12 and you have resistance to Slashing damage.",
+        ascendable: true,
+      },
+    ],
+  },
+  {
+    key: "AGI_WEAPON",
+    attributeKey: "AGI",
+    name: "Bow",
+    color: "#888888",
+    traits: [
+      {
+        key: "AGI_WEAPON_ABILITY_1",
         name: "Bow Strike",
         description:
-          "Roll an Agility check to attack a creature between 20ft and 100ft. On a success, the target takes 2dX damage.",
+          "Roll an Agility check to attack a creature between 20ft and 100ft. On a success, the target takes 2dX Piercing damage.",
         ascendable: true,
       },
     ],
@@ -193,17 +220,44 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     ],
   },
   {
-    key: "INT_WEAPON_1",
+    key: "INT_ARMOR",
     attributeKey: "INT",
-    name: "Hexlock",
-    ascensionNames: ["Musket", "Revolver", "Repeater"],
+    name: "Hexclad",
     color: "#888888",
     traits: [
       {
-        key: "INT_WEAPON_1_ABILITY_1",
+        key: "INT_ARMOR_PERK_1",
+        name: "Force Magic Resistance",
+        description: "You have resistance against Force damage.",
+      },
+      {
+        key: "INT_ARMOR_PERK_2",
+        name: "Psychic Magic Resistance",
+        description: "You have resistance against Psychic damage.",
+      },
+      {
+        key: "INT_ARMOR_PERK_3",
+        name: "Light Magic Resistance",
+        description: "You have resistance against Light damage.",
+      },
+      {
+        key: "INT_ARMOR_PERK_4",
+        name: "Dark Magic Resistance",
+        description: "You have resistance against Dark damage.",
+      },
+    ],
+  },
+  {
+    key: "INT_WEAPON",
+    attributeKey: "INT",
+    name: "Hexlock",
+    color: "#888888",
+    traits: [
+      {
+        key: "INT_WEAPON_ABILITY_1",
         name: "Hexlock Blast",
         description:
-          "Roll an Intelligence check to attack a creature between 10ft and 30ft. On a success, the target takes 2dX damage.",
+          "Roll an Intelligence check to attack a creature between 10ft and 30ft. On a success, the target takes 2dX Force damage.",
         ascendable: true,
       },
     ],
@@ -243,17 +297,30 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     ],
   },
   {
-    key: "CHA_WEAPON_1",
+    key: "CHA_ARMOR",
     attributeKey: "CHA",
-    name: "Blade",
-    ascensionNames: ["Katar", "Dagger", "Karambit"],
+    name: "Cloak",
     color: "#888888",
     traits: [
       {
-        key: "CHA_WEAPON_1_ABILITY_1",
-        name: "Blade Strike",
+        key: "CHA_ARMOR_PERK_1",
+        name: "Social Camouflage",
+        description: "You have advantage on Charisma checks.",
+        ascendable: true,
+      },
+    ],
+  },
+  {
+    key: "CHA_WEAPON",
+    attributeKey: "CHA",
+    name: "Dagger",
+    color: "#888888",
+    traits: [
+      {
+        key: "CHA_WEAPON_ABILITY_1",
+        name: "Dagger Strike",
         description:
-          "Roll a Charisma check to deceive a creature within 5ft to let you strike from lethal distance. On a success, the target takes 6dX damage. You cannot attack the same target with a Blade twice.",
+          "Roll a Charisma check to deceive a creature within 5ft to let you strike from lethal distance. On a success, the target takes 6dX Piercing damage. You cannot attack the same target with a Blade twice.",
         ascendable: true,
       },
     ],
@@ -293,17 +360,44 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     ],
   },
   {
-    key: "WIS_WEAPON_1",
+    key: "WIS_ARMOR",
     attributeKey: "WIS",
-    name: "Staff",
-    ascensionNames: ["Hanbo", "Jo", "Bo"],
+    name: "Robe",
     color: "#888888",
     traits: [
       {
-        key: "WIS_WEAPON_1_ABILITY_1",
+        key: "WIS_ARMOR_PERK_1",
+        name: "Fire Magic Resistance",
+        description: "You have resistance against Fire damage.",
+      },
+      {
+        key: "WIS_ARMOR_PERK_2",
+        name: "Water Magic Resistance",
+        description: "You have resistance against Water damage.",
+      },
+      {
+        key: "WIS_ARMOR_PERK_3",
+        name: "Earth Magic Resistance",
+        description: "You have resistance against Earth damage.",
+      },
+      {
+        key: "WIS_ARMOR_PERK_4",
+        name: "Air Magic Resistance",
+        description: "You have resistance against Air damage.",
+      },
+    ],
+  },
+  {
+    key: "WIS_WEAPON",
+    attributeKey: "WIS",
+    name: "Staff",
+    color: "#888888",
+    traits: [
+      {
+        key: "WIS_WEAPON_ABILITY_1",
         name: "Staff Strike",
         description:
-          "Roll a Wisdom check to attack a creature within 10ft. On a success, the target takes 2dX damage.",
+          "Roll a Wisdom check to attack a creature within 10ft. On a success, the target takes 2dX Bludgeoning damage.",
         ascendable: true,
       },
     ],

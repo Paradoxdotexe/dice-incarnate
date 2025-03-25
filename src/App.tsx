@@ -3,6 +3,7 @@ import "./App.css";
 import { NFlex } from "./common/NFlex";
 import {
   CHARACTER_CLASS_CARD_WIDTH,
+  CHARACTER_CLASS_CARD_WIDTH_SM,
   CharacterClassCard,
 } from "./components/CharacterClassCard";
 import {
@@ -90,8 +91,7 @@ function App() {
     >
       <NFlex
         style={{
-          width: 1280,
-          paddingLeft: CHARACTER_ATTRIBUTE_SCORE_WIDTH + ROW_GAP,
+          width: 1266,
           fontWeight: "600",
           fontSize: 14,
         }}
@@ -101,7 +101,8 @@ function App() {
             align-items: center;
             gap: 6px;
 
-            &::after, &::before {
+            &::after,
+            &::before {
               content: "";
               display: block;
               width: 100%;
@@ -112,11 +113,13 @@ function App() {
         `}
         gap={ROW_GAP}
       >
+        <div style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>SKILLS</div>
         <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>PERKS</div>
-        <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>WEAPONS</div>
+        <div style={{ width: CHARACTER_CLASS_CARD_WIDTH_SM }}>ARMOR</div>
+        <div style={{ width: CHARACTER_CLASS_CARD_WIDTH_SM }}>WEAPONS</div>
         <div style={{ flex: 1 }}>CLASSES</div>
       </NFlex>
-      <NFlex gap={ROW_GAP} style={{ width: 1280 }}>
+      <NFlex gap={ROW_GAP} style={{ width: 1266 }}>
         <NFlex vertical justify="center" gap={24} style={{ flex: 1 }}>
           {CHARACTER_ATTRIBUTES.map((attribute) => (
             <NFlex key={attribute.key} gap={ROW_GAP}>

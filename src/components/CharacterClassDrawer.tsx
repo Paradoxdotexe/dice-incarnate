@@ -38,11 +38,6 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
       props.class.traits.find((trait) => trait.key === traitKey)!.ascendable
   ).length;
 
-  let className = props.class.name;
-  if (props.class.ascensionNames && ascendable) {
-    className += `: ${props.class.ascensionNames[props.ascension]}`;
-  }
-
   return (
     <NDrawer open={props.open} onClose={props.onClose} width={PANEL_WIDTH}>
       <NFlex
@@ -64,7 +59,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
               fontWeight: 500,
             }}
           >
-            {className}
+            {props.class.name}
           </div>
 
           {ascendable && (

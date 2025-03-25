@@ -4,7 +4,8 @@ import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { NFlex } from "../common/NFlex";
 import { CharacterClass } from "../appendix/CharacterClass";
 
-export const CHARACTER_CLASS_CARD_WIDTH = 240;
+export const CHARACTER_CLASS_CARD_WIDTH = 240; // 36 * 6 + 24
+export const CHARACTER_CLASS_CARD_WIDTH_SM = 168; // 36 * 4 + 24
 export const CHARACTER_CLASS_CARD_HEIGHT = 120;
 
 export const getAscensionDie = (ascension: number) => {
@@ -33,21 +34,15 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   const antiChopGradientEnd = opacify(-0.95, color);
   const antiChopGradient = `linear-gradient(${gradientStart} 14%, ${antiChopGradientEnd})`;
 
-  const ascendable = !!props.acquiredTraits.filter(
-    (traitKey) =>
-      props.class.traits.find((trait) => trait.key === traitKey)!.ascendable
-  ).length;
-
-  let className = props.class.name;
-  if (props.class.ascensionNames && ascendable) {
-    className += `: ${props.class.ascensionNames[props.ascension]}`;
-  }
-
   return (
     <NFlex
       align="center"
       style={{
-        width: CHARACTER_CLASS_CARD_WIDTH,
+        width:
+          props.class.key.includes("WEAPON") ||
+          props.class.key.includes("ARMOR")
+            ? CHARACTER_CLASS_CARD_WIDTH_SM
+            : CHARACTER_CLASS_CARD_WIDTH,
         height: CHARACTER_CLASS_CARD_HEIGHT,
         border: `2px solid ${color}`,
         borderRadius: 12,
@@ -76,7 +71,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
               fontWeight: 500,
             }}
           >
-            {className}
+            {props.class.name}
           </div>
 
           <NFlex gap={3}>
