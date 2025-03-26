@@ -12,25 +12,29 @@ import {
 } from "./components/CharacterAttributeScore";
 import { CHARACTER_CLASSES } from "./appendix/CharacterClass";
 import { CharacterClassDrawer } from "./components/CharacterClassDrawer";
-import {
-  CHARACTER_ATTRIBUTES,
-  CharacterAttributeKey,
-} from "./appendix/CharacterAttribute";
+import { CHARACTER_ATTRIBUTES } from "./appendix/CharacterAttribute";
+import { useDatabaseQuery } from "./database/useDatabaseQuery";
+import { useDatabaseCollection } from "./database/useDatabaseCollection";
+import { v4 as uuid } from "uuid";
 
 const ROW_GAP = 18;
 
 function App() {
-  const [characterState, setCharacterState] = useState<{
-    classes: { [key: string]: { acquiredTraits: string[]; ascension: number } };
-  }>({
-    classes: CHARACTER_CLASSES.reduce(
-      (classes, cc) => ({
-        ...classes,
-        [cc.key]: { acquiredTraits: [], ascension: 0 },
-      }),
-      {}
-    ),
-  });
+  const charactersCollection = useDatabaseCollection("characters");
+  const characters = useDatabaseQuery("characters");
+  const character = characters?.[0];
+
+  useEffect(() => {
+    // initialize character on first arrival
+    if (characters?.length === 0) {
+      charactersCollection.insert({
+        id: uuid(),
+        experience: 6,
+        classStates: [],
+      });
+    }
+  }, [characters]);
+
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
 
   useEffect(() => {
@@ -45,37 +49,16 @@ function App() {
     };
   }, []);
 
-  const scoreByAttribute = useMemo(() => {
-    return CHARACTER_ATTRIBUTES.reduce((dict, attribute) => {
-      const bonus = Object.entries(characterState.classes)
-        .filter(([key]) => key.startsWith(attribute.key))
-        .reduce(
-          (count, [_, classState]) =>
-            count + classState.acquiredTraits.length + classState.ascension * 2,
-          0
-        );
-      return { ...dict, [attribute.key]: 10 + bonus };
-    }, {}) as { [key in CharacterAttributeKey]: number };
-  }, [characterState]);
-
-  const [xpPoints, levelPoints] = useMemo(() => {
-    return [
-      Object.values(characterState.classes).reduce(
-        (count, cc) => count + cc.acquiredTraits.length,
-        0
-      ),
-      Object.values(characterState.classes).reduce(
-        (count, cc) => count + cc.ascension,
-        0
-      ),
-    ];
-  }, [characterState]);
+  if (!character) {
+    return null;
+  }
 
   const selectedClass = CHARACTER_CLASSES.find(
     (cc) => cc.key === selectedClassKey
   );
-  const selectedClassState =
-    selectedClassKey && characterState.classes[selectedClassKey];
+  const selectedClassState = selectedClassKey
+    ? character.getClassState(selectedClassKey)
+    : undefined;
 
   return (
     <NFlex
@@ -125,17 +108,17 @@ function App() {
             <NFlex key={attribute.key} gap={ROW_GAP}>
               <CharacterAttributeScore
                 attribute={attribute}
-                score={scoreByAttribute[attribute.key]}
+                score={10 + character.getAttributeBonus(attribute.key)}
               />
               {CHARACTER_CLASSES.filter(
                 (cc) => cc.attributeKey === attribute.key
               ).map((cc) => {
-                const classState = characterState.classes[cc.key];
+                const classState = character.getClassState(cc.key);
                 return (
                   <CharacterClassCard
                     key={cc.key}
                     class={cc}
-                    acquiredTraits={classState.acquiredTraits}
+                    acquiredTraits={classState.traits}
                     ascension={classState.ascension}
                     onClick={() => setSelectedClassKey(cc.key)}
                   />
@@ -151,26 +134,17 @@ function App() {
             onClose={() => setSelectedClassKey(undefined)}
             key={selectedClass.key}
             class={selectedClass}
-            acquiredTraits={selectedClassState.acquiredTraits}
+            acquiredTraits={selectedClassState.traits}
             ascension={selectedClassState.ascension}
             onClick={() => setSelectedClassKey(selectedClass.key)}
             onAcquire={(traitKey) => {
-              characterState.classes[selectedClass.key].acquiredTraits.push(
-                traitKey
-              );
-              characterState.classes[selectedClass.key].acquiredTraits.sort(
-                (a, b) =>
-                  selectedClass.traits.findIndex((trait) => trait.key === a) -
-                  selectedClass.traits.findIndex((trait) => trait.key === b)
-              );
-              setCharacterState({ ...characterState });
+              character.acquireClassTrait(selectedClass.key, traitKey);
             }}
-            acquireDisabled={xpPoints >= 6}
+            acquireDisabled={character.getAvailableExperience() <= 0}
             onAscend={() => {
-              characterState.classes[selectedClass.key].ascension += 1;
-              setCharacterState({ ...characterState });
+              character.ascendClass(selectedClass.key);
             }}
-            ascendDisabled={levelPoints >= 2}
+            ascendDisabled={character.getAvailableAscension() <= 0}
           />
         )}
       </NFlex>

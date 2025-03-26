@@ -52,13 +52,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
         key: "STR_GENERAL_PERK_5",
         name: "Iron Grip",
         description:
-          "*You're not going anywhere.* You have advantage on Strength checks related to grappling",
-      },
-      {
-        key: "STR_GENERAL_PERK_6",
-        name: "Big Hands",
-        description:
-          "*You know what the say about big hands?* You can wield two-handed weapons with one hand.",
+          "*You're not going anywhere.* You have advantage on Strength checks related to grappling.",
       },
     ],
   },

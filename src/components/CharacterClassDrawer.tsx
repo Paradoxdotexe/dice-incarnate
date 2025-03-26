@@ -76,16 +76,17 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
         <NFlex vertical gap={18}>
           {props.class.traits.map((trait) => {
             const isAcquired = props.acquiredTraits.includes(trait.key);
+            const isAcquirable = !isAcquired && !props.acquireDisabled;
             return (
               <NFlex
                 key={trait.key}
                 vertical
                 gap={12}
                 onClick={
-                  !isAcquired ? () => props.onAcquire(trait.key) : undefined
+                  isAcquirable ? () => props.onAcquire(trait.key) : undefined
                 }
                 style={{
-                  cursor: !isAcquired ? "pointer" : undefined,
+                  cursor: isAcquirable ? "pointer" : undefined,
                   padding: 12,
                   borderRadius: 12,
                   opacity: isAcquired ? 1 : 0.7,
