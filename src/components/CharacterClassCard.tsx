@@ -34,6 +34,15 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   const antiChopGradientEnd = opacify(-0.95, color);
   const antiChopGradient = `linear-gradient(${gradientStart} 14%, ${antiChopGradientEnd})`;
 
+  let boxShadow = "";
+  const boxShadowColor = opacify(-0.25, color);
+  if (props.ascension == 1) {
+    boxShadow = `0 0 0 2px #1b1b1b, -2px 2px 0 2px ${boxShadowColor}`;
+  }
+  if (props.ascension == 2) {
+    boxShadow = `0 0 0 2px #1b1b1b, 0 0 0 4px ${boxShadowColor}`;
+  }
+
   return (
     <NFlex
       align="center"
@@ -51,6 +60,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
         padding: 12,
         cursor: "pointer",
         userSelect: "none",
+        boxShadow,
       }}
       onClick={props.onClick}
     >
