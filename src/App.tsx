@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import { NFlex } from "./common/NFlex";
 import {
@@ -13,41 +13,14 @@ import {
 import { CHARACTER_CLASSES } from "./appendix/CharacterClass";
 import { CharacterClassDrawer } from "./components/CharacterClassDrawer";
 import { CHARACTER_ATTRIBUTES } from "./appendix/CharacterAttribute";
-import { useDatabaseQuery } from "./database/useDatabaseQuery";
-import { useDatabaseCollection } from "./database/useDatabaseCollection";
-import { v4 as uuid } from "uuid";
+import { useCharacter } from "./hooks/useCharacter";
 
 const ROW_GAP = 18;
 
 function App() {
-  const charactersCollection = useDatabaseCollection("characters");
-  const characters = useDatabaseQuery("characters");
-  const character = characters?.[0];
-
-  useEffect(() => {
-    // initialize character on first arrival
-    if (characters?.length === 0) {
-      charactersCollection.insert({
-        id: uuid(),
-        experience: 6,
-        classStates: [],
-      });
-    }
-  }, [characters]);
+  const character = useCharacter();
 
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
-
-  useEffect(() => {
-    const onContextMenu = (event: MouseEvent) => {
-      event?.preventDefault();
-    };
-
-    document.addEventListener("contextmenu", onContextMenu);
-
-    return () => {
-      document.removeEventListener("contextmenu", onContextMenu);
-    };
-  }, []);
 
   if (!character) {
     return null;

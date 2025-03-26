@@ -81,7 +81,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
               )!;
 
               return (
-                <CharacterAbilityIcon color={color}>
+                <CharacterAbilityIcon key={traitKey} color={color}>
                   {trait.ascendable && ascensionDie}
                 </CharacterAbilityIcon>
               );

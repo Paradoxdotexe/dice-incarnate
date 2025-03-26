@@ -10,6 +10,8 @@ import reactStringReplace from "react-string-replace";
 import { NTag } from "../common/NTag";
 import { NDrawer } from "../common/NDrawer";
 import { NButton } from "../common/NButton";
+import { useCharacter } from "../hooks/useCharacter";
+import { CharacterAttributeKey } from "../appendix/CharacterAttribute";
 
 const PANEL_WIDTH = 600;
 
@@ -97,8 +99,8 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
                 }}
               >
                 <TraitEntry
-                  color={color}
                   trait={trait}
+                  color={color}
                   ascensionDie={ascensionDie}
                 />
               </NFlex>
@@ -128,7 +130,10 @@ const TraitEntry: React.FC<TraitEntryProps> = (props) => {
         <div style={{ fontSize: 20, fontWeight: 700, lineHeight: "25px" }}>
           {props.trait.name}
         </div>
-        <TraitDescription ascensionDie={props.ascensionDie}>
+        <TraitDescription
+          traitKey={props.trait.key}
+          ascensionDie={props.ascensionDie}
+        >
           {props.trait.description}
         </TraitDescription>
       </NFlex>
@@ -138,26 +143,46 @@ const TraitEntry: React.FC<TraitEntryProps> = (props) => {
 
 type TraitDescriptionProps = {
   children: string;
+  traitKey: string;
   ascensionDie?: number;
 };
 
 const TraitDescription: React.FC<TraitDescriptionProps> = (props) => {
-  let description = reactStringReplace(props.children, /(\d+ft)/g, (str, i) => (
-    <NTag key={`ft#${i}`}>{str}</NTag>
-  ));
+  const character = useCharacter();
 
-  description = reactStringReplace(description, /(\d Mana)/g, (str, i) => (
-    <NTag key={`mana#${i}`}>{str}</NTag>
-  ));
+  const attributeBonus = character?.getAttributeBonus(
+    props.traitKey.slice(0, 3) as CharacterAttributeKey
+  );
 
-  description = reactStringReplace(description, /\*(.+?)\*/g, (str, i) => (
-    <em key={`em#${i}`}>{str}&nbsp;</em>
-  ));
+  let description = reactStringReplace(
+    props.children,
+    /(\d+ft)/g,
+    (str, _, offset) => (
+      <NTag key={`FT#${props.traitKey}#${offset}`}>{str}</NTag>
+    )
+  );
+
+  description = reactStringReplace(
+    description,
+    /(\d Mana)/g,
+    (str, _, offset) => (
+      <NTag key={`MANA#${props.traitKey}#${offset}`}>{str}</NTag>
+    )
+  );
+
+  description = reactStringReplace(
+    description,
+    /\*(.+?)\*/g,
+    (str, _, offset) => (
+      <em key={`EM#${props.traitKey}#${offset}`}>{str}&nbsp;</em>
+    )
+  );
 
   if (props.ascensionDie) {
     description = reactStringReplace(description, /(\ddX)/g, (str, i) => (
       <NTag key={`dx#${i}`}>
         {str.replace("X", props.ascensionDie!.toString())}
+        {attributeBonus ? ` + ${attributeBonus}` : ""}
       </NTag>
     ));
   }
