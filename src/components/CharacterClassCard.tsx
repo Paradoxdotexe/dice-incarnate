@@ -5,7 +5,6 @@ import { NFlex } from "../common/NFlex";
 import { CharacterClass } from "../appendix/CharacterClass";
 
 export const CHARACTER_CLASS_CARD_WIDTH = 240; // 36 * 6 + 24
-export const CHARACTER_CLASS_CARD_WIDTH_SM = 168; // 36 * 4 + 24
 export const CHARACTER_CLASS_CARD_HEIGHT = 120;
 
 export const getAscensionDie = (ascension: number) => {
@@ -47,11 +46,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
     <NFlex
       align="center"
       style={{
-        width:
-          props.class.key.includes("WEAPON") ||
-          props.class.key.includes("ARMOR")
-            ? CHARACTER_CLASS_CARD_WIDTH_SM
-            : CHARACTER_CLASS_CARD_WIDTH,
+        width: CHARACTER_CLASS_CARD_WIDTH,
         height: CHARACTER_CLASS_CARD_HEIGHT,
         border: `2px solid ${color}`,
         borderRadius: 12,

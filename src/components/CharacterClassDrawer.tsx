@@ -12,6 +12,7 @@ import { NDrawer } from "../common/NDrawer";
 import { NButton } from "../common/NButton";
 import { useCharacter } from "../hooks/useCharacter";
 import { CharacterAttributeKey } from "../appendix/CharacterAttribute";
+import classNames from "classnames";
 
 const PANEL_WIDTH = 600;
 
@@ -80,30 +81,14 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
             const isAcquired = props.acquiredTraits.includes(trait.key);
             const isAcquirable = !isAcquired && !props.acquireDisabled;
             return (
-              <NFlex
-                key={trait.key}
-                vertical
-                gap={12}
-                onClick={
-                  isAcquirable ? () => props.onAcquire(trait.key) : undefined
-                }
-                style={{
-                  cursor: isAcquirable ? "pointer" : undefined,
-                  padding: 12,
-                  borderRadius: 12,
-                  opacity: isAcquired ? 1 : 0.7,
-                  background: isAcquired
-                    ? "rgba(255, 255, 255, 0.06)"
-                    : `repeating-linear-gradient(45deg,rgba(255, 255, 255, 0.03),rgba(255, 255, 255, 0.03) 10px,rgba(255, 255, 255, 0.06) 10px,rgba(255, 255, 255, 0.06) 20px)`,
-                  filter: !isAcquired ? "saturate(0)" : undefined,
-                }}
-              >
-                <TraitEntry
-                  trait={trait}
-                  color={color}
-                  ascensionDie={ascensionDie}
-                />
-              </NFlex>
+              <TraitCard
+                class={props.class}
+                trait={trait}
+                isAcquired={isAcquired}
+                isAcquirable={isAcquirable}
+                onClick={() => props.onAcquire(trait.key)}
+                ascensionDie={ascensionDie}
+              />
             );
           })}
         </NFlex>
@@ -112,30 +97,71 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
   );
 };
 
-type TraitEntryProps = {
+type TraitCardProps = {
+  class: CharacterClass;
   trait: CharacterClassTrait;
-  color: string;
+  isAcquired: boolean;
+  isAcquirable: boolean;
+  onClick: () => void;
   ascensionDie: number;
 };
 
-const TraitEntry: React.FC<TraitEntryProps> = (props) => {
+const TraitCard: React.FC<TraitCardProps> = (props) => {
   return (
-    <NFlex gap={9} align="start">
-      {
-        <CharacterAbilityIcon color={props.color}>
-          {props.trait.ascendable && props.ascensionDie}
-        </CharacterAbilityIcon>
-      }
-      <NFlex vertical gap={3}>
-        <div style={{ fontSize: 20, fontWeight: 700, lineHeight: "25px" }}>
-          {props.trait.name}
-        </div>
-        <TraitDescription
-          traitKey={props.trait.key}
-          ascensionDie={props.ascensionDie}
-        >
-          {props.trait.description}
-        </TraitDescription>
+    <NFlex
+      vertical
+      gap={12}
+      onClick={props.isAcquirable ? props.onClick : undefined}
+      className={classNames({
+        acquired: props.isAcquired,
+        acquirable: props.isAcquirable,
+      })}
+      css={`
+        padding: 12px;
+        border-radius: 12px;
+        background: repeating-linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.05) 10px,
+          rgba(255, 255, 255, 0.07) 10px,
+          rgba(255, 255, 255, 0.07) 20px
+        );
+        filter: saturate(0);
+        opacity: 0.5;
+        transition: filter 150ms ease, opacity 150ms ease;
+
+        &:hover.acquirable,
+        &.acquired {
+          filter: none;
+          opacity: 1;
+        }
+
+        &.acquirable {
+          cursor: pointer;
+        }
+
+        &.acquired {
+          background: rgba(255, 255, 255, 0.06);
+        }
+      `}
+    >
+      <NFlex gap={9} align="start">
+        {
+          <CharacterAbilityIcon color={props.class.color}>
+            {props.trait.ascendable && props.ascensionDie}
+          </CharacterAbilityIcon>
+        }
+        <NFlex vertical gap={3}>
+          <div style={{ fontSize: 20, fontWeight: 700, lineHeight: "25px" }}>
+            {props.trait.name}
+          </div>
+          <TraitDescription
+            traitKey={props.trait.key}
+            ascensionDie={props.ascensionDie}
+          >
+            {props.trait.description}
+          </TraitDescription>
+        </NFlex>
       </NFlex>
     </NFlex>
   );

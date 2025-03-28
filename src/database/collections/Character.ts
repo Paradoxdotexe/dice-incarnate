@@ -62,7 +62,7 @@ type CharacterClassState = Character["classStates"][number];
 const characterSchema: RxJsonSchema<Character> = _characterSchema;
 
 type CharacterMethods = {
-  getClassState: (classKey: string) => CharacterClassState;
+  getClassState: (classKey: string) => CharacterClassState | undefined;
   acquireClassTrait: (classKey: string, traitKey: string) => void;
   ascendClass: (classKey: string) => void;
   getAttributeBonus: (attributeKey: CharacterAttributeKey) => number;
@@ -86,13 +86,7 @@ const _sum_ascension = (classStates: CharacterClassState[]) =>
 
 const characterMethods: CharacterMethods = {
   getClassState: function (this: CharacterDocument, classKey: string) {
-    return (
-      this.classStates.find((classState) => classState.key === classKey) ?? {
-        key: classKey,
-        traits: [],
-        ascension: 0,
-      }
-    );
+    return this.classStates.find((classState) => classState.key === classKey);
   },
   acquireClassTrait: function (
     this: CharacterDocument,

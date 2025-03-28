@@ -8,6 +8,15 @@ export type CharacterClass = {
   traits: CharacterClassTrait[];
 };
 
+export const getClassType = (key: string) => {
+  for (const str of ["GENERAL", "WEAPON", "ARMOR"]) {
+    if (key.split("_")[1] === str) {
+      return str;
+    }
+  }
+  return "CLASS";
+};
+
 export type CharacterClassTrait = {
   key: string;
   name: string;
@@ -67,7 +76,6 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
         name: "Heavy Armor",
         description:
           "Your AC is increased to 15, you have resistance against Bludgeoning damage, and you have disadvantage on all Agility checks.",
-        ascendable: true,
       },
     ],
   },
@@ -454,18 +462,21 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
         name: "Attack Beast",
         description:
           "Spend 1 Mana to command your tamed beast to attack a target within 30ft. The target takes 1dX damage and can be dragged 5ft in any direction.",
+        ascendable: true,
       },
       {
         key: "WIS_DRUID_1_ABILITY_2",
         name: "Guard Beast",
         description:
           "Spend 2 Mana to command your tamed beast to defend you. The next time you are attacked, your tamed beast deals 1dX damage and deflects up to 1dX damage.",
+        ascendable: true,
       },
       {
         key: "WIS_DRUID_1_ABILITY_3",
         name: "Mercy Beast",
         description:
           "Spend 4 Mana to command your tamed beast to stabilize an incapacitated ally within 60ft. The ally heals 3dX HP.",
+        ascendable: true,
       },
       {
         key: "WIS_DRUID_1_PERK_1",
