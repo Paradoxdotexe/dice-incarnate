@@ -3,6 +3,7 @@ import React from "react";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { NFlex } from "../common/NFlex";
 import { CharacterClass } from "../appendix/CharacterClass";
+import { CharacterClassState } from "../database/collections/Character";
 
 export const CHARACTER_CLASS_CARD_WIDTH = 240; // 36 * 6 + 24
 export const CHARACTER_CLASS_CARD_HEIGHT = 120;
@@ -13,8 +14,7 @@ export const getAscensionDie = (ascension: number) => {
 
 type CharacterClassCardProps = {
   class: CharacterClass;
-  acquiredTraits: string[];
-  ascension: number;
+  classState?: CharacterClassState;
   onClick?: () => void;
 };
 
@@ -23,22 +23,23 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 ) => {
   const color = props.class.color;
 
-  const ascensionDie = getAscensionDie(props.ascension);
+  const ascensionDie = getAscensionDie(props.classState?.ascension ?? 0);
 
-  const gradientStart = opacify(-1, color);
-  const gradientEnd = opacify(-0.1, color);
-  const gradient = `linear-gradient(to bottom right, ${gradientStart} 18%, ${gradientEnd})`;
+  const gradientStartColor = opacify(-1, color);
+  const gradientEndColor = opacify(-0.1, color);
+  const gradient = `linear-gradient(to bottom right, ${gradientStartColor} 18%, ${gradientEndColor})`;
 
   // second gradient is used to avoid choppiness
-  const antiChopGradientEnd = opacify(-0.95, color);
-  const antiChopGradient = `linear-gradient(${gradientStart} 14%, ${antiChopGradientEnd})`;
+  const antiChopGradientEndColor = opacify(-0.95, color);
+  const antiChopGradient = `linear-gradient(${gradientStartColor} 14%, ${antiChopGradientEndColor})`;
 
+  // use boxShadow to highlight ascension
   let boxShadow = "";
   const boxShadowColor = opacify(-0.25, color);
-  if (props.ascension == 1) {
+  if (props.classState?.ascension == 1) {
     boxShadow = `0 0 0 2px #1b1b1b, -2px 2px 0 2px ${boxShadowColor}`;
   }
-  if (props.ascension == 2) {
+  if (props.classState?.ascension == 2) {
     boxShadow = `0 0 0 2px #1b1b1b, 0 0 0 4px ${boxShadowColor}`;
   }
 
@@ -80,7 +81,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           </div>
 
           <NFlex gap={3}>
-            {props.acquiredTraits.map((traitKey) => {
+            {props.classState?.traits.map((traitKey) => {
               const trait = props.class.traits.find(
                 (trait) => trait.key === traitKey
               )!;

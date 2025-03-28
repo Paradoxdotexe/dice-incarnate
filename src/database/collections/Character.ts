@@ -57,7 +57,7 @@ type Character = ExtractDocumentTypeFromTypedRxJsonSchema<
   typeof _characterSchema
 >;
 
-type CharacterClassState = Character["classStates"][number];
+export type CharacterClassState = Character["classStates"][number];
 
 const characterSchema: RxJsonSchema<Character> = _characterSchema;
 

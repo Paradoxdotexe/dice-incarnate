@@ -13,6 +13,8 @@ import { NButton } from "../common/NButton";
 import { useCharacter } from "../hooks/useCharacter";
 import { CharacterAttributeKey } from "../appendix/CharacterAttribute";
 import classNames from "classnames";
+import { CharacterClassState } from "../database/collections/Character";
+import { keyBy } from "lodash-es";
 
 const PANEL_WIDTH = 600;
 
@@ -20,8 +22,7 @@ type CharacterClassDrawerProps = {
   open: boolean;
   onClose: () => void;
   class: CharacterClass;
-  acquiredTraits: string[];
-  ascension: number;
+  classState?: CharacterClassState;
   onClick?: () => void;
   onAcquire: (traitKey: string) => void;
   acquireDisabled?: boolean;
@@ -34,11 +35,13 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
 ) => {
   const color = props.class.color;
 
-  const ascensionDie = getAscensionDie(props.ascension);
+  const ascensionDie = getAscensionDie(props.classState?.ascension ?? 0);
+  const maxAscension = props.classState?.ascension == 2;
 
-  const ascendable = !!props.acquiredTraits.filter(
-    (traitKey) =>
-      props.class.traits.find((trait) => trait.key === traitKey)!.ascendable
+  const traitsByKey = keyBy(props.class.traits, "key");
+
+  const ascendable = !!props.classState?.traits.filter(
+    (traitKey) => traitsByKey[traitKey].ascendable
   ).length;
 
   return (
@@ -69,16 +72,17 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
             <NButton
               color={color}
               onClick={props.onAscend}
-              disabled={props.ascension == 2 || props.ascendDisabled}
+              disabled={maxAscension || props.ascendDisabled}
             >
-              {props.ascension == 2 ? "Max Ascension" : "Ascend"}
+              {maxAscension ? "Max Ascension" : "Ascend"}
             </NButton>
           )}
         </NFlex>
 
         <NFlex vertical gap={18}>
           {props.class.traits.map((trait) => {
-            const isAcquired = props.acquiredTraits.includes(trait.key);
+            const isAcquired =
+              props.classState?.traits.includes(trait.key) ?? false;
             const isAcquirable = !isAcquired && !props.acquireDisabled;
             return (
               <TraitCard

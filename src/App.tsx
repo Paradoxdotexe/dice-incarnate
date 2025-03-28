@@ -97,8 +97,7 @@ function App() {
                     <CharacterClassCard
                       key={cc.key}
                       class={cc}
-                      acquiredTraits={classState?.traits ?? []}
-                      ascension={classState?.ascension ?? 0}
+                      classState={classState}
                       onClick={() => setSelectedClassKey(cc.key)}
                     />
                   );
@@ -113,7 +112,7 @@ function App() {
                       width: CHARACTER_CLASS_CARD_WIDTH,
                       height: CHARACTER_CLASS_CARD_HEIGHT,
                       border: `2px solid #494949`,
-                      color: '#808080',
+                      color: "#808080",
                       borderRadius: 12,
                       cursor: "pointer",
                     }}
@@ -151,8 +150,6 @@ function App() {
             <CharacterClassCard
               key={cc.key}
               class={cc}
-              acquiredTraits={[]}
-              ascension={0}
               onClick={() => {
                 setAttributeKey(undefined);
                 setSelectedClassKey(cc.key);
@@ -168,8 +165,7 @@ function App() {
           onClose={() => setSelectedClassKey(undefined)}
           key={selectedClass.key}
           class={selectedClass}
-          acquiredTraits={selectedClassState?.traits ?? []}
-          ascension={selectedClassState?.ascension ?? 0}
+          classState={selectedClassState}
           onClick={() => setSelectedClassKey(selectedClass.key)}
           onAcquire={(traitKey) => {
             character.acquireClassTrait(selectedClass.key, traitKey);
