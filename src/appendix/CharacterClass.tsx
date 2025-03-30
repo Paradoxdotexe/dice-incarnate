@@ -43,49 +43,6 @@
     traits: [],
   },
   {
-    key: "AGI_GENERAL",
-    attributeKey: "AGI",
-    name: "Agile",
-    color: "#494949",
-    traits: [
-      {
-        key: "AGI_GENERAL_PERK_1",
-        name: "Spotter",
-        description:
-          "*Watch your step!* When you succeed on an Agility check, you can help one other creature immediately succeed on the same check.",
-      },
-      {
-        key: "AGI_GENERAL_PERK_2",
-        name: "Surefooted",
-        description:
-          "*A distant descendent of mountain goats.* You are not impeded by Rough Terrain during combat.",
-      },
-      {
-        key: "AGI_GENERAL_PERK_3",
-        name: "Slippery",
-        description:
-          "*Missed me!* Opportunity attacks against you have disadvantage.",
-      },
-      {
-        key: "AGI_GENERAL_PERK_4",
-        name: "Righting Reflex",
-        description:
-          "*Cats always land on their feet.* When you fall, you land on your feet and your fall damage is reduced by one die.",
-      },
-      {
-        key: "AGI_GENERAL_PERK_5",
-        name: "Sneaky",
-        description:
-          "*Must have been the wind.* You advantage on Agility checks to move stealthily.",
-      },
-      {
-        key: "AGI_GENERAL_PERK_6",
-        name: "Quick Draw",
-        description: "You can draw and switch weapons without a Bonus Action.",
-      },
-    ],
-  },
-  {
     key: "AGI_ARMOR",
     attributeKey: "AGI",
     name: "Leathers",
@@ -128,32 +85,6 @@
     name: "Marksman Ranger",
     color: "#0d7535",
     traits: [],
-  },
-  {
-    key: "INT_GENERAL",
-    attributeKey: "INT",
-    name: "Intelligent",
-    color: "#494949",
-    traits: [
-      {
-        key: "INT_GENERAL_PERK_1",
-        name: "Book Worm",
-        description:
-          "*You are a voracious reader.* You have advantage on Intelligence checks to comprehend written information.",
-      },
-      {
-        key: "INT_GENERAL_PERK_2",
-        name: "Linguist",
-        description:
-          "*Some have called you a polyglot.* You have advantage on Intelligence checks to comprehend languages.",
-      },
-      {
-        key: "INT_GENERAL_PERK_3",
-        name: "Mastermind",
-        description:
-          "*There's always Plan B.* If you forgo your first turn in combat, your allies have advantage on their Initiative roll and all rolls made on their first turn.",
-      },
-    ],
   },
   {
     key: "INT_ARMOR",

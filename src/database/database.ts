@@ -10,14 +10,14 @@ import {
 } from "./collections/Character";
 import {
   CHARACTER_CLASS_COLLECTION,
-  CHARACTER_CLASSES,
   CharacterClassCollection,
 } from "./collections/CharacterClass";
 import {
   CHARACTER_CLASS_FEATURE_COLLECTION,
-  CHARACTER_CLASS_FEATURES,
   CharacterClassFeatureCollection,
 } from "./collections/CharacterClassFeature";
+import { CHARACTER_CLASSES } from "./static/CHARACTER_CLASSES";
+import { CHARACTER_CLASS_FEATURES } from "./static/CHARACTER_CLASS_FEATURES";
 
 export type TestDatabaseCollections = {
   character: CharacterCollection;
