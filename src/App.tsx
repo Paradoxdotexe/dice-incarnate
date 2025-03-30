@@ -10,26 +10,27 @@ import {
   CHARACTER_ATTRIBUTE_SCORE_WIDTH,
   CharacterAttributeScore,
 } from "./components/CharacterAttributeScore";
-import { CHARACTER_CLASSES, getClassType } from "./appendix/CharacterClass";
 import { CharacterClassDrawer } from "./components/CharacterClassDrawer";
 import { CHARACTER_ATTRIBUTES } from "./appendix/CharacterAttribute";
 import { useCharacter } from "./hooks/useCharacter";
 import { NDrawer } from "./common/NDrawer";
 import PlusIcon from "./assets/icons/Plus.svg?react";
+import { useCharacterClasses } from "./hooks/useCharacterClasses";
 
 const ROW_GAP = 18;
 
 function App() {
   const character = useCharacter();
+  const characterClasses = useCharacterClasses();
 
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
   const [attributeKey, setAttributeKey] = useState<string>();
 
-  if (!character) {
+  if (!character || !characterClasses) {
     return null;
   }
 
-  const selectedClass = CHARACTER_CLASSES.find(
+  const selectedClass = characterClasses.find(
     (cc) => cc.key === selectedClassKey
   );
   const selectedClassState = selectedClassKey
@@ -38,9 +39,9 @@ function App() {
 
   return (
     <NFlex
-      justify="center"
-      align="center"
       vertical
+      align="center"
+      justify="center"
       css={`
         padding: 24px;
         min-height: 100vh;
@@ -48,42 +49,22 @@ function App() {
       `}
       gap={12}
     >
-      <NFlex
-        style={{
-          width: 894,
-          fontWeight: "600",
-          fontSize: 14,
-        }}
-        css={`
-          div {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-
-            &::after,
-            &::before {
-              content: "";
-              display: block;
-              width: 100%;
-              height: 1px;
-              background: #727272;
-            }
-          }
-        `}
-        gap={ROW_GAP}
-      >
-        <div style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>SKILLS</div>
-        <div style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>PERKS</div>
-        <div style={{ flex: 1 }}>CLASSES</div>
+      <NFlex style={{ width: 894 }} gap={ROW_GAP}>
+        <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>
+          SKILLS
+        </Header>
+        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>PERKS</Header>
+        <Header style={{ flex: 1 }}>CLASSES</Header>
       </NFlex>
+
       <NFlex gap={ROW_GAP} style={{ width: 894 }}>
         <NFlex vertical justify="center" gap={24} style={{ flex: 1 }}>
           {CHARACTER_ATTRIBUTES.map((attribute) => {
-            const characterClasses = CHARACTER_CLASSES.filter(
+            const attributeClasses = characterClasses.filter(
               (cc) =>
                 cc.attributeKey === attribute.key &&
-                (getClassType(cc.key) === "GENERAL" ||
-                  !!character.getClassState(cc.key))
+                (cc.type === "PERK" ||
+                  (cc.type === "CLASS" && !!character.getClassState(cc.key)))
             );
             return (
               <NFlex key={attribute.key} gap={ROW_GAP}>
@@ -91,7 +72,7 @@ function App() {
                   attribute={attribute}
                   score={10 + character.getAttributeBonus(attribute.key)}
                 />
-                {characterClasses.map((cc) => {
+                {attributeClasses.map((cc) => {
                   const classState = character.getClassState(cc.key);
                   return (
                     <CharacterClassCard
@@ -102,7 +83,7 @@ function App() {
                     />
                   );
                 })}
-                {characterClasses.length < 3 && (
+                {attributeClasses.length < 3 && (
                   <NFlex
                     vertical
                     align="center"
@@ -135,27 +116,57 @@ function App() {
         </NFlex>
       </NFlex>
 
+      <NFlex style={{ width: 894, marginTop: 48 }} gap={ROW_GAP}>
+        <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }} />
+        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>ARMOR</Header>
+        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>WEAPONS</Header>
+        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>ITEMS</Header>
+      </NFlex>
+
+      <NFlex style={{ width: 894 }} gap={ROW_GAP}>
+        <div style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }} />
+        {["ARMOR", "WEAPON", "ITEM"].map((classType) => (
+          <NFlex key={classType} vertical gap={ROW_GAP}>
+            {characterClasses
+              .filter((cc) => cc.type === classType)
+              .map((cc) => {
+                const classState = character.getClassState(cc.key);
+                return (
+                  <CharacterClassCard
+                    key={cc.key}
+                    class={cc}
+                    classState={classState}
+                    onClick={() => setSelectedClassKey(cc.key)}
+                  />
+                );
+              })}
+          </NFlex>
+        ))}
+      </NFlex>
+
       <NDrawer
         open={!!attributeKey}
         onClose={() => setAttributeKey(undefined)}
         width={CHARACTER_CLASS_CARD_WIDTH + 48}
       >
         <NFlex vertical gap={18} style={{ padding: 24 }}>
-          {CHARACTER_CLASSES.filter(
-            (cc) =>
-              cc.attributeKey === attributeKey &&
-              getClassType(cc.key) === "CLASS" &&
-              !character.getClassState(cc.key)
-          ).map((cc) => (
-            <CharacterClassCard
-              key={cc.key}
-              class={cc}
-              onClick={() => {
-                setAttributeKey(undefined);
-                setSelectedClassKey(cc.key);
-              }}
-            />
-          ))}
+          {characterClasses
+            .filter(
+              (cc) =>
+                cc.attributeKey === attributeKey &&
+                cc.type === "CLASS" &&
+                !character.getClassState(cc.key)
+            )
+            .map((cc) => (
+              <CharacterClassCard
+                key={cc.key}
+                class={cc}
+                onClick={() => {
+                  setAttributeKey(undefined);
+                  setSelectedClassKey(cc.key);
+                }}
+              />
+            ))}
         </NFlex>
       </NDrawer>
 
@@ -182,3 +193,32 @@ function App() {
 }
 
 export default App;
+
+const Header: React.FC<{ children?: string; style: React.CSSProperties }> = (
+  props
+) => {
+  return (
+    <NFlex
+      align="center"
+      gap={6}
+      style={{
+        fontWeight: "600",
+        fontSize: 14,
+        visibility: !props.children ? "hidden" : undefined,
+        ...props.style,
+      }}
+      css={`
+        &::after,
+        &::before {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          background: #727272;
+        }
+      `}
+    >
+      {props.children}
+    </NFlex>
+  );
+};

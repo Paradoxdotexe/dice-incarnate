@@ -4,8 +4,8 @@ import { useDatabaseQuery } from "../database/useDatabaseQuery";
 import { v4 as uuid } from "uuid";
 
 export const useCharacter = () => {
-  const charactersCollection = useDatabaseCollection("characters");
-  const characters = useDatabaseQuery("characters");
+  const charactersCollection = useDatabaseCollection("character");
+  const characters = useDatabaseQuery("character");
 
   useEffect(() => {
     // initialize character on first arrival

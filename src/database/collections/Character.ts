@@ -5,12 +5,7 @@ import {
   RxDocument,
   RxJsonSchema,
 } from "rxdb";
-import { CharacterAttributeKey } from "../../appendix/CharacterAttribute";
-import {
-  CHARACTER_CLASSES,
-  CharacterClass,
-} from "../../appendix/CharacterClass";
-import { notNull } from "../../utils/notNull";
+import { CharacterAttributeKey } from "./CharacterClass";
 
 const _characterSchema = {
   title: "Character",
@@ -147,7 +142,7 @@ const characterMethods: CharacterMethods = {
 
 export type CharacterCollection = RxCollection<Character, CharacterMethods>;
 
-export const CHARACTERS_COLLECTION: RxCollectionCreator<Character> = {
+export const CHARACTER_COLLECTION: RxCollectionCreator<Character> = {
   schema: characterSchema,
   methods: characterMethods,
 };

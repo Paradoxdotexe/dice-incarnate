@@ -1,7 +1,7 @@
-export type CharacterAttributeKey = "STR" | "AGI" | "INT" | "CHA" | "WIS";
+import { CharacterClass } from "../database/collections/CharacterClass";
 
 export type CharacterAttribute = {
-  key: CharacterAttributeKey;
+  key: CharacterClass["attributeKey"];
   name: string;
   description: string;
 };

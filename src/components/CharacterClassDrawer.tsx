@@ -1,8 +1,4 @@
 import { opacify } from "polished";
-import {
-  CharacterClass,
-  CharacterClassTrait,
-} from "../appendix/CharacterClass";
 import { NFlex } from "../common/NFlex";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { getAscensionDie } from "./CharacterClassCard";
@@ -11,17 +7,18 @@ import { NTag } from "../common/NTag";
 import { NDrawer } from "../common/NDrawer";
 import { NButton } from "../common/NButton";
 import { useCharacter } from "../hooks/useCharacter";
-import { CharacterAttributeKey } from "../appendix/CharacterAttribute";
 import classNames from "classnames";
 import { CharacterClassState } from "../database/collections/Character";
 import { keyBy } from "lodash-es";
+import { CharacterClassDocument } from "../database/collections/CharacterClass";
+import { CharacterClassFeatureDocument } from "../database/collections/CharacterClassFeature";
 
 const PANEL_WIDTH = 600;
 
 type CharacterClassDrawerProps = {
   open: boolean;
   onClose: () => void;
-  class: CharacterClass;
+  class: CharacterClassDocument;
   classState?: CharacterClassState;
   onClick?: () => void;
   onAcquire: (traitKey: string) => void;
@@ -38,10 +35,10 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
   const ascensionDie = getAscensionDie(props.classState?.ascension ?? 0);
   const maxAscension = props.classState?.ascension == 2;
 
-  const traitsByKey = keyBy(props.class.traits, "key");
+  const traitsByKey = keyBy(props.class.features, "key");
 
-  const ascendable = !!props.classState?.traits.filter(
-    (traitKey) => traitsByKey[traitKey].ascendable
+  const ascendable = !!props.classState?.traits.filter((traitKey) =>
+    traitsByKey[traitKey].getIsAscendable()
   ).length;
 
   return (
@@ -80,17 +77,17 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
         </NFlex>
 
         <NFlex vertical gap={18}>
-          {props.class.traits.map((trait) => {
+          {props.class.features.map((feature) => {
             const isAcquired =
-              props.classState?.traits.includes(trait.key) ?? false;
+              props.classState?.traits.includes(feature.key) ?? false;
             const isAcquirable = !isAcquired && !props.acquireDisabled;
             return (
-              <TraitCard
+              <ClassFeatureCard
                 class={props.class}
-                trait={trait}
+                feature={feature}
                 isAcquired={isAcquired}
                 isAcquirable={isAcquirable}
-                onClick={() => props.onAcquire(trait.key)}
+                onClick={() => props.onAcquire(feature.key)}
                 ascensionDie={ascensionDie}
               />
             );
@@ -101,16 +98,16 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
   );
 };
 
-type TraitCardProps = {
-  class: CharacterClass;
-  trait: CharacterClassTrait;
+type ClassFeatureCardProps = {
+  class: CharacterClassDocument;
+  feature: CharacterClassFeatureDocument;
   isAcquired: boolean;
   isAcquirable: boolean;
   onClick: () => void;
   ascensionDie: number;
 };
 
-const TraitCard: React.FC<TraitCardProps> = (props) => {
+const ClassFeatureCard: React.FC<ClassFeatureCardProps> = (props) => {
   return (
     <NFlex
       vertical
@@ -152,43 +149,45 @@ const TraitCard: React.FC<TraitCardProps> = (props) => {
       <NFlex gap={9} align="start">
         {
           <CharacterAbilityIcon color={props.class.color}>
-            {props.trait.ascendable && props.ascensionDie}
+            {props.feature.getIsAscendable() && props.ascensionDie}
           </CharacterAbilityIcon>
         }
         <NFlex vertical gap={3}>
           <div style={{ fontSize: 20, fontWeight: 700, lineHeight: "25px" }}>
-            {props.trait.name}
+            {props.feature.name}
           </div>
-          <TraitDescription
-            traitKey={props.trait.key}
+          <FeatureClassDescription
+            class={props.class}
+            feature={props.feature}
             ascensionDie={props.ascensionDie}
-          >
-            {props.trait.description}
-          </TraitDescription>
+          />
         </NFlex>
       </NFlex>
     </NFlex>
   );
 };
 
-type TraitDescriptionProps = {
-  children: string;
-  traitKey: string;
+type FeatureClassDescriptionProps = {
+  class: CharacterClassDocument;
+  feature: CharacterClassFeatureDocument;
   ascensionDie?: number;
 };
 
-const TraitDescription: React.FC<TraitDescriptionProps> = (props) => {
+const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (
+  props
+) => {
   const character = useCharacter();
 
-  const attributeBonus = character?.getAttributeBonus(
-    props.traitKey.slice(0, 3) as CharacterAttributeKey
-  );
+  const attributeBonus =
+    character && props.class.attributeKey
+      ? character.getAttributeBonus(props.class.attributeKey)
+      : 0;
 
   let description = reactStringReplace(
-    props.children,
+    props.feature.description,
     /(\d+ft)/g,
     (str, _, offset) => (
-      <NTag key={`FT#${props.traitKey}#${offset}`}>{str}</NTag>
+      <NTag key={`FT#${props.feature.key}#${offset}`}>{str}</NTag>
     )
   );
 
@@ -196,7 +195,7 @@ const TraitDescription: React.FC<TraitDescriptionProps> = (props) => {
     description,
     /(\d Mana)/g,
     (str, _, offset) => (
-      <NTag key={`MANA#${props.traitKey}#${offset}`}>{str}</NTag>
+      <NTag key={`MANA#${props.feature.key}#${offset}`}>{str}</NTag>
     )
   );
 
@@ -204,7 +203,7 @@ const TraitDescription: React.FC<TraitDescriptionProps> = (props) => {
     description,
     /\*(.+?)\*/g,
     (str, _, offset) => (
-      <em key={`EM#${props.traitKey}#${offset}`}>{str}&nbsp;</em>
+      <em key={`EM#${props.feature.key}#${offset}`}>{str}&nbsp;</em>
     )
   );
 

@@ -5,12 +5,24 @@ import { getRxStorageDexie } from "rxdb/plugins/storage-dexie";
 import { RxDBMigrationSchemaPlugin } from "rxdb/plugins/migration-schema";
 import { RxDBQueryBuilderPlugin } from "rxdb/plugins/query-builder";
 import {
-  CHARACTERS_COLLECTION,
+  CHARACTER_COLLECTION,
   CharacterCollection,
 } from "./collections/Character";
+import {
+  CHARACTER_CLASS_COLLECTION,
+  CHARACTER_CLASSES,
+  CharacterClassCollection,
+} from "./collections/CharacterClass";
+import {
+  CHARACTER_CLASS_FEATURE_COLLECTION,
+  CHARACTER_CLASS_FEATURES,
+  CharacterClassFeatureCollection,
+} from "./collections/CharacterClassFeature";
 
 export type TestDatabaseCollections = {
-  characters: CharacterCollection;
+  character: CharacterCollection;
+  characterClass: CharacterClassCollection;
+  characterClassFeature: CharacterClassFeatureCollection;
 };
 
 export type TestDatabase = RxDatabase<TestDatabaseCollections>;
@@ -26,8 +38,14 @@ export const initDatabase = async () => {
   });
 
   await db.addCollections({
-    characters: CHARACTERS_COLLECTION,
+    character: CHARACTER_COLLECTION,
+    characterClass: CHARACTER_CLASS_COLLECTION,
+    characterClassFeature: CHARACTER_CLASS_FEATURE_COLLECTION,
   });
+
+  // upsert static data
+  db.collections.characterClass.bulkUpsert(CHARACTER_CLASSES);
+  db.collections.characterClassFeature.bulkUpsert(CHARACTER_CLASS_FEATURES);
 
   return db;
 };

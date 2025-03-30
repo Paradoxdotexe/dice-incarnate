@@ -2,8 +2,8 @@ import { opacify } from "polished";
 import React from "react";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { NFlex } from "../common/NFlex";
-import { CharacterClass } from "../appendix/CharacterClass";
 import { CharacterClassState } from "../database/collections/Character";
+import { CharacterClassDocument } from "../database/collections/CharacterClass";
 
 export const CHARACTER_CLASS_CARD_WIDTH = 240; // 36 * 6 + 24
 export const CHARACTER_CLASS_CARD_HEIGHT = 120;
@@ -13,7 +13,7 @@ export const getAscensionDie = (ascension: number) => {
 };
 
 type CharacterClassCardProps = {
-  class: CharacterClass;
+  class: CharacterClassDocument;
   classState?: CharacterClassState;
   onClick?: () => void;
 };
@@ -82,13 +82,13 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 
           <NFlex gap={3}>
             {props.classState?.traits.map((traitKey) => {
-              const trait = props.class.traits.find(
-                (trait) => trait.key === traitKey
+              const feature = props.class.features.find(
+                (feature) => feature.key === traitKey
               )!;
 
               return (
                 <CharacterAbilityIcon key={traitKey} color={color}>
-                  {trait.ascendable && ascensionDie}
+                  {feature.getIsAscendable() && ascensionDie}
                 </CharacterAbilityIcon>
               );
             })}
