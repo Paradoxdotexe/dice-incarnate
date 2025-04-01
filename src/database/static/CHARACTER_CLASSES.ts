@@ -52,7 +52,14 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     attributeKey: "CHA",
     name: "Charming",
     color: "#494949",
-    featureKeys: [],
+    featureKeys: [
+      "CHA_GENERAL_F1",
+      "CHA_GENERAL_F2",
+      "CHA_GENERAL_F3",
+      "CHA_GENERAL_F4",
+      "CHA_GENERAL_F5",
+      "CHA_GENERAL_F6",
+    ],
   },
   {
     key: "WIS_GENERAL",

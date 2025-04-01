@@ -120,7 +120,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "INT_GENERAL_F5",
     name: "Surgeon General",
     description:
-      "*That's it, I'll do it!* Even when you are incapacitated with a deadly injury, you can roll an Intelligence check to stabilize yourself.",
+      "*That's it, I'll do it!* Even when you are incapacitated with a Fatal Injury, you can roll an Intelligence check to stabilize yourself.",
     order: 5,
   },
   {
@@ -128,6 +128,49 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     name: "Field Medic",
     description:
       "*It's just a flesh wound.* You have advantage on Intelligence checks to stabilize incapacitated creatures.",
+    order: 6,
+  },
+  // CHA - Charming
+  {
+    key: "CHA_GENERAL_F1",
+    name: "Local Legend",
+    description:
+      "*You might of heard of me...* You have advantage on Charisma checks against commoners.",
+    order: 1,
+  },
+  {
+    key: "CHA_GENERAL_F2",
+    name: "Method Actor",
+    description:
+      "*I don't read the script. The script reads me.* You have advantage on Charisma checks while trying to impersonate someone else.",
+    order: 2,
+  },
+  {
+    key: "CHA_GENERAL_F3",
+    name: "Commanding Voice",
+    description:
+      "*Get your ass back up!* You can roll a Charisma check to stabilize a creature with a Non-Fatal Injury.",
+    order: 3,
+  },
+  {
+    key: "CHA_GENERAL_F4",
+    name: "Silver Tongue",
+    description:
+      "*Let's keep this between us...* You have advantage on Charisma checks in 1-on-1 conversations.",
+    order: 4,
+  },
+  {
+    key: "CHA_GENERAL_F5",
+    name: "Aura of Confidence",
+    description:
+      "*Looks like my confidence is contagious.* Allies within 10ft of you have resistance to Psychic magic.",
+    order: 5,
+  },
+  {
+    key: "CHA_GENERAL_F6",
+    name: "Inspiring Leader",
+    description:
+      "*Trust me. You don't want to do this.* You can forgo your first turn of combat to give enemies disadvantage on all skill checks during their first turn.",
     order: 6,
   },
 ];

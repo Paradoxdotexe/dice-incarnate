@@ -144,26 +144,6 @@
     traits: [],
   },
   {
-    key: "CHA_GENERAL",
-    attributeKey: "CHA",
-    name: "Charming",
-    color: "#494949",
-    traits: [
-      {
-        key: "CHA_GENERAL_PERK_1",
-        name: "Method Actor",
-        description:
-          "*You never break character.* You have advantage on Charisma checks to deceive others while impersonating as someone else.",
-      },
-      {
-        key: "CHA_GENERAL_PERK_2",
-        name: "Folk Hero",
-        description:
-          "*The world has heard of your accomplishments.* You have advantage on Charisma checks to persuade commoners.",
-      },
-    ],
-  },
-  {
     key: "CHA_ARMOR",
     attributeKey: "CHA",
     name: "Cloak",
