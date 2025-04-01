@@ -187,26 +187,6 @@
     traits: [],
   },
   {
-    key: "WIS_GENERAL",
-    attributeKey: "WIS",
-    name: "Wise",
-    color: "#494949",
-    traits: [
-      {
-        key: "WIS_GENERAL_PERK_1",
-        name: "Environmentalist",
-        description:
-          "*Somewhat of a tree hugger.* You have advantage on Wisdom checks when dealing with natural phenomena, such animals or lands.",
-      },
-      {
-        key: "WIS_GENERAL_PERK_2",
-        name: "Sixth Sense",
-        description:
-          "*What was that?* When your party is surprised, you are not. You do not lose your turn.",
-      },
-    ],
-  },
-  {
     key: "WIS_ARMOR",
     attributeKey: "WIS",
     name: "Robe",

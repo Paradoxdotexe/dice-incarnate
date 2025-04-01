@@ -44,6 +44,13 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
       "*You know what they say about big hands?* You can wield two-handed weapons with one hand.",
     order: 6,
   },
+  {
+    key: "STR_GENERAL_F7",
+    name: "Intimidating",
+    description:
+      "*I wouldn't do that if I was you.* Once per Rest, you can roll a Strength check in place of a Charisma check.",
+    order: 7,
+  },
   // AGI - Agile
   {
     key: "AGI_GENERAL_F1",
@@ -77,14 +84,14 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "AGI_GENERAL_F5",
     name: "Sneaky",
     description:
-      "*Must have been the wind.* You advantage on Agility checks to move stealthily.",
+      "*Must have been the wind.* You have advantage on Agility checks to move stealthily.",
     order: 5,
   },
   {
     key: "AGI_GENERAL_F6",
     name: "Quick Draw",
     description:
-      "*Think fast!* You can draw and switch weapons without a Bonus Action.",
+      "*Too slow!* You can draw your weapon on the first turn of combat for 0 Mana.",
     order: 6,
   },
   // INT - Intelligent
@@ -171,6 +178,48 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     name: "Inspiring Leader",
     description:
       "*Trust me. You don't want to do this.* You can forgo your first turn of combat to give enemies disadvantage on all skill checks during their first turn.",
+    order: 6,
+  },
+  // WIS - Insightful
+  {
+    key: "WIS_GENERAL_F1",
+    name: "Sixth Sense",
+    description: "*Did you hear that?* You can't be surprised during combat.",
+    order: 1,
+  },
+  {
+    key: "WIS_GENERAL_F2",
+    name: "Pathfinder",
+    description:
+      "*It's definitely this way.* You have advantage on Insight checks to navigate natural environments.",
+    order: 2,
+  },
+  {
+    key: "WIS_GENERAL_F3",
+    name: "Words of Wisdom",
+    description:
+      "*Trust me, I know how this plays out.* Once per Rest, you can roll an Insight check in place of a Charisma check.",
+    order: 3,
+  },
+  {
+    key: "WIS_GENERAL_F4",
+    name: "Detective",
+    description:
+      "*Nothing stays hidden forever.* You have advantage on Insight checks to search for clues.",
+    order: 4,
+  },
+  {
+    key: "WIS_GENERAL_F5",
+    name: "Archaeologist",
+    description:
+      "*This must be 100 years old...* You have advantage on Insight checks to ascertain who built a structure and why.",
+    order: 5,
+  },
+  {
+    key: "WIS_GENERAL_F6",
+    name: "Soul Searcher",
+    description:
+      "*To be everywhere, is to be nowhere.* You have advantage on all checks related to Spirit magic.",
     order: 6,
   },
 ];

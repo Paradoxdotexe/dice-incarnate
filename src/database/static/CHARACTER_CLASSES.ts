@@ -14,6 +14,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
       "STR_GENERAL_F4",
       "STR_GENERAL_F5",
       "STR_GENERAL_F6",
+      "STR_GENERAL_F7",
     ],
   },
   {
@@ -65,8 +66,15 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     key: "WIS_GENERAL",
     type: "PERK",
     attributeKey: "WIS",
-    name: "Wise",
+    name: "Insightful",
     color: "#494949",
-    featureKeys: [],
+    featureKeys: [
+      "WIS_GENERAL_F1",
+      "WIS_GENERAL_F2",
+      "WIS_GENERAL_F3",
+      "WIS_GENERAL_F4",
+      "WIS_GENERAL_F5",
+      "WIS_GENERAL_F6",
+    ],
   },
 ];

@@ -33,8 +33,8 @@ export const CHARACTER_ATTRIBUTES: CharacterAttribute[] = [
   },
   {
     key: "WIS",
-    name: "Wisdom",
+    name: "Insight",
     description:
-      "Wisdom reflects your intuition and perceptiveness. It influences your ability to notice details, read situations, and intuitively understand others, aiding in activities like investigation, detection, and decision-making.",
+      "Insight reflects your intuition and perceptiveness. It influences your ability to notice details, read situations, and intuitively understand others, aiding in activities like investigation, detection, and decision-making.",
   },
 ];
