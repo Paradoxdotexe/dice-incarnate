@@ -118,14 +118,14 @@ function App() {
 
       <NFlex style={{ width: 894, marginTop: 48 }} gap={ROW_GAP}>
         <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }} />
-        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>ARMOR</Header>
         <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>WEAPONS</Header>
+        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>ARMOR</Header>
         <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>ITEMS</Header>
       </NFlex>
 
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
         <div style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }} />
-        {["ARMOR", "WEAPON", "ITEM"].map((classType) => (
+        {["WEAPON", "ARMOR", "ITEM"].map((classType) => (
           <NFlex key={classType} vertical gap={ROW_GAP}>
             {characterClasses
               .filter((cc) => cc.type === classType)

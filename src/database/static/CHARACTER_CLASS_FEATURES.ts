@@ -222,4 +222,109 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
       "*To be everywhere, is to be nowhere.* You have advantage on all checks related to Spirit magic.",
     order: 6,
   },
+  // WIS - Storm Sage
+  {
+    key: "WIS_SAGE1_F1",
+    name: "Tempest Strike",
+    description:
+      "Spend 1 Mana to channel wind into a weapon attack of you or an ally. This attack deals an additional 1d12 damage.",
+    order: 1,
+  },
+  {
+    key: "WIS_SAGE1_F2",
+    name: "Tempest Surge",
+    description:
+      "Spend 2 Mana to surge wind towards 2 targets within 15ft. Each target takes 1d12 damage and is pushed back 15ft.",
+    order: 2,
+  },
+  {
+    key: "WIS_SAGE1_F3",
+    name: "Tempest Storm",
+    description:
+      "Spend 3 Mana to envelope a target within 60ft in a wind vortex. That target takes 2d12 damage and loses 1 Mana.",
+    order: 3,
+  },
+  {
+    key: "WIS_SAGE1_F4",
+    name: "Veil of the Storm",
+    description:
+      "The winds protect you with a swirling barrier. Ranged attacks against you have disadvantage.",
+    order: 4,
+  },
+  {
+    key: "WIS_SAGE1_F5",
+    name: "Grace of the Storm",
+    description:
+      "You fall at half the rate of normal. Your fall damage is reduced by half.",
+    order: 5,
+  },
+  {
+    key: "WIS_SAGE1_F6",
+    name: "Eye of the Storm",
+    description:
+      "If you spend 0 Mana three turns in a row, the calm of the wind restores you. You heal gain a Healing Surge.",
+    order: 6,
+  },
+  // WIS - Beast Druid
+  {
+    key: "WIS_DRUID1_F1",
+    name: "Attack Beast",
+    description:
+      "Spend 1 Mana to command your tamed beast to attack a target within 30ft. The target takes 1d12 damage and can be dragged 5ft in any direction.",
+    order: 1,
+  },
+  {
+    key: "WIS_DRUID1_F2",
+    name: "Guard Beast",
+    description:
+      "Spend 2 Mana to command your tamed beast to defend you. The next time you are attacked, your tamed beast deals 1d12 damage and deflects up to 1d12 damage.",
+    order: 2,
+  },
+  {
+    key: "WIS_DRUID1_F3",
+    name: "Mercy Beast",
+    description:
+      "Spend 3 Mana to command your tamed beast to stabilize an incapacitated ally within 60ft. The ally heals 3d12 HP.",
+    order: 3,
+  },
+  {
+    key: "WIS_DRUID1_F4",
+    name: "Beast Speech",
+    description:
+      'You can communicate with beasts through their unique visual and auditory cues. You are effectively limited to single words or basic phrases, such as "threat" or "go that way".',
+    order: 4,
+  },
+  {
+    key: "WIS_DRUID1_F5",
+    name: "Beast Sight",
+    description:
+      "You can look through the eyes of your tamed beast while they are within 120ft.",
+    order: 5,
+  },
+  {
+    key: "WIS_DRUID1_F6",
+    name: "Beast Shape",
+    description:
+      "You can transform into the same animal as your tamed beast for up to 1 hour. You can only do this once per Rest.",
+    order: 6,
+  },
+  {
+    key: "WEAPON_SWORD_F1",
+    name: "Sabre Strike",
+    description:
+      "Roll a Strength check to attack a creature within 5ft. On a success, the target takes 1d6 Slashing damage.",
+    order: 1,
+  },
+  {
+    key: "ARMOR_HEAVY_F1",
+    name: "Heavy Armor",
+    description: "Your Armor Class is increased to [10+2*A].",
+    order: 1,
+  },
+  {
+    key: "ARMOR_HEAVY_F2",
+    name: "Soul Steel",
+    description: "You have resistance to Bludgeoning Damage.",
+    order: 5,
+  },
 ];

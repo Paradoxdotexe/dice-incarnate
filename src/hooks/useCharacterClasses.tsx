@@ -11,14 +11,16 @@ export const useCharacterClasses = () => {
   useEffect(() => {
     if (uCharacterClasses) {
       Promise.all(
-        uCharacterClasses.map(async (ucc) => {
-          const classFeatures: CharacterClassFeatureDocument[] =
-            await ucc.populate("featureKeys");
-          (ucc as any).features = classFeatures.sort(
-            (a, b) => a.order - b.order
-          );
-          return ucc as CharacterClassDocument;
-        })
+        uCharacterClasses
+          .sort((a, b) => a.order - b.order)
+          .map(async (ucc) => {
+            const classFeatures: CharacterClassFeatureDocument[] =
+              await ucc.populate("featureKeys");
+            (ucc as any).features = classFeatures.sort(
+              (a, b) => a.order - b.order
+            );
+            return ucc as CharacterClassDocument;
+          })
       ).then(setCharacterClasses);
     }
   }, [uCharacterClasses]);

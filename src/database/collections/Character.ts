@@ -39,6 +39,8 @@ const _characterSchema = {
           },
           ascension: {
             type: "number",
+            minimum: 1,
+            maximum: 5,
           },
         },
         required: ["key", "traits", "ascension"],
@@ -75,7 +77,7 @@ const _sum_experience = (classStates: CharacterClassState[]) =>
 
 const _sum_ascension = (classStates: CharacterClassState[]) =>
   classStates.reduce(
-    (ascension, classState) => ascension + classState.ascension,
+    (ascension, classState) => ascension + (classState.ascension - 1),
     0
   );
 
@@ -94,7 +96,7 @@ const characterMethods: CharacterMethods = {
 
       // add new class state if this is the first acquisition
       if (!classState) {
-        classState = { key: classKey, traits: [], ascension: 0 };
+        classState = { key: classKey, traits: [], ascension: 1 };
         patchedClassStates.push(classState);
       }
 

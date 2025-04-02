@@ -34,6 +34,12 @@ const _characterClassSchema = {
     color: {
       type: "string",
     },
+    order: {
+      type: "number"
+    },
+    ascendable: {
+      type: "boolean"
+    },
     featureKeys: {
       type: "array",
       ref: "characterClassFeature",
@@ -42,7 +48,7 @@ const _characterClassSchema = {
       },
     },
   },
-  required: ["key", "type", "name", "color", "featureKeys"],
+  required: ["key", "type", "name", "color", "order","featureKeys"],
 } as const;
 
 export type CharacterClass = ExtractDocumentTypeFromTypedRxJsonSchema<

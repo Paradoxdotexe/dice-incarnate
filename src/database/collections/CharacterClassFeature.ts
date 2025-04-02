@@ -38,7 +38,7 @@ const characterClassFeatureSchema: RxJsonSchema<CharacterClassFeature> =
   _characterClassFeatureSchema;
 
 type CharacterClassFeatureMethods = {
-  getIsAscendable: () => boolean;
+  getMana: () => number | undefined;
 };
 
 export type CharacterClassFeatureDocument = RxDocument<
@@ -47,8 +47,9 @@ export type CharacterClassFeatureDocument = RxDocument<
 >;
 
 const characterClassFeatureMethods: CharacterClassFeatureMethods = {
-  getIsAscendable: function (this: CharacterClassFeatureDocument) {
-    return /\ddX/g.test(this.description);
+  getMana: function (this: CharacterClassFeatureDocument) {
+    const match = /Spend (\d) Mana/g.exec(this.description);
+    return match ? parseInt(match[1]) : undefined;
   },
 };
 

@@ -25,7 +25,7 @@ export const CharacterAbilityIcon: React.FC<CharacterAbilityIconProps> = (
             style={{
               fontFamily: "Reddit Sans Condensed",
               fontWeight: 600,
-              fontSize: 13,
+              fontSize: 15,
               marginTop: -1,
             }}
           >

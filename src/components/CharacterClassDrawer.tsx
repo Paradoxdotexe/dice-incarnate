@@ -1,7 +1,6 @@
 import { opacify } from "polished";
 import { NFlex } from "../common/NFlex";
 import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
-import { getAscensionDie } from "./CharacterClassCard";
 import reactStringReplace from "react-string-replace";
 import { NTag } from "../common/NTag";
 import { NDrawer } from "../common/NDrawer";
@@ -9,7 +8,6 @@ import { NButton } from "../common/NButton";
 import { useCharacter } from "../hooks/useCharacter";
 import classNames from "classnames";
 import { CharacterClassState } from "../database/collections/Character";
-import { keyBy } from "lodash-es";
 import { CharacterClassDocument } from "../database/collections/CharacterClass";
 import { CharacterClassFeatureDocument } from "../database/collections/CharacterClassFeature";
 
@@ -32,14 +30,9 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
 ) => {
   const color = props.class.color;
 
-  const ascensionDie = getAscensionDie(props.classState?.ascension ?? 0);
-  const maxAscension = props.classState?.ascension == 2;
-
-  const traitsByKey = keyBy(props.class.features, "key");
-
-  const ascendable = !!props.classState?.traits.filter((traitKey) =>
-    traitsByKey[traitKey].getIsAscendable()
-  ).length;
+  const ascension = props.classState?.ascension ?? 1;
+  const maxAscension = props.class.type === "CLASS" ? 3 : 5;
+  const isMaxAscension = ascension === maxAscension;
 
   return (
     <NDrawer open={props.open} onClose={props.onClose} width={PANEL_WIDTH}>
@@ -62,16 +55,19 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
               fontWeight: 500,
             }}
           >
-            {props.class.name}
+            {props.class.name}{" "}
+            {props.classState &&
+              props.class.ascendable &&
+              ["I", "II", "III", "IV", "V"][ascension - 1]}
           </div>
 
-          {ascendable && (
+          {props.class.ascendable && (
             <NButton
               color={color}
               onClick={props.onAscend}
-              disabled={maxAscension || props.ascendDisabled}
+              disabled={isMaxAscension || props.ascendDisabled}
             >
-              {maxAscension ? "Max Ascension" : "Ascend"}
+              {isMaxAscension ? "Max Ascension" : "Ascend"}
             </NButton>
           )}
         </NFlex>
@@ -83,12 +79,13 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
             const isAcquirable = !isAcquired && !props.acquireDisabled;
             return (
               <ClassFeatureCard
+                key={feature.key}
                 class={props.class}
                 feature={feature}
                 isAcquired={isAcquired}
                 isAcquirable={isAcquirable}
                 onClick={() => props.onAcquire(feature.key)}
-                ascensionDie={ascensionDie}
+                ascension={ascension}
               />
             );
           })}
@@ -104,7 +101,7 @@ type ClassFeatureCardProps = {
   isAcquired: boolean;
   isAcquirable: boolean;
   onClick: () => void;
-  ascensionDie: number;
+  ascension: number;
 };
 
 const ClassFeatureCard: React.FC<ClassFeatureCardProps> = (props) => {
@@ -149,7 +146,7 @@ const ClassFeatureCard: React.FC<ClassFeatureCardProps> = (props) => {
       <NFlex gap={9} align="start">
         {
           <CharacterAbilityIcon color={props.class.color}>
-            {props.feature.getIsAscendable() && props.ascensionDie}
+            {props.feature.getMana()}
           </CharacterAbilityIcon>
         }
         <NFlex vertical gap={3}>
@@ -159,7 +156,7 @@ const ClassFeatureCard: React.FC<ClassFeatureCardProps> = (props) => {
           <FeatureClassDescription
             class={props.class}
             feature={props.feature}
-            ascensionDie={props.ascensionDie}
+            ascension={props.ascension}
           />
         </NFlex>
       </NFlex>
@@ -170,7 +167,7 @@ const ClassFeatureCard: React.FC<ClassFeatureCardProps> = (props) => {
 type FeatureClassDescriptionProps = {
   class: CharacterClassDocument;
   feature: CharacterClassFeatureDocument;
-  ascensionDie?: number;
+  ascension: number;
 };
 
 const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (
@@ -183,14 +180,25 @@ const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (
       ? character.getAttributeBonus(props.class.attributeKey)
       : 0;
 
+  // italicize
   let description = reactStringReplace(
     props.feature.description,
-    /(\d+ft)/g,
+    /\*(.+?)\*/g,
     (str, _, offset) => (
-      <NTag key={`FT#${props.feature.key}#${offset}`}>{str}</NTag>
+      <em key={`EM#${props.feature.key}#${offset}`}>{str}&nbsp;</em>
     )
   );
 
+  // format distance
+  description = reactStringReplace(
+    description,
+    /(\d+ft)/g,
+    (str, _, offset) => (
+      <NTag key={`FEET#${props.feature.key}#${offset}`}>{str}</NTag>
+    )
+  );
+
+  // format Mana
   description = reactStringReplace(
     description,
     /(\d Mana)/g,
@@ -199,22 +207,27 @@ const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (
     )
   );
 
+  // parse dice expressions
   description = reactStringReplace(
     description,
-    /\*(.+?)\*/g,
-    (str, _, offset) => (
-      <em key={`EM#${props.feature.key}#${offset}`}>{str}&nbsp;</em>
-    )
+    /(\dd\d{1,2})/g,
+    (str, _, offset) => {
+      const diceCount = parseInt(str[0]) * props.ascension;
+      return (
+        <NTag key={`DICE#${props.feature.key}#${offset}`}>
+          {diceCount}
+          {str.slice(1)}
+          {attributeBonus ? ` + ${attributeBonus}` : ""}
+        </NTag>
+      );
+    }
   );
 
-  if (props.ascensionDie) {
-    description = reactStringReplace(description, /(\ddX)/g, (str, i) => (
-      <NTag key={`dx#${i}`}>
-        {str.replace("X", props.ascensionDie!.toString())}
-        {attributeBonus ? ` + ${attributeBonus}` : ""}
-      </NTag>
-    ));
-  }
+  // parse math expression
+  description = reactStringReplace(description, /\[(.+?)\]/g, (str) => {
+    str = str.replace("A", props.ascension.toString());
+    return eval(str);
+  });
 
   return (
     <div

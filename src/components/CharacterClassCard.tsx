@@ -8,10 +8,6 @@ import { CharacterClassDocument } from "../database/collections/CharacterClass";
 export const CHARACTER_CLASS_CARD_WIDTH = 240; // 36 * 6 + 24
 export const CHARACTER_CLASS_CARD_HEIGHT = 120;
 
-export const getAscensionDie = (ascension: number) => {
-  return { 0: 6, 1: 12, 2: 20 }[ascension] as number;
-};
-
 type CharacterClassCardProps = {
   class: CharacterClassDocument;
   classState?: CharacterClassState;
@@ -23,7 +19,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 ) => {
   const color = props.class.color;
 
-  const ascensionDie = getAscensionDie(props.classState?.ascension ?? 0);
+  const ascension = props.classState?.ascension ?? 1;
 
   const gradientStartColor = opacify(-1, color);
   const gradientEndColor = opacify(-0.1, color);
@@ -36,11 +32,17 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
   // use boxShadow to highlight ascension
   let boxShadow = "";
   const boxShadowColor = opacify(-0.25, color);
-  if (props.classState?.ascension == 1) {
+  if (ascension == 2) {
     boxShadow = `0 0 0 2px #1b1b1b, -2px 2px 0 2px ${boxShadowColor}`;
   }
-  if (props.classState?.ascension == 2) {
+  if (ascension >= 3) {
     boxShadow = `0 0 0 2px #1b1b1b, 0 0 0 4px ${boxShadowColor}`;
+  }
+  if (ascension >= 4) {
+    boxShadow += `, 0 2px 0 4px #1b1b1b , 0 4px 0 4px ${boxShadowColor}`;
+  }
+  if (ascension == 5) {
+    boxShadow += `, 0 -2px 0 4px #1b1b1b , 0 -4px 0 4px ${boxShadowColor}`;
   }
 
   return (
@@ -77,7 +79,10 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
               fontWeight: 500,
             }}
           >
-            {props.class.name}
+            {props.class.name}{" "}
+            {props.classState &&
+              props.class.ascendable &&
+              ["I", "II", "III", "IV", "V"][ascension - 1]}
           </div>
 
           <NFlex gap={3}>
@@ -88,7 +93,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 
               return (
                 <CharacterAbilityIcon key={traitKey} color={color}>
-                  {feature.getIsAscendable() && ascensionDie}
+                  {feature.getMana()}
                 </CharacterAbilityIcon>
               );
             })}
