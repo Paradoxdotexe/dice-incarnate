@@ -324,7 +324,19 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: "ARMOR_HEAVY_F2",
     name: "Soul Steel",
-    description: "You have resistance to Bludgeoning Damage.",
-    order: 5,
+    description: "You have resistance to Bludgeoning damage.",
+    order: 2,
+  },
+  {
+    key: "ARMOR_LIGHT_F1",
+    name: "Light Armor",
+    description: "Your Armor Class is increased to [10+1*A].",
+    order: 1,
+  },
+  {
+    key: "ARMOR_LIGHT_F2",
+    name: "Soul Hide",
+    description: "You have resistance to Slashing and Piercing damage.",
+    order: 2,
   },
 ];

@@ -21,12 +21,10 @@ const _characterClassSchema = {
     attributeKey: {
       type: "string",
       enum: ["STR", "AGI", "INT", "CHA", "WIS"],
-      final: true,
     },
     type: {
       type: "string",
       enum: ["PERK", "CLASS", "WEAPON", "ARMOR", "ITEM"],
-      final: true,
     },
     name: {
       type: "string",

@@ -31,18 +31,17 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
 
   // use boxShadow to highlight ascension
   let boxShadow = "";
-  const boxShadowColor = opacify(-0.25, color);
   if (ascension == 2) {
-    boxShadow = `0 0 0 2px #1b1b1b, -2px 2px 0 2px ${boxShadowColor}`;
+    boxShadow = `0 0 0 2px #1b1b1b, -2px 2px 0 2px ${opacify(-0.25, color)}`;
   }
   if (ascension >= 3) {
-    boxShadow = `0 0 0 2px #1b1b1b, 0 0 0 4px ${boxShadowColor}`;
+    boxShadow = `0 0 0 2px #1b1b1b, 0 0 0 4px ${opacify(-0.25, color)}`;
   }
   if (ascension >= 4) {
-    boxShadow += `, 0 2px 0 4px #1b1b1b , 0 4px 0 4px ${boxShadowColor}`;
+    boxShadow += `, 0 2px 0 4px #1b1b1b , 0 4px 0 4px ${opacify(-0.5, color)}`;
   }
   if (ascension == 5) {
-    boxShadow += `, 0 -2px 0 4px #1b1b1b , 0 -4px 0 4px ${boxShadowColor}`;
+    boxShadow += `, 0 -2px 0 4px #1b1b1b , 0 -4px 0 4px ${opacify(-0.5, color)}`;
   }
 
   return (
