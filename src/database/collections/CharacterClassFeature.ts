@@ -48,7 +48,7 @@ export type CharacterClassFeatureDocument = RxDocument<
 
 const characterClassFeatureMethods: CharacterClassFeatureMethods = {
   getMana: function (this: CharacterClassFeatureDocument) {
-    const match = /Spend (\d) Mana/g.exec(this.description);
+    const match = /spend (\d) Mana/g.exec(this.description);
     return match ? parseInt(match[1]) : undefined;
   },
 };

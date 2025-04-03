@@ -1,21 +1,21 @@
-import { useState } from "react";
-import "./App.css";
-import { NFlex } from "./common/NFlex";
+import { useState } from 'react';
+import './App.css';
+import { NFlex } from './common/NFlex';
 import {
   CHARACTER_CLASS_CARD_HEIGHT,
   CHARACTER_CLASS_CARD_WIDTH,
   CharacterClassCard,
-} from "./components/CharacterClassCard";
+} from './components/CharacterClassCard';
 import {
   CHARACTER_ATTRIBUTE_SCORE_WIDTH,
   CharacterAttributeScore,
-} from "./components/CharacterAttributeScore";
-import { CharacterClassDrawer } from "./components/CharacterClassDrawer";
-import { CHARACTER_ATTRIBUTES } from "./appendix/CharacterAttribute";
-import { useCharacter } from "./hooks/useCharacter";
-import { NDrawer } from "./common/NDrawer";
-import PlusIcon from "./assets/icons/Plus.svg?react";
-import { useCharacterClasses } from "./hooks/useCharacterClasses";
+} from './components/CharacterAttributeScore';
+import { CharacterClassDrawer } from './components/CharacterClassDrawer';
+import { CHARACTER_ATTRIBUTES } from './appendix/CharacterAttribute';
+import { useCharacter } from './hooks/useCharacter';
+import { NDrawer } from './common/NDrawer';
+import PlusIcon from './assets/icons/Plus.svg?react';
+import { useCharacterClasses } from './hooks/useCharacterClasses';
 
 const ROW_GAP = 18;
 
@@ -30,9 +30,7 @@ function App() {
     return null;
   }
 
-  const selectedClass = characterClasses.find(
-    (cc) => cc.key === selectedClassKey
-  );
+  const selectedClass = characterClasses.find((cc) => cc.key === selectedClassKey);
   const selectedClassState = selectedClassKey
     ? character.getClassState(selectedClassKey)
     : undefined;
@@ -50,9 +48,7 @@ function App() {
       gap={12}
     >
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
-        <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>
-          SKILLS
-        </Header>
+        <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>SKILLS</Header>
         <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>PERKS</Header>
         <Header style={{ flex: 1 }}>CLASSES</Header>
       </NFlex>
@@ -63,8 +59,7 @@ function App() {
             const attributeClasses = characterClasses.filter(
               (cc) =>
                 cc.attributeKey === attribute.key &&
-                (cc.type === "PERK" ||
-                  (cc.type === "CLASS" && !!character.getClassState(cc.key)))
+                (cc.type === 'PERK' || (cc.type === 'CLASS' && !!character.getClassState(cc.key)))
             );
             return (
               <NFlex key={attribute.key} gap={ROW_GAP}>
@@ -93,9 +88,9 @@ function App() {
                       width: CHARACTER_CLASS_CARD_WIDTH,
                       height: CHARACTER_CLASS_CARD_HEIGHT,
                       border: `2px solid #494949`,
-                      color: "#808080",
+                      color: '#808080',
                       borderRadius: 12,
-                      cursor: "pointer",
+                      cursor: 'pointer',
                     }}
                     css={`
                       opacity: 0.5;
@@ -125,7 +120,7 @@ function App() {
 
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
         <div style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }} />
-        {["WEAPON", "ARMOR", "ITEM"].map((classType) => (
+        {['WEAPON', 'ARMOR', 'ITEM'].map((classType) => (
           <NFlex key={classType} vertical gap={ROW_GAP}>
             {characterClasses
               .filter((cc) => cc.type === classType)
@@ -154,7 +149,7 @@ function App() {
             .filter(
               (cc) =>
                 cc.attributeKey === attributeKey &&
-                cc.type === "CLASS" &&
+                cc.type === 'CLASS' &&
                 !character.getClassState(cc.key)
             )
             .map((cc) => (
@@ -194,23 +189,22 @@ function App() {
 
 export default App;
 
-const Header: React.FC<{ children?: string; style: React.CSSProperties }> = (
-  props
-) => {
+export const Header: React.FC<{ children?: string; style: React.CSSProperties }> = (props) => {
   return (
     <NFlex
       align="center"
       gap={6}
       style={{
-        fontWeight: "600",
+        fontWeight: '600',
         fontSize: 14,
-        visibility: !props.children ? "hidden" : undefined,
+        visibility: !props.children ? 'hidden' : undefined,
+        paddingBottom: 6,
         ...props.style,
       }}
       css={`
         &::after,
         &::before {
-          content: "";
+          content: '';
           display: block;
           width: 100%;
           height: 1px;
