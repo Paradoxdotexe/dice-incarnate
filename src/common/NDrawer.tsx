@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import { useFrozenScroll } from "../utils/useFrozenScroll";
 
 const TIMEOUT = 250;
 
@@ -17,6 +18,8 @@ export const NDrawer: React.FC<NDrawerProps> = (props) => {
   const nodeRef = useRef(null);
 
   useEffect(() => setOpen(props.open), [props.open]);
+
+  useFrozenScroll(open);
 
   return (
     <div

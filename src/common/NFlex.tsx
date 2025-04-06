@@ -2,7 +2,7 @@ import { CSSProperties, MouseEventHandler, ReactNode } from "react";
 
 type NFlexProps = {
   children: ReactNode;
-  align?: "center" | "start" | "end" | "stretch";
+  align?: "center" | "start" | "end" | "stretch" | "baseline";
   justify?: "start" | "center" | "end" | "space-between" | "space-around";
   vertical?: boolean;
   gap?: number | string;

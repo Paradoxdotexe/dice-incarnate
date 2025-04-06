@@ -26,6 +26,9 @@ const _characterClassFeatureSchema = {
     order: {
       type: "number",
     },
+    attributeRequirement: {
+      type: "number",
+    },
   },
   required: ["key", "name", "description", "order"],
 } as const;

@@ -16,6 +16,7 @@ import { useCharacter } from "./hooks/useCharacter";
 import { NDrawer } from "./common/NDrawer";
 import PlusIcon from "./assets/icons/Plus.svg?react";
 import { useCharacterClasses } from "./hooks/useCharacterClasses";
+import { Header } from "./components/Header";
 
 const ROW_GAP = 18;
 
@@ -53,8 +54,12 @@ function App() {
         <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>
           SKILLS
         </Header>
-        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>PERKS</Header>
-        <Header style={{ flex: 1 }}>CLASSES</Header>
+        <Header align="left" style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>
+          PERKS
+        </Header>
+        <Header align="left" style={{ flex: 1 }}>
+          CLASSES
+        </Header>
       </NFlex>
 
       <NFlex gap={ROW_GAP} style={{ width: 894 }}>
@@ -118,9 +123,15 @@ function App() {
 
       <NFlex style={{ width: 894, marginTop: 48 }} gap={ROW_GAP}>
         <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }} />
-        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>WEAPONS</Header>
-        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>ARMOR</Header>
-        <Header style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>ITEMS</Header>
+        <Header align="left" style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>
+          WEAPONS
+        </Header>
+        <Header align="left" style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>
+          ARMOR
+        </Header>
+        <Header align="left" style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>
+          ITEMS
+        </Header>
       </NFlex>
 
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
@@ -193,34 +204,3 @@ function App() {
 }
 
 export default App;
-
-export const Header: React.FC<{
-  children?: string;
-  style: React.CSSProperties;
-}> = (props) => {
-  return (
-    <NFlex
-      align="center"
-      gap={6}
-      style={{
-        fontWeight: "600",
-        fontSize: 14,
-        visibility: !props.children ? "hidden" : undefined,
-        paddingBottom: 6,
-        ...props.style,
-      }}
-      css={`
-        &::after,
-        &::before {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 1px;
-          background: #727272;
-        }
-      `}
-    >
-      {props.children}
-    </NFlex>
-  );
-};

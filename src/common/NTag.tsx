@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 type NTagProps = {
   children: ReactNode;
+  style?: React.CSSProperties;
 };
 
 export const NTag: React.FC<NTagProps> = (props) => {
@@ -13,7 +14,8 @@ export const NTag: React.FC<NTagProps> = (props) => {
         borderRadius: 6,
         paddingInline: 4,
         fontWeight: 400,
-        lineHeight: 1.32
+        lineHeight: 1.32,
+        ...props.style,
       }}
     >
       {props.children}

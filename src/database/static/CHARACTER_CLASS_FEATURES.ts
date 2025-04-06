@@ -3,89 +3,100 @@ import { CharacterClassFeature } from "../collections/CharacterClassFeature";
 export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   // STR - Strong
   {
+    key: "STR_GENERAL_F2",
+    name: "Aggressor",
+    description:
+      "*Strike first, strike hard.* You add your Strength bonus to your Initiative bonus.",
+    order: 1,
+    attributeRequirement: 10,
+  },
+  {
     key: "STR_GENERAL_F1",
     name: "Big Brother",
     description:
       "*Pick on someone your own size!* When a creature within 5ft is hit with an attack, you can leap in to switch places.",
-    order: 1,
-  },
-  {
-    key: "STR_GENERAL_F2",
-    name: "Aggressor",
-    description:
-      "*Strike first, strike hard.* Add your Strength bonus to your Initiative bonus.",
     order: 2,
-  },
-  {
-    key: "STR_GENERAL_F3",
-    name: "Heavy Hitter",
-    description:
-      "*I was here first!* If you consume no movement on your turn, your melee attack damage is increased by one die.",
-    order: 3,
+    attributeRequirement: 10,
   },
   {
     key: "STR_GENERAL_F4",
     name: "Pack Mule",
     description:
       "*Let me carry that for you!* Your carrying capacity is doubled.",
-    order: 4,
+    order: 3,
+    attributeRequirement: 10,
   },
   {
     key: "STR_GENERAL_F5",
     name: "Iron Grip",
     description:
       "*You're mine now.* You have advantage on Strength checks related to grappling.",
-    order: 5,
+    order: 4,
+    attributeRequirement: 15,
   },
   {
-    key: "STR_GENERAL_F6",
-    name: "Big Hands",
+    key: "STR_GENERAL_F3",
+    name: "Heavy Hitter",
     description:
-      "*You know what they say about big hands?* You can wield two-handed weapons with one hand.",
-    order: 6,
+      "*I was here first!* If you consume no movement on your turn, your melee attack damage is increased by one die.",
+    order: 5,
+    attributeRequirement: 15,
   },
   {
     key: "STR_GENERAL_F7",
     name: "Intimidating",
     description:
       "*I wouldn't do that if I was you.* Once per Rest, you can roll a Strength check in place of a Charisma check.",
+    order: 6,
+    attributeRequirement: 15,
+  },
+  {
+    key: "STR_GENERAL_F6",
+    name: "Big Hands",
+    description:
+      "*You know what they say about big hands?* You can wield two-handed weapons with one hand.",
     order: 7,
+    attributeRequirement: 20,
   },
   // AGI - Agile
   {
-    key: "AGI_GENERAL_F1",
-    name: "Spotter",
+    key: "AGI_GENERAL_F5",
+    name: "Sneaky",
     description:
-      "*Watch your step!* When you succeed on an Agility check, you can help one other creature immediately succeed on the same check.",
+      "*Must have been the wind.* You have advantage on Agility checks to move stealthily.",
     order: 1,
-  },
-  {
-    key: "AGI_GENERAL_F2",
-    name: "Surefooted",
-    description:
-      "*I said watch your damn step!* You are not impeded by Rough Terrain.",
-    order: 2,
-  },
-  {
-    key: "AGI_GENERAL_F3",
-    name: "Slippery",
-    description:
-      "*Missed me!* Opportunity attacks against you have disadvantage.",
-    order: 3,
+    attributeRequirement: 10,
   },
   {
     key: "AGI_GENERAL_F4",
     name: "Righting Reflex",
     description:
       "*Cats always land on their feet.* When you fall, you land on your feet and your fall damage is reduced by one die.",
-    order: 4,
+    order: 2,
+    attributeRequirement: 10,
   },
   {
-    key: "AGI_GENERAL_F5",
-    name: "Sneaky",
+    key: "AGI_GENERAL_F1",
+    name: "Spotter",
     description:
-      "*Must have been the wind.* You have advantage on Agility checks to move stealthily.",
+      "*Need a hand?* When you succeed on an Agility check, you can help one other creature immediately succeed on the same check.",
+    order: 3,
+    attributeRequirement: 10,
+  },
+  {
+    key: "AGI_GENERAL_F2",
+    name: "Nimble",
+    description: "*Watch your step!* You are not impeded by Rough Terrain.",
+    order: 4,
+    attributeRequirement: 15,
+  },
+  {
+    key: "AGI_GENERAL_F3",
+    name: "Slippery",
+    description:
+      "*Missed me!* Opportunity attacks against you have disadvantage.",
     order: 5,
+    attributeRequirement: 15,
   },
   {
     key: "AGI_GENERAL_F6",
@@ -93,6 +104,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     description:
       "*Too slow!* You can draw your weapon on the first turn of combat for 0 Mana.",
     order: 6,
+    attributeRequirement: 15,
   },
   // INT - Intelligent
   {
@@ -101,6 +113,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     description:
       "*I've read about this before.* You have advantage on Intelligence checks to recall history and comprehend written information.",
     order: 1,
+    attributeRequirement: 10,
   },
   {
     key: "INT_GENERAL_F2",
@@ -108,63 +121,72 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     description:
       "*I sense something powerful nearby.* When within 10ft of a magical source, you can detect the magic's presence and ascertain its type.",
     order: 2,
-  },
-  {
-    key: "INT_GENERAL_F3",
-    name: "Mastermind",
-    description:
-      "*Wait, I got a plan!* You can forgo your first turn of combat to give your allies advantage on all skill checks during their first turn.",
-    order: 3,
-  },
-  {
-    key: "INT_GENERAL_F4",
-    name: "Mind Over Matter",
-    description:
-      "*Work smarter, not harder.* Once per Rest, you can roll an Intelligence check in place of a Strength or Agility check.",
-    order: 4,
-  },
-  {
-    key: "INT_GENERAL_F5",
-    name: "Surgeon General",
-    description:
-      "*That's it, I'll do it!* Even when you are incapacitated with a Fatal Injury, you can roll an Intelligence check to stabilize yourself.",
-    order: 5,
+    attributeRequirement: 10,
   },
   {
     key: "INT_GENERAL_F6",
     name: "Field Medic",
     description:
       "*It's just a flesh wound.* You have advantage on Intelligence checks to stabilize incapacitated creatures.",
+    order: 3,
+    attributeRequirement: 10,
+  },
+  {
+    key: "INT_GENERAL_F3",
+    name: "Mastermind",
+    description:
+      "*Wait, I got a plan!* You can forgo your first turn of combat to give your allies advantage on all skill checks during their first turn.",
+    order: 4,
+    attributeRequirement: 15,
+  },
+  {
+    key: "INT_GENERAL_F4",
+    name: "Mind Over Matter",
+    description:
+      "*Work smarter, not harder.* Once per Rest, you can roll an Intelligence check in place of a Strength or Agility check.",
+    order: 5,
+    attributeRequirement: 15,
+  },
+  {
+    key: "INT_GENERAL_F5",
+    name: "Surgeon General",
+    description:
+      "*That's it, I'll do it!* Even when you are incapacitated with a Fatal Injury, you can roll an Intelligence check to stabilize yourself.",
     order: 6,
+    attributeRequirement: 15,
   },
   // CHA - Charming
-  {
-    key: "CHA_GENERAL_F1",
-    name: "Local Legend",
-    description:
-      "*You might of heard of me...* You have advantage on Charisma checks against commoners.",
-    order: 1,
-  },
   {
     key: "CHA_GENERAL_F2",
     name: "Method Actor",
     description:
       "*I don't read the script. The script reads me.* You have advantage on Charisma checks while trying to impersonate someone else.",
-    order: 2,
+    order: 1,
+    attributeRequirement: 10,
   },
   {
-    key: "CHA_GENERAL_F3",
-    name: "Commanding Voice",
+    key: "CHA_GENERAL_F1",
+    name: "Local Legend",
     description:
-      "*Get your ass back up!* You can roll a Charisma check to stabilize a creature with a Non-Fatal Injury.",
-    order: 3,
+      "*You might of heard of me...* You have advantage on Charisma checks against commoners.",
+    order: 2,
+    attributeRequirement: 10,
   },
   {
     key: "CHA_GENERAL_F4",
     name: "Silver Tongue",
     description:
       "*Let's keep this between us...* You have advantage on Charisma checks in 1-on-1 conversations.",
+    order: 3,
+    attributeRequirement: 10,
+  },
+  {
+    key: "CHA_GENERAL_F6",
+    name: "Inspiring Leader",
+    description:
+      "*Trust me. You don't want to do this.* You can forgo your first turn of combat to give enemies disadvantage on all skill checks during their first turn.",
     order: 4,
+    attributeRequirement: 15,
   },
   {
     key: "CHA_GENERAL_F5",
@@ -172,48 +194,55 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     description:
       "*Looks like my confidence is contagious.* Allies within 10ft of you have resistance to Psychic magic.",
     order: 5,
+    attributeRequirement: 15,
   },
   {
-    key: "CHA_GENERAL_F6",
-    name: "Inspiring Leader",
+    key: "CHA_GENERAL_F3",
+    name: "Commanding Voice",
     description:
-      "*Trust me. You don't want to do this.* You can forgo your first turn of combat to give enemies disadvantage on all skill checks during their first turn.",
+      "*Get your ass back up!* You can roll a Charisma check to stabilize a creature with a Non-Fatal Injury if they can hear you.",
     order: 6,
+    attributeRequirement: 15,
   },
   // WIS - Insightful
-  {
-    key: "WIS_GENERAL_F1",
-    name: "Sixth Sense",
-    description: "*Did you hear that?* You can't be surprised during combat.",
-    order: 1,
-  },
   {
     key: "WIS_GENERAL_F2",
     name: "Pathfinder",
     description:
       "*It's definitely this way.* You have advantage on Wisdom checks to navigate natural environments.",
-    order: 2,
-  },
-  {
-    key: "WIS_GENERAL_F3",
-    name: "Words of Wisdom",
-    description:
-      "*Trust me, I know how this plays out.* Once per Rest, you can roll an Wisdom check in place of a Charisma check.",
-    order: 3,
-  },
-  {
-    key: "WIS_GENERAL_F4",
-    name: "Detective",
-    description:
-      "*Nothing stays hidden forever.* You have advantage on Wisdom checks to search for clues.",
-    order: 4,
+    order: 1,
+    attributeRequirement: 10,
   },
   {
     key: "WIS_GENERAL_F5",
     name: "Archaeologist",
     description:
       "*This must be 100 years old...* You have advantage on Wisdom checks to ascertain who built a structure and why.",
+    order: 2,
+    attributeRequirement: 10,
+  },
+  {
+    key: "WIS_GENERAL_F4",
+    name: "Detective",
+    description:
+      "*Nothing stays hidden forever.* You have advantage on Wisdom checks to search for clues.",
+    order: 3,
+    attributeRequirement: 10,
+  },
+  {
+    key: "WIS_GENERAL_F1",
+    name: "Sixth Sense",
+    description: "*Did you hear that?* You can't be surprised during combat.",
+    order: 4,
+    attributeRequirement: 15,
+  },
+  {
+    key: "WIS_GENERAL_F3",
+    name: "Words of Wisdom",
+    description:
+      "*Trust me, I know how this plays out.* Once per Rest, you can roll an Wisdom check in place of a Charisma check.",
     order: 5,
+    attributeRequirement: 15,
   },
   {
     key: "WIS_GENERAL_F6",
@@ -221,6 +250,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     description:
       "*To be everywhere, is to be nowhere.* You have advantage on all checks related to Spirit magic.",
     order: 6,
+    attributeRequirement: 15,
   },
   // WIS - Storm Sage
   {
@@ -284,7 +314,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "WIS_DRUID1_F3",
     name: "Mercy Beast",
     description:
-      "Roll a DC 15 Wisdom check. On a succes, spend 3 Mana to command your tamed beast to help an incapacitated creature within 60ft. That creature is stabilized with 3d12 health.",
+      "Roll a DC 15 Wisdom check. On a success, spend 3 Mana to command your tamed beast to help an incapacitated creature within 60ft. That creature is stabilized with 3d12 health.",
     order: 3,
   },
   {
