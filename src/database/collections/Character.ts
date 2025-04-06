@@ -20,8 +20,7 @@ const _characterSchema = {
     },
     experience: {
       type: "number",
-      minimum: 6,
-      maximum: 72,
+      minimum: 0,
     },
     classStates: {
       type: "array",
@@ -63,9 +62,11 @@ type CharacterMethods = {
   acquireClassTrait: (classKey: string, featureKey: string) => void;
   ascendClass: (classKey: string) => void;
   getAttributeBonus: (attributeKey: CharacterAttributeKey) => number;
-  getExperience: () => number;
-  getSpentExperience: () => number;
-  getAvailableExperience: () => number;
+  getShards: () => number;
+  getSpentShards: () => number;
+  getAvailableShards: () => number;
+  getShardCost: () => number;
+  getCurrentLevelExperience: () => number;
   getAscension: () => number;
   getSpentAscension: () => number;
   getAvailableAscension: () => number;
@@ -73,9 +74,12 @@ type CharacterMethods = {
 
 type CharacterDocument = RxDocument<Character, CharacterMethods>;
 
-const _sum_experience = (classStates: CharacterClassState[]) =>
+export const BASE_XP_PER_SHARD = 100;
+export const SHARDS_PER_LEVEL = 5;
+
+const _sum_shards = (classStates: CharacterClassState[]) =>
   classStates.reduce(
-    (experience, classState) => experience + classState.featureKeys.length,
+    (shards, classState) => shards + classState.featureKeys.length,
     0
   );
 
@@ -84,6 +88,11 @@ const _sum_ascension = (classStates: CharacterClassState[]) =>
     (ascension, classState) => ascension + (classState.ascension - 1),
     0
   );
+
+const _get_shard_cost = (level: number) => 100 * level;
+
+const _get_level_cost = (level: number) =>
+  _get_shard_cost(level) * SHARDS_PER_LEVEL;
 
 const characterMethods: CharacterMethods = {
   getClassState: function (this: CharacterDocument, classKey: string) {
@@ -129,24 +138,46 @@ const characterMethods: CharacterMethods = {
     const attributeClassStates = this.classStates.filter(
       (classState) => classState.key.slice(0, 3) === attributeKey
     );
-    const attributeExperience = _sum_experience(attributeClassStates);
+    const attributeShards = _sum_shards(attributeClassStates);
     const attributeAscension = _sum_ascension(attributeClassStates);
 
     // 2 EXPERIENCE = +1 BONUS
     // 1 ASCENSION (5 EXPERIENCE) = +2 BONUS
-    return Math.floor(attributeExperience / 2 + attributeAscension * 2);
+    return Math.floor(attributeShards / 2 + attributeAscension * 2);
   },
-  getExperience: function (this: CharacterDocument) {
-    return this.experience;
+  getShards: function (this: CharacterDocument) {
+    let experienceCounter = this.experience;
+    let shardCount = SHARDS_PER_LEVEL;
+    while (true) {
+      const shardCost =
+        BASE_XP_PER_SHARD * Math.floor(shardCount / SHARDS_PER_LEVEL);
+      if (experienceCounter >= shardCost) {
+        experienceCounter -= shardCost;
+        shardCount++;
+      } else {
+        break;
+      }
+    }
+    return shardCount;
   },
-  getSpentExperience: function (this: CharacterDocument) {
-    return _sum_experience(this.classStates);
+  getSpentShards: function (this: CharacterDocument) {
+    return _sum_shards(this.classStates);
   },
-  getAvailableExperience: function (this: CharacterDocument) {
-    return this.getExperience() - this.getSpentExperience();
+  getAvailableShards: function (this: CharacterDocument) {
+    return this.getShards() - this.getSpentShards();
+  },
+  getShardCost: function (this: CharacterDocument) {
+    return BASE_XP_PER_SHARD * Math.floor(this.getShards() / SHARDS_PER_LEVEL);
+  },
+  getCurrentLevelExperience: function (this: CharacterDocument) {
+    let pastLevelExperience = 0;
+    for (let i = 1; i < this.getAscension(); i++) {
+      pastLevelExperience += _get_level_cost(i);
+    }
+    return this.experience - pastLevelExperience;
   },
   getAscension: function (this: CharacterDocument) {
-    return Math.floor(this.experience / 5);
+    return Math.floor(this.getShards() / SHARDS_PER_LEVEL);
   },
   getSpentAscension: function (this: CharacterDocument) {
     return _sum_ascension(this.classStates);

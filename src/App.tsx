@@ -203,7 +203,7 @@ function App() {
           onAcquire={(featureKey) => {
             character.acquireClassTrait(selectedClass.key, featureKey);
           }}
-          acquireDisabled={character.getAvailableExperience() <= 0}
+          acquireDisabled={character.getAvailableShards() <= 0}
           onAscend={() => {
             character.ascendClass(selectedClass.key);
           }}
