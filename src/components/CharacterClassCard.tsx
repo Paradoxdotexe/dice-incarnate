@@ -4,6 +4,7 @@ import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { NFlex } from "../common/NFlex";
 import { CharacterClassState } from "../database/collections/Character";
 import { CharacterClassDocument } from "../database/collections/CharacterClass";
+import { ROMAN_NUMERALS } from "../appendix/CharacterAttribute";
 
 export const CHARACTER_CLASS_CARD_WIDTH = 240; // 36 * 6 + 24
 export const CHARACTER_CLASS_CARD_HEIGHT = 120;
@@ -72,7 +73,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           zIndex: 1,
         }}
       >
-        <NFlex vertical gap={12}>
+        <NFlex vertical gap={6}>
           <div
             style={{
               fontFamily: "Grenze",
@@ -84,21 +85,13 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
             {props.class.name}{" "}
             {props.classState &&
               props.class.ascendable &&
-              ["I", "II", "III", "IV", "V"][ascension - 1]}
+              ROMAN_NUMERALS[ascension - 1]}
           </div>
 
           <NFlex gap={3}>
-            {props.classState?.featureKeys.map((traitKey) => {
-              const feature = props.class.features.find(
-                (feature) => feature.key === traitKey
-              )!;
-
-              return (
-                <CharacterAbilityIcon key={traitKey} color={color}>
-                  {feature.getMana()}
-                </CharacterAbilityIcon>
-              );
-            })}
+            {props.classState?.featureKeys.map((featureKey) => (
+              <CharacterAbilityIcon key={featureKey} color={color} />
+            ))}
           </NFlex>
         </NFlex>
       </NFlex>

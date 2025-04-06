@@ -1,5 +1,18 @@
 import { CharacterClass } from "../database/collections/CharacterClass";
 
+export const ROMAN_NUMERALS = [
+  "I",
+  "II",
+  "III",
+  "IV",
+  "V",
+  "VI",
+  "VII",
+  "VIII",
+  "IX",
+  "X",
+];
+
 export type CharacterAttribute = {
   key: CharacterClass["attributeKey"];
   name: string;

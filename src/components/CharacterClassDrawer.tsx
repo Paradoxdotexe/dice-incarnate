@@ -8,6 +8,7 @@ import { CharacterClassFeatureCard } from "./CharacterClassFeatureCard";
 import { CharacterClassFeatureDocument } from "../database/collections/CharacterClassFeature";
 import { groupBy } from "lodash-es";
 import { Header } from "./Header";
+import { ROMAN_NUMERALS } from "../appendix/CharacterAttribute";
 
 const PANEL_WIDTH = 600;
 
@@ -17,7 +18,7 @@ type CharacterClassDrawerProps = {
   class: CharacterClassDocument;
   classState?: CharacterClassState;
   onClick?: () => void;
-  onAcquire: (traitKey: string) => void;
+  onAcquire: (featureKey: string) => void;
   acquireDisabled?: boolean;
   onAscend?: () => void;
   ascendDisabled?: boolean;
@@ -72,7 +73,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
             {props.class.name}{" "}
             {props.classState &&
               props.class.ascendable &&
-              ["I", "II", "III", "IV", "V"][ascension - 1]}
+              ROMAN_NUMERALS[ascension - 1]}
           </div>
 
           {props.class.ascendable && (
@@ -85,7 +86,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
                 !props.classState?.featureKeys.length
               }
             >
-              {isMaxAscension ? "Max Ascension" : "Ascend"}
+              {isMaxAscension ? "Max Level" : "Surge"}
             </NButton>
           )}
         </NFlex>

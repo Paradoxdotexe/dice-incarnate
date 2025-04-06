@@ -75,11 +75,7 @@ export const CharacterClassFeatureCard: React.FC<
       `}
     >
       <NFlex gap={9} align="start">
-        {
-          <CharacterAbilityIcon color={props.class.color}>
-            {props.feature.getMana()}
-          </CharacterAbilityIcon>
-        }
+        {<CharacterAbilityIcon color={props.class.color} />}
         <NFlex vertical gap={3} style={{ flex: 1 }}>
           <NFlex align="center" justify="space-between">
             <div style={{ fontSize: 20, fontWeight: 700, lineHeight: "25px" }}>

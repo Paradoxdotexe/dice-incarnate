@@ -19,6 +19,7 @@ import { useCharacterClasses } from "./hooks/useCharacterClasses";
 import { Header } from "./components/Header";
 import { capitalize } from "lodash-es";
 import { CharacterClassDocument } from "./database/collections/CharacterClass";
+import { CharacterLevelPanel } from "./components/CharacterLevelPanel";
 
 const ROW_GAP = 18;
 
@@ -53,6 +54,10 @@ function App() {
       `}
       gap={15}
     >
+      <NFlex style={{ width: 894, paddingBottom: 48 }}>
+        <CharacterLevelPanel />
+      </NFlex>
+
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
         <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>
           SKILLS
@@ -195,8 +200,8 @@ function App() {
           class={selectedClass}
           classState={selectedClassState}
           onClick={() => setSelectedClassKey(selectedClass.key)}
-          onAcquire={(traitKey) => {
-            character.acquireClassTrait(selectedClass.key, traitKey);
+          onAcquire={(featureKey) => {
+            character.acquireClassTrait(selectedClass.key, featureKey);
           }}
           acquireDisabled={character.getAvailableExperience() <= 0}
           onAscend={() => {

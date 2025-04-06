@@ -60,10 +60,14 @@ const characterSchema: RxJsonSchema<Character> = _characterSchema;
 
 type CharacterMethods = {
   getClassState: (classKey: string) => CharacterClassState | undefined;
-  acquireClassTrait: (classKey: string, traitKey: string) => void;
+  acquireClassTrait: (classKey: string, featureKey: string) => void;
   ascendClass: (classKey: string) => void;
   getAttributeBonus: (attributeKey: CharacterAttributeKey) => number;
+  getExperience: () => number;
+  getSpentExperience: () => number;
   getAvailableExperience: () => number;
+  getAscension: () => number;
+  getSpentAscension: () => number;
   getAvailableAscension: () => number;
 };
 
@@ -88,7 +92,7 @@ const characterMethods: CharacterMethods = {
   acquireClassTrait: function (
     this: CharacterDocument,
     classKey: string,
-    traitKey: string
+    featureKey: string
   ) {
     this.modify((character) => {
       const patchedClassStates = structuredClone(this.classStates);
@@ -100,7 +104,7 @@ const characterMethods: CharacterMethods = {
         patchedClassStates.push(classState);
       }
 
-      classState.featureKeys.push(traitKey);
+      classState.featureKeys.push(featureKey);
       return { ...character, classStates: patchedClassStates };
     });
   },
@@ -129,16 +133,26 @@ const characterMethods: CharacterMethods = {
     const attributeAscension = _sum_ascension(attributeClassStates);
 
     // 2 EXPERIENCE = +1 BONUS
-    // 1 ASCENSION (6 EXPERIENCE) = +3 BONUS
-    return Math.floor((attributeExperience + attributeAscension * 6) / 2);
+    // 1 ASCENSION (5 EXPERIENCE) = +2 BONUS
+    return Math.floor(attributeExperience / 2 + attributeAscension * 2);
+  },
+  getExperience: function (this: CharacterDocument) {
+    return this.experience;
+  },
+  getSpentExperience: function (this: CharacterDocument) {
+    return _sum_experience(this.classStates);
   },
   getAvailableExperience: function (this: CharacterDocument) {
-    const spentExperience = _sum_experience(this.classStates);
-    return this.experience - spentExperience;
+    return this.getExperience() - this.getSpentExperience();
+  },
+  getAscension: function (this: CharacterDocument) {
+    return Math.floor(this.experience / 5);
+  },
+  getSpentAscension: function (this: CharacterDocument) {
+    return _sum_ascension(this.classStates);
   },
   getAvailableAscension: function (this: CharacterDocument) {
-    const spentAscension = _sum_ascension(this.classStates);
-    return Math.floor(this.experience / 6) - spentAscension;
+    return this.getAscension() - this.getSpentAscension();
   },
 };
 
