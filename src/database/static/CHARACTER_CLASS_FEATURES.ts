@@ -191,28 +191,28 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "WIS_GENERAL_F2",
     name: "Pathfinder",
     description:
-      "*It's definitely this way.* You have advantage on Insight checks to navigate natural environments.",
+      "*It's definitely this way.* You have advantage on Wisdom checks to navigate natural environments.",
     order: 2,
   },
   {
     key: "WIS_GENERAL_F3",
     name: "Words of Wisdom",
     description:
-      "*Trust me, I know how this plays out.* Once per Rest, you can roll an Insight check in place of a Charisma check.",
+      "*Trust me, I know how this plays out.* Once per Rest, you can roll an Wisdom check in place of a Charisma check.",
     order: 3,
   },
   {
     key: "WIS_GENERAL_F4",
     name: "Detective",
     description:
-      "*Nothing stays hidden forever.* You have advantage on Insight checks to search for clues.",
+      "*Nothing stays hidden forever.* You have advantage on Wisdom checks to search for clues.",
     order: 4,
   },
   {
     key: "WIS_GENERAL_F5",
     name: "Archaeologist",
     description:
-      "*This must be 100 years old...* You have advantage on Insight checks to ascertain who built a structure and why.",
+      "*This must be 100 years old...* You have advantage on Wisdom checks to ascertain who built a structure and why.",
     order: 5,
   },
   {
@@ -227,21 +227,21 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "WIS_SAGE1_F1",
     name: "Tempest Strike",
     description:
-      "Spend 1 Mana to channel wind into a weapon attack of you or an ally. This attack deals an additional 1d12 damage.",
+      "Roll a DC 5 Wisdom check. On a success, spend 1 Mana to channel wind into a weapon attack. That attack deals an additional 1d12 damage.",
     order: 1,
   },
   {
     key: "WIS_SAGE1_F2",
     name: "Tempest Surge",
     description:
-      "Spend 2 Mana to surge wind towards 2 targets within 15ft. Each target takes 1d12 damage and is pushed back 15ft.",
+      "Roll a DC 10 Wisdom check. On a success, spend 2 Mana to surge wind towards 2 creatures within 15ft. Those creatures take 1d12 damage and are pushed back 15ft.",
     order: 2,
   },
   {
     key: "WIS_SAGE1_F3",
     name: "Tempest Storm",
     description:
-      "Spend 3 Mana to envelope a target within 60ft in a wind vortex. That target takes 2d12 damage and loses 1 Mana.",
+      "Roll a DC 15 Wisdom check. On a success, spend 3 Mana to envelope a creature within 60ft in a wind vortex. That creature takes 2d12 damage and loses 1 Mana.",
     order: 3,
   },
   {
@@ -270,21 +270,21 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "WIS_DRUID1_F1",
     name: "Attack Beast",
     description:
-      "Spend 1 Mana to command your tamed beast to attack a target within 30ft. The target takes 1d12 damage and can be dragged 5ft in any direction.",
+      "Roll a DC 5 Wisdom check. On a success, spend 1 Mana to command your tamed beast to attack a creature within 30ft. That creature takes 1d12 damage and can be dragged 5ft in any direction.",
     order: 1,
   },
   {
     key: "WIS_DRUID1_F2",
     name: "Guard Beast",
     description:
-      "Spend 2 Mana to command your tamed beast to defend you. The next time you are attacked, your tamed beast deals 1d12 damage and deflects up to 1d12 damage.",
+      "Roll a DC 10 Wisdom check. On a success, spend 2 Mana to command your tamed beast to defend you. The next time you are hit with a melee attack, your tamed beast will deflect 2d12 damage.",
     order: 2,
   },
   {
     key: "WIS_DRUID1_F3",
     name: "Mercy Beast",
     description:
-      "Spend 3 Mana to command your tamed beast to stabilize an incapacitated ally within 60ft. The ally heals 3d12 HP.",
+      "Roll a DC 15 Wisdom check. On a succes, spend 3 Mana to command your tamed beast to help an incapacitated creature within 60ft. That creature is stabilized with 3d12 health.",
     order: 3,
   },
   {
@@ -312,7 +312,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "WEAPON_SWORD_F1",
     name: "Sabre Strike",
     description:
-      "Roll a Strength check to attack a creature within 5ft. On a success, the target takes 1d6 Slashing damage.",
+      "Roll a Strength check to attack a creature within 5ft. If you hit their AC, they take 1d6 Slashing damage.",
     order: 1,
   },
   {

@@ -194,9 +194,10 @@ function App() {
 
 export default App;
 
-const Header: React.FC<{ children?: string; style: React.CSSProperties }> = (
-  props
-) => {
+export const Header: React.FC<{
+  children?: string;
+  style: React.CSSProperties;
+}> = (props) => {
   return (
     <NFlex
       align="center"
