@@ -79,7 +79,11 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
             <NButton
               color={color}
               onClick={props.onAscend}
-              disabled={isMaxAscension || props.ascendDisabled}
+              disabled={
+                isMaxAscension ||
+                props.ascendDisabled ||
+                !props.classState?.featureKeys.length
+              }
             >
               {isMaxAscension ? "Max Ascension" : "Ascend"}
             </NButton>

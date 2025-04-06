@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import "./App.css";
 import { NFlex } from "./common/NFlex";
 import {
@@ -17,6 +17,8 @@ import { NDrawer } from "./common/NDrawer";
 import PlusIcon from "./assets/icons/Plus.svg?react";
 import { useCharacterClasses } from "./hooks/useCharacterClasses";
 import { Header } from "./components/Header";
+import { capitalize } from "lodash-es";
+import { CharacterClassDocument } from "./database/collections/CharacterClass";
 
 const ROW_GAP = 18;
 
@@ -25,7 +27,8 @@ function App() {
   const characterClasses = useCharacterClasses();
 
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
-  const [attributeKey, setAttributeKey] = useState<string>();
+  const [choosableClasses, setChoosableClasses] =
+    useState<CharacterClassDocument[]>();
 
   if (!character || !characterClasses) {
     return null;
@@ -48,7 +51,7 @@ function App() {
         min-height: 100vh;
         overflow-x: hidden;
       `}
-      gap={12}
+      gap={15}
     >
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
         <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>
@@ -63,7 +66,7 @@ function App() {
       </NFlex>
 
       <NFlex gap={ROW_GAP} style={{ width: 894 }}>
-        <NFlex vertical justify="center" gap={24} style={{ flex: 1 }}>
+        <NFlex vertical justify="center" gap={18} style={{ flex: 1 }}>
           {CHARACTER_ATTRIBUTES.map((attribute) => {
             const attributeClasses = characterClasses.filter(
               (cc) =>
@@ -89,31 +92,20 @@ function App() {
                   );
                 })}
                 {attributeClasses.length < 3 && (
-                  <NFlex
-                    vertical
-                    align="center"
-                    justify="center"
-                    gap={6}
-                    style={{
-                      width: CHARACTER_CLASS_CARD_WIDTH,
-                      height: CHARACTER_CLASS_CARD_HEIGHT,
-                      border: `2px solid #494949`,
-                      color: "#808080",
-                      borderRadius: 12,
-                      cursor: "pointer",
-                    }}
-                    css={`
-                      opacity: 0.5;
-
-                      &:hover {
-                        opacity: 1;
-                      }
-                    `}
-                    onClick={() => setAttributeKey(attribute.key)}
+                  <AddClassCard
+                    onClick={() =>
+                      setChoosableClasses(
+                        characterClasses.filter(
+                          (cc) =>
+                            cc.attributeKey === attribute.key &&
+                            cc.type === "CLASS" &&
+                            !character.getClassState(cc.key)
+                        )
+                      )
+                    }
                   >
-                    <PlusIcon style={{ fontSize: 24 }} />
-                    <div>Add Class</div>
-                  </NFlex>
+                    Add Class
+                  </AddClassCard>
                 )}
               </NFlex>
             );
@@ -136,11 +128,18 @@ function App() {
 
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
         <div style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }} />
-        {["WEAPON", "ARMOR", "ITEM"].map((classType) => (
-          <NFlex key={classType} vertical gap={ROW_GAP}>
-            {characterClasses
-              .filter((cc) => cc.type === classType)
-              .map((cc) => {
+        {["WEAPON", "ARMOR", "ITEM"].map((classType) => {
+          const classes = characterClasses.filter(
+            (cc) => cc.type === classType && !!character.getClassState(cc.key)
+          );
+          return (
+            <NFlex
+              key={classType}
+              vertical
+              gap={ROW_GAP}
+              style={{ width: CHARACTER_CLASS_CARD_WIDTH }}
+            >
+              {classes.map((cc) => {
                 const classState = character.getClassState(cc.key);
                 return (
                   <CharacterClassCard
@@ -151,33 +150,40 @@ function App() {
                   />
                 );
               })}
-          </NFlex>
-        ))}
+              <AddClassCard
+                onClick={() =>
+                  setChoosableClasses(
+                    characterClasses.filter(
+                      (cc) =>
+                        cc.type === classType &&
+                        !character.getClassState(cc.key)
+                    )
+                  )
+                }
+              >
+                Add {capitalize(classType)}
+              </AddClassCard>
+            </NFlex>
+          );
+        })}
       </NFlex>
 
       <NDrawer
-        open={!!attributeKey}
-        onClose={() => setAttributeKey(undefined)}
+        open={!!choosableClasses}
+        onClose={() => setChoosableClasses(undefined)}
         width={CHARACTER_CLASS_CARD_WIDTH + 48}
       >
         <NFlex vertical gap={18} style={{ padding: 24 }}>
-          {characterClasses
-            .filter(
-              (cc) =>
-                cc.attributeKey === attributeKey &&
-                cc.type === "CLASS" &&
-                !character.getClassState(cc.key)
-            )
-            .map((cc) => (
-              <CharacterClassCard
-                key={cc.key}
-                class={cc}
-                onClick={() => {
-                  setAttributeKey(undefined);
-                  setSelectedClassKey(cc.key);
-                }}
-              />
-            ))}
+          {choosableClasses?.map((cc) => (
+            <CharacterClassCard
+              key={cc.key}
+              class={cc}
+              onClick={() => {
+                setChoosableClasses(undefined);
+                setSelectedClassKey(cc.key);
+              }}
+            />
+          ))}
         </NFlex>
       </NDrawer>
 
@@ -202,5 +208,37 @@ function App() {
     </NFlex>
   );
 }
+
+const AddClassCard: React.FC<{ onClick: () => void; children: ReactNode }> = (
+  props
+) => {
+  return (
+    <NFlex
+      vertical
+      align="center"
+      justify="center"
+      gap={6}
+      style={{
+        width: CHARACTER_CLASS_CARD_WIDTH,
+        height: CHARACTER_CLASS_CARD_HEIGHT,
+        border: `2px solid #494949`,
+        color: "#808080",
+        borderRadius: 12,
+        cursor: "pointer",
+      }}
+      css={`
+        opacity: 0.5;
+
+        &:hover {
+          opacity: 1;
+        }
+      `}
+      onClick={props.onClick}
+    >
+      <PlusIcon style={{ fontSize: 24 }} />
+      <div>{props.children}</div>
+    </NFlex>
+  );
+};
 
 export default App;

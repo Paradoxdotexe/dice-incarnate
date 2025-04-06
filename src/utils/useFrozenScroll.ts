@@ -10,7 +10,7 @@ export const useFrozenScroll = (frozen: boolean) => {
       html.style.overflow = "hidden";
 
       if (hasScrollbar) {
-        html.style.paddingRight = "16px";
+        html.style.paddingRight = "15px";
       }
     } else {
       html.style.overflow = "";
