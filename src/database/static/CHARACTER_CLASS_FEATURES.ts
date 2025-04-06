@@ -155,7 +155,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     order: 6,
     attributeRequirement: 15,
   },
-  // CHA - Charming
+  // CHA - Charismatic
   {
     key: "CHA_GENERAL_F2",
     name: "Method Actor",
@@ -340,9 +340,23 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   },
   {
     key: "WEAPON_SWORD_F1",
-    name: "Sabre Strike",
+    name: "Sword Strike",
     description:
       "Roll a Strength check to attack a creature within 5ft. If you hit their AC, they take 1d6 Slashing damage.",
+    order: 1,
+  },
+  {
+    key: "WEAPON_BOW_F1",
+    name: "Bow Strike",
+    description:
+      "Roll an Agility check to attack a creature between 10ft and 120ft. If you hit their AC, they take 1d6 Piercing damage.",
+    order: 1,
+  },
+  {
+    key: "WEAPON_DAGGER_F1",
+    name: "Dagger Strike",
+    description:
+      "Roll an Agility check to attack a creature within 5ft. If you hit their AC, they take 1d12 Piercing damage. You can only use Dagger Strike once per creature per combat.",
     order: 1,
   },
   {
@@ -368,5 +382,47 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     name: "Soul Hide",
     description: "You have resistance to Slashing and Piercing damage.",
     order: 2,
+  },
+  {
+    key: "ARMOR_NONE_F1",
+    name: "Fire Magic Resistance",
+    description: "You have resistance to Fire damage.",
+    order: 1,
+  },
+  {
+    key: "ARMOR_NONE_F2",
+    name: "Water Magic Resistance",
+    description: "You have resistance to Water damage.",
+    order: 2,
+  },
+  {
+    key: "ARMOR_NONE_F3",
+    name: "Earth Magic Resistance",
+    description: "You have resistance to Earth damage.",
+    order: 3,
+  },
+  {
+    key: "ARMOR_NONE_F4",
+    name: "Air Magic Resistance",
+    description: "You have resistance to Air damage.",
+    order: 4,
+  },
+  {
+    key: "ARMOR_NONE_F5",
+    name: "Force Magic Resistance",
+    description: "You have resistance to Force damage.",
+    order: 5,
+  },
+  {
+    key: "ARMOR_NONE_F6",
+    name: "Psychic Magic Resistance",
+    description: "You have resistance to Psychic damage.",
+    order: 6,
+  },
+  {
+    key: "ARMOR_NONE_F7",
+    name: "Spirit Magic Resistance",
+    description: "You have resistance to Spirit damage.",
+    order: 7,
   },
 ];

@@ -87,9 +87,9 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
         </NFlex>
 
         <NFlex vertical gap={18}>
-          {Object.entries(featureAreas).map(([areaLabel, features]) => (
+          {Object.entries(featureAreas).map(([area, features]) => (
             <NFlex vertical gap={12}>
-              <Header align="left">{areaLabel}</Header>
+              {area && <Header align="left">{area}</Header>}
               {features.map((feature) => {
                 const isAcquired =
                   props.classState?.featureKeys.includes(feature.key) ?? false;
