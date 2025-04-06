@@ -205,6 +205,7 @@ const Header: React.FC<{ children?: string; style: React.CSSProperties }> = (
         fontWeight: "600",
         fontSize: 14,
         visibility: !props.children ? "hidden" : undefined,
+        paddingBottom: 6,
         ...props.style,
       }}
       css={`

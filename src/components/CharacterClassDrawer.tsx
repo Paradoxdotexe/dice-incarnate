@@ -75,7 +75,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
         <NFlex vertical gap={18}>
           {props.class.features.map((feature) => {
             const isAcquired =
-              props.classState?.traits.includes(feature.key) ?? false;
+              props.classState?.featureKeys.includes(feature.key) ?? false;
             const isAcquirable = !isAcquired && !props.acquireDisabled;
             return (
               <ClassFeatureCard

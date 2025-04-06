@@ -31,7 +31,7 @@ const _characterSchema = {
           key: {
             type: "string",
           },
-          traits: {
+          featureKeys: {
             type: "array",
             items: {
               type: "string",
@@ -43,7 +43,7 @@ const _characterSchema = {
             maximum: 5,
           },
         },
-        required: ["key", "traits", "ascension"],
+        required: ["key", "featureKeys", "ascension"],
       },
     },
   },
@@ -71,7 +71,7 @@ type CharacterDocument = RxDocument<Character, CharacterMethods>;
 
 const _sum_experience = (classStates: CharacterClassState[]) =>
   classStates.reduce(
-    (experience, classState) => experience + classState.traits.length,
+    (experience, classState) => experience + classState.featureKeys.length,
     0
   );
 
@@ -96,11 +96,11 @@ const characterMethods: CharacterMethods = {
 
       // add new class state if this is the first acquisition
       if (!classState) {
-        classState = { key: classKey, traits: [], ascension: 1 };
+        classState = { key: classKey, featureKeys: [], ascension: 1 };
         patchedClassStates.push(classState);
       }
 
-      classState.traits.push(traitKey);
+      classState.featureKeys.push(traitKey);
       return { ...character, classStates: patchedClassStates };
     });
   },

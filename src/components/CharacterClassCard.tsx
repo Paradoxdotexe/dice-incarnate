@@ -41,7 +41,10 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
     boxShadow += `, 0 2px 0 4px #1b1b1b , 0 4px 0 4px ${opacify(-0.5, color)}`;
   }
   if (ascension == 5) {
-    boxShadow += `, 0 -2px 0 4px #1b1b1b , 0 -4px 0 4px ${opacify(-0.5, color)}`;
+    boxShadow += `, 0 -2px 0 4px #1b1b1b , 0 -4px 0 4px ${opacify(
+      -0.5,
+      color
+    )}`;
   }
 
   return (
@@ -85,7 +88,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
           </div>
 
           <NFlex gap={3}>
-            {props.classState?.traits.map((traitKey) => {
+            {props.classState?.featureKeys.map((traitKey) => {
               const feature = props.class.features.find(
                 (feature) => feature.key === traitKey
               )!;
