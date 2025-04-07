@@ -207,7 +207,7 @@ function App() {
           onAscend={() => {
             character.ascendClass(selectedClass.key);
           }}
-          ascendDisabled={character.getAvailableAscension() <= 0}
+          ascendDisabled={character.getAvailableSurges() <= 0}
         />
       )}
     </NFlex>

@@ -12,20 +12,20 @@ export const CharacterLevelPanel: React.FC = () => {
     return null;
   }
 
-  const shardCost = character.getShardCost();
-  const currentLevelExperience = character.getCurrentLevelExperience();
+  const levelExperience = character.getLevelExperience();
+  const shardCost = character.getLevelShardCost();
 
   return (
     <NFlex vertical gap={6}>
       <div style={{ fontFamily: "Grenze", fontSize: 28 }}>
-        Incarnate {ROMAN_NUMERALS[character.getAscension() - 1]}
+        Incarnate {ROMAN_NUMERALS[character.getLevel() - 1]}
       </div>
       <NFlex gap={3}>
         {arrayOf(5).map((i) => {
           const shardCostStart = shardCost * i;
           const fillRatio = Math.min(
             1,
-            (currentLevelExperience - shardCostStart) / shardCost
+            (levelExperience - shardCostStart) / shardCost
           );
           return (
             <div
@@ -38,7 +38,7 @@ export const CharacterLevelPanel: React.FC = () => {
                 position: "relative",
               }}
             >
-              {character.getCurrentLevelExperience() > shardCostStart && (
+              {levelExperience > shardCostStart && (
                 <div
                   css={`
                     width: ${`${fillRatio * 100}%`};
@@ -62,7 +62,7 @@ export const CharacterLevelPanel: React.FC = () => {
         }}
       >
         <div>
-          {character.experience} / {shardCost * SHARDS_PER_LEVEL} XP
+          {levelExperience} / {shardCost * SHARDS_PER_LEVEL} XP
         </div>
         <NFlex gap={6}>
           <div>
@@ -70,8 +70,7 @@ export const CharacterLevelPanel: React.FC = () => {
           </div>
           <div>|</div>
           <div>
-            {character.getSpentAscension()} / {character.getAscension()} Soul
-            Surges
+            {character.getSpentSurges()} / {character.getSurges()} Soul Surges
           </div>
         </NFlex>
       </NFlex>
