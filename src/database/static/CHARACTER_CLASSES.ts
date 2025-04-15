@@ -38,7 +38,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     key: "INT_GENERAL",
     type: "PERK",
     attributeKey: "INT",
-    name: "Intelligent",
+    name: "Knowledgable",
     color: "#494949",
     order: 1,
     featureKeys: [
@@ -70,7 +70,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     key: "WIS_GENERAL",
     type: "PERK",
     attributeKey: "WIS",
-    name: "Insightful",
+    name: "Instinctual",
     color: "#494949",
     order: 1,
     featureKeys: [
