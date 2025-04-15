@@ -80,6 +80,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
       "WIS_GENERAL_F4",
       "WIS_GENERAL_F5",
       "WIS_GENERAL_F6",
+      "WIS_GENERAL_F7"
     ],
   },
   {

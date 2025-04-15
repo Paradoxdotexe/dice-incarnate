@@ -248,6 +248,14 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     order: 6,
     attributeRequirement: 15,
   },
+  {
+    key: 'WIS_GENERAL_F7',
+    name: 'Lucky',
+    description:
+      '*Mama needs a new pair of shoes!* Choose a lucky number between 2 and 19. When you roll this number, it acts as a natural 20.',
+    order: 7,
+    attributeRequirement: 20,
+  },
   // WIS - Storm Sage
   {
     key: 'WIS_SAGE1_F1',
