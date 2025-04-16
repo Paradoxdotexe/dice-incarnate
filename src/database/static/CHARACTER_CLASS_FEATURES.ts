@@ -348,6 +348,46 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     order: 1,
   },
   {
+    key: 'WEAPON_SWORD_R1_STONE',
+    name: 'Rune of the Destroyer',
+    description:
+      'This weapon deals max damage against objects.',
+    order: 2,
+    ascensionRequirement: 1
+  },
+  {
+    key: 'WEAPON_SWORD_R2_STONE',
+    name: 'Rune of Diamond Blade',
+    description:
+      'Spend 1 Mana to turn this weapon\'s blade into diamond. Your next attack deals 1d12 damage.',
+    order: 3,
+    ascensionRequirement: 2
+  },
+  {
+    key: 'WEAPON_SWORD_R3_STONE',
+    name: 'Rune of the Juggernaut',
+    description:
+      'While wielding this weapon, your AC is increased by 1.',
+    order: 4,
+    ascensionRequirement: 3
+  },
+  {
+    key: 'WEAPON_SWORD_R4_STONE',
+    name: 'Rune of Shattered Earth',
+    description:
+      'Roll a DC 15 Strength check. On a success, spend 1 Mana to shatter the earth under all creatures within 5ft. Those creatures take 1d6 damage.',
+    order: 5,
+    ascensionRequirement: 4
+  },
+  {
+    key: 'WEAPON_SWORD_R5_STONE',
+    name: 'Rune of the Mad Titan',
+    description:
+      'This weapon is now twice as heavy. It requires two hands to wield and deals double damage.',
+    order: 6,
+    ascensionRequirement: 5
+  },
+  {
     key: 'WEAPON_BOW_F1',
     name: 'Bow Strike',
     description:
