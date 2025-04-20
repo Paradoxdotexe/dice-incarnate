@@ -391,7 +391,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_BOW_F1',
     name: 'Bow Strike',
     description:
-      'Roll an Agility check to attack a creature between 10ft and 120ft. If you hit their AC, they take 1d6 Piercing damage.',
+      'Roll an Agility check to attack a creature between 10ft and 60ft. If you hit their AC, they take 1d6 Piercing damage.',
     order: 1,
   },
   {
@@ -404,7 +404,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'ARMOR_HEAVY_F1',
     name: 'Heavy Armor',
-    description: 'Your Armor Class is increased to [10+2*A].',
+    description: 'Your Armor Class is increased by [2*A].',
     order: 1,
   },
   {
@@ -416,43 +416,55 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'ARMOR_LIGHT_F1',
     name: 'Light Armor',
-    description: 'Your Armor Class is increased to [10+1*A].',
+    description: 'Your Armor Class is increased by [A].',
     order: 1,
   },
   {
     key: 'ARMOR_LIGHT_F2',
-    name: 'Soul Hide',
-    description: 'You have resistance to Slashing and Piercing damage.',
+    name: 'Simple Ward',
+    description: 'Your Ward Class is increased by [A].',
     order: 2,
   },
   {
+    key: 'ARMOR_LIGHT_F3',
+    name: 'Soul Hide',
+    description: 'You have resistance to Slashing and Piercing damage.',
+    order: 3,
+  },
+  {
     key: 'ARMOR_NONE_F1',
-    name: 'Stone Magic Resistance',
-    description: 'You have resistance to Stone magic damage.',
+    name: 'Supreme Ward',
+    description: 'Your Ward Class is increased by [2*A].',
     order: 1,
   },
   {
     key: 'ARMOR_NONE_F2',
-    name: 'Sky Magic Resistance',
-    description: 'You have resistance to Sky magic damage.',
+    name: 'Stone Magic Resistance',
+    description: 'You have resistance to Stone magic damage.',
     order: 2,
   },
   {
     key: 'ARMOR_NONE_F3',
-    name: 'Verace Magic Resistance',
-    description: 'You have resistance to Verace magic damage.',
+    name: 'Sky Magic Resistance',
+    description: 'You have resistance to Sky magic damage.',
     order: 3,
   },
   {
     key: 'ARMOR_NONE_F4',
-    name: 'Veil Magic Resistance',
-    description: 'You have resistance to Veil magic damage.',
+    name: 'Sun Magic Resistance',
+    description: 'You have resistance to Sun magic damage.',
     order: 4,
   },
   {
     key: 'ARMOR_NONE_F5',
+    name: 'Moon Magic Resistance',
+    description: 'You have resistance to Moon magic damage.',
+    order: 5,
+  },
+  {
+    key: 'ARMOR_NONE_F6',
     name: 'Spirt Magic Resistance',
     description: 'You have resistance to Spirt magic damage.',
-    order: 5,
+    order: 6,
   },
 ];
