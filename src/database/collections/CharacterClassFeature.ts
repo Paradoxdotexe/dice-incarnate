@@ -18,7 +18,7 @@ const _characterClassFeatureSchema = {
       maxLength: 36,
     },
     name: {
-      type: 'string',
+    type: 'string',
     },
     description: {
       type: 'string',
