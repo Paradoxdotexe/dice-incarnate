@@ -82,10 +82,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
               fontWeight: 500,
             }}
           >
-            {props.class.name}{" "}
-            {props.classState &&
-              props.class.ascendable &&
-              ROMAN_NUMERALS[ascension - 1]}
+            {props.class.getName(props.classState)}
           </div>
 
           <NFlex gap={3}>

@@ -388,7 +388,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "WEAPON_SWORD_R5_STONE",
     name: "Rune of Stone Splitting",
     description:
-      "This weapon becomes the Sword of Stone Splitting. It requires two hands to wield and deals an additional 1d6 Stone damage on each hit.",
+      'This weapon becomes "Stone Splitter". It requires two hands to wield and deals an additional 1d6 Stone damage on each hit.',
     order: 5,
     ascensionRequirement: 5,
   },
@@ -425,9 +425,9 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   },
   {
     key: "WEAPON_SWORD_R5_SKY",
-    name: "Rune of Sky Speed",
+    name: "Rune of Sky Slicing",
     description:
-      "This weapon becomes the Sword of Sky Speed. If you consumed Mana this turn, you can attack once with this weapon without consuming an Action.",
+      'This weapon becomes "Sky Slice". If you consumed Mana this turn, you can attack once with this weapon without consuming an Action.',
     order: 5,
     ascensionRequirement: 5,
   },
@@ -464,9 +464,9 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   },
   {
     key: "WEAPON_SWORD_R5_SUN",
-    name: "Rune of Sun Sight",
+    name: "Rune of Sun Vision",
     description:
-      "This weapon becomes the Sword of Sun Sight. While wielding this weapon, the penalties of Blinded, Obscured, and Flanked do not affect you.",
+      'This weapon becomes "Sun Spot". While wielding this weapon, the penalties of Blinded, Obscured, and Flanked do not affect you.',
     order: 5,
     ascensionRequirement: 5,
   },
@@ -506,7 +506,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "WEAPON_SWORD_R5_MOON",
     name: "Rune of Moon Shadow",
     description:
-      "This weapon becomes the Sword of Moon Shadow. As an Action, you can render yourself partially invisible. Until you move, you are Obscured.",
+      'This weapon becomes "Moon Shadow". As an Action, you can render yourself partially invisible. Until you move, you are Obscured.',
     order: 5,
     ascensionRequirement: 5,
   },
@@ -546,7 +546,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: "WEAPON_SWORD_R5_SPIRIT",
     name: "Rune of the Spirit Eater",
     description:
-      "This weapon becomes the Sword of the Spirit Eater. When this weapon deals Spirit damage, you heal the same amount of damage dealt.",
+      'This weapon becomes "Spirit Eater". When this weapon deals Spirit damage, you heal the same amount of damage dealt.',
     order: 5,
     ascensionRequirement: 5,
   },

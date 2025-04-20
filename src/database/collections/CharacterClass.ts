@@ -6,6 +6,8 @@ import {
   RxJsonSchema,
 } from "rxdb";
 import { CharacterClassFeatureDocument } from "./CharacterClassFeature";
+import { CharacterClassState } from "./Character";
+import { ROMAN_NUMERALS } from "../../appendix/CharacterAttribute";
 
 const _characterClassSchema = {
   title: "CharacterClass",
@@ -33,10 +35,10 @@ const _characterClassSchema = {
       type: "string",
     },
     order: {
-      type: "number"
+      type: "number",
     },
     ascendable: {
-      type: "boolean"
+      type: "boolean",
     },
     featureKeys: {
       type: "array",
@@ -46,7 +48,7 @@ const _characterClassSchema = {
       },
     },
   },
-  required: ["key", "type", "name", "color", "order","featureKeys"],
+  required: ["key", "type", "name", "color", "order", "featureKeys"],
 } as const;
 
 export type CharacterClass = ExtractDocumentTypeFromTypedRxJsonSchema<
@@ -58,7 +60,9 @@ export type CharacterAttributeKey = CharacterClass["attributeKey"];
 const characterClassSchema: RxJsonSchema<CharacterClass> =
   _characterClassSchema;
 
-type CharacterClassMethods = {};
+type CharacterClassMethods = {
+  getName: (classState?: CharacterClassState) => string;
+};
 
 export type UnpopulatedCharacterClassDocument = RxDocument<
   CharacterClass,
@@ -68,7 +72,34 @@ export type CharacterClassDocument = UnpopulatedCharacterClassDocument & {
   features: CharacterClassFeatureDocument[];
 };
 
-const characterClassMethods: CharacterClassMethods = {};
+const characterClassMethods: CharacterClassMethods = {
+  getName: function (
+    this: CharacterClassDocument,
+    classState?: CharacterClassState
+  ) {
+    let name = this.name;
+
+    // add ascension level
+    if (classState && this.ascendable) {
+      name += ` ${ROMAN_NUMERALS[classState?.ascension - 1]}`;
+    }
+
+    // use the name of Tier 5 Rune if applicable
+    if (classState) {
+      const maxRuneKey = classState.featureKeys.find((key) =>
+        key.includes("_R5_")
+      );
+      if (maxRuneKey) {
+        const feature = this.features.find(
+          (feature) => feature.key === maxRuneKey
+        )!;
+        return /This weapon becomes "(.+?)"\./.exec(feature.description)![1];
+      }
+    }
+
+    return name;
+  },
+};
 
 export type CharacterClassCollection = RxCollection<
   CharacterClass,

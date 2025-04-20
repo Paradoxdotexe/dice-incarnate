@@ -1,14 +1,13 @@
-import { NFlex } from '../common/NFlex';
-import { CharacterAbilityIcon } from './CharacterAbilityIcon';
-import reactStringReplace from 'react-string-replace';
-import { NTag } from '../common/NTag';
-import { useCharacter } from '../hooks/useCharacter';
-import classNames from 'classnames';
-import { CharacterClassDocument } from '../database/collections/CharacterClass';
-import { CharacterClassFeatureDocument } from '../database/collections/CharacterClassFeature';
-import LockIcon from '../assets/icons/Lock.svg?react';
-import { CharacterClassState } from '../database/collections/Character';
-import { NTooltip } from '../common/NTooltip';
+import { NFlex } from "../common/NFlex";
+import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
+import reactStringReplace from "react-string-replace";
+import { NTag } from "../common/NTag";
+import { useCharacter } from "../hooks/useCharacter";
+import classNames from "classnames";
+import { CharacterClassDocument } from "../database/collections/CharacterClass";
+import { CharacterClassFeatureDocument } from "../database/collections/CharacterClassFeature";
+import LockIcon from "../assets/icons/Lock.svg?react";
+import { CharacterClassState } from "../database/collections/Character";
 
 type CharacterClassFeatureCardProps = {
   class: CharacterClassDocument;
@@ -20,16 +19,28 @@ type CharacterClassFeatureCardProps = {
   ascension: number;
 };
 
-export const CharacterClassFeatureCard: React.FC<CharacterClassFeatureCardProps> = (props) => {
+export const CharacterClassFeatureCard: React.FC<
+  CharacterClassFeatureCardProps
+> = (props) => {
   const character = useCharacter();
 
   let isLocked = false;
-  if (character && props.feature.attributeRequirement && props.class.attributeKey) {
-    const attributeScore = 10 + character!.getAttributeBonus(props.class.attributeKey);
+  if (
+    character &&
+    props.feature.attributeRequirement &&
+    props.class.attributeKey
+  ) {
+    const attributeScore =
+      10 + character!.getAttributeBonus(props.class.attributeKey);
     isLocked = props.feature.attributeRequirement > attributeScore;
   }
-  if (character && props.feature.ascensionRequirement && props.classState) {
-    isLocked = props.feature.ascensionRequirement > props.classState.ascension;
+  if (character && props.feature.ascensionRequirement) {
+    if (props.classState) {
+      isLocked =
+        props.feature.ascensionRequirement > props.classState.ascension;
+    } else {
+      isLocked = true;
+    }
   }
 
   const isAcquirable = props.isAcquirable && !isLocked;
@@ -50,7 +61,7 @@ export const CharacterClassFeatureCard: React.FC<CharacterClassFeatureCardProps>
         background: rgba(255, 255, 255, 0.06);
         filter: saturate(0);
         transition: filter 150ms ease, opacity 150ms ease;
-        opacity: 0.45;
+        opacity: 0.6;
 
         &:hover.acquirable,
         &.acquired {
@@ -77,7 +88,7 @@ export const CharacterClassFeatureCard: React.FC<CharacterClassFeatureCardProps>
         {<CharacterAbilityIcon color={props.class.color} />}
         <NFlex vertical gap={3} style={{ flex: 1 }}>
           <NFlex align="center" justify="space-between">
-            <div style={{ fontSize: 20, fontWeight: 700, lineHeight: '25px' }}>
+            <div style={{ fontSize: 20, fontWeight: 700, lineHeight: "25px" }}>
               {props.feature.name}
             </div>
             {isLocked && (
@@ -103,7 +114,9 @@ type FeatureClassDescriptionProps = {
   ascension: number;
 };
 
-const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (props) => {
+const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (
+  props
+) => {
   const character = useCharacter();
 
   const attributeBonus =
@@ -115,34 +128,48 @@ const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (props) 
   let description = reactStringReplace(
     props.feature.description,
     /\*(.+?)\*/g,
-    (str, _, offset) => <em key={`EM#${props.feature.key}#${offset}`}>{str}&nbsp;</em>
+    (str, _, offset) => (
+      <em key={`EM#${props.feature.key}#${offset}`}>{str}&nbsp;</em>
+    )
   );
 
   // format distance
-  description = reactStringReplace(description, /(\d+ft)/g, (str, _, offset) => (
-    <NTag key={`FEET#${props.feature.key}#${offset}`}>{str}</NTag>
-  ));
+  description = reactStringReplace(
+    description,
+    /(\d+ft)/g,
+    (str, _, offset) => (
+      <NTag key={`FEET#${props.feature.key}#${offset}`}>{str}</NTag>
+    )
+  );
 
   // format Mana
-  description = reactStringReplace(description, /(\d Mana)/g, (str, _, offset) => (
-    <NTag key={`MANA#${props.feature.key}#${offset}`}>{str}</NTag>
-  ));
+  description = reactStringReplace(
+    description,
+    /(\d Mana)/g,
+    (str, _, offset) => (
+      <NTag key={`MANA#${props.feature.key}#${offset}`}>{str}</NTag>
+    )
+  );
 
   // parse dice expressions
-  description = reactStringReplace(description, /(\dd\d{1,2})/g, (str, _, offset) => {
-    const diceCount = parseInt(str[0]) * props.ascension;
-    return (
-      <NTag key={`DICE#${props.feature.key}#${offset}`}>
-        {diceCount}
-        {str.slice(1)}
-        {attributeBonus ? ` + ${attributeBonus}` : ''}
-      </NTag>
-    );
-  });
+  description = reactStringReplace(
+    description,
+    /(\dd\d{1,2})/g,
+    (str, _, offset) => {
+      const diceCount = parseInt(str[0]) * props.ascension;
+      return (
+        <NTag key={`DICE#${props.feature.key}#${offset}`}>
+          {diceCount}
+          {str.slice(1)}
+          {attributeBonus ? ` + ${attributeBonus}` : ""}
+        </NTag>
+      );
+    }
+  );
 
   // parse math expression
   description = reactStringReplace(description, /\[(.+?)\]/g, (str) => {
-    str = str.replace('A', props.ascension.toString());
+    str = str.replace("A", props.ascension.toString());
     return eval(str);
   });
 
@@ -150,8 +177,8 @@ const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (props) 
     <div
       style={{
         lineHeight: 1.5,
-        color: 'rgba(255, 255, 255, 0.7)',
-        fontFamily: 'Reddit Sans',
+        color: "rgba(255, 255, 255, 0.7)",
+        fontFamily: "Reddit Sans",
         fontWeight: 300,
       }}
     >

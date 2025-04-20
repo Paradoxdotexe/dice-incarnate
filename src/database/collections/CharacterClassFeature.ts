@@ -4,36 +4,36 @@ import {
   RxCollectionCreator,
   RxDocument,
   RxJsonSchema,
-} from 'rxdb';
+} from "rxdb";
 
 const _characterClassFeatureSchema = {
-  title: 'CharacterClassFeature',
-  description: '',
+  title: "CharacterClassFeature",
+  description: "",
   version: 0,
-  primaryKey: 'key',
-  type: 'object',
+  primaryKey: "key",
+  type: "object",
   properties: {
     key: {
-      type: 'string',
+      type: "string",
       maxLength: 36,
     },
     name: {
-    type: 'string',
+      type: "string",
     },
     description: {
-      type: 'string',
+      type: "string",
     },
     order: {
-      type: 'number',
+      type: "number",
     },
     attributeRequirement: {
-      type: 'number',
+      type: "number",
     },
     ascensionRequirement: {
-      type: 'number',
+      type: "number",
     },
   },
-  required: ['key', 'name', 'description', 'order'],
+  required: ["key", "name", "description", "order"],
 } as const;
 
 export type CharacterClassFeature = ExtractDocumentTypeFromTypedRxJsonSchema<
@@ -45,6 +45,7 @@ const characterClassFeatureSchema: RxJsonSchema<CharacterClassFeature> =
 
 type CharacterClassFeatureMethods = {
   getMana: () => number | undefined;
+  getRuneType: () => string | undefined;
 };
 
 export type CharacterClassFeatureDocument = RxDocument<
@@ -57,6 +58,11 @@ const characterClassFeatureMethods: CharacterClassFeatureMethods = {
     const match = /spend (\d) Mana/g.exec(this.description);
     return match ? parseInt(match[1]) : undefined;
   },
+  getRuneType: function (this: CharacterClassFeatureDocument) {
+    if (this.key.includes("_R")) {
+      return this.key.split("_").at(-1);
+    }
+  },
 };
 
 export type CharacterClassFeatureCollection = RxCollection<
@@ -64,7 +70,8 @@ export type CharacterClassFeatureCollection = RxCollection<
   CharacterClassFeatureMethods
 >;
 
-export const CHARACTER_CLASS_FEATURE_COLLECTION: RxCollectionCreator<CharacterClassFeature> = {
-  schema: characterClassFeatureSchema,
-  methods: characterClassFeatureMethods,
-};
+export const CHARACTER_CLASS_FEATURE_COLLECTION: RxCollectionCreator<CharacterClassFeature> =
+  {
+    schema: characterClassFeatureSchema,
+    methods: characterClassFeatureMethods,
+  };

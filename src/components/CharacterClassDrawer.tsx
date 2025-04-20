@@ -51,8 +51,9 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
         `${attributeName.toUpperCase()} ${feature.attributeRequirement} PERKS`
     );
   } else if (props.class.type === "WEAPON") {
-    featureAreas = groupBy(props.class.features, (feature) =>
-      feature.key.includes("_R") ? `${feature.key.split("_").at(-1)} RUNES` : ""
+    featureAreas = groupBy(
+      props.class.features,
+      (feature) => feature.getRuneType() ?? ""
     );
   } else {
     featureAreas = { "": props.class.features };
@@ -80,10 +81,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
               fontWeight: 500,
             }}
           >
-            {props.class.name}{" "}
-            {props.classState &&
-              props.class.ascendable &&
-              ROMAN_NUMERALS[ascension - 1]}
+            {props.class.getName(props.classState)}
           </div>
 
           {props.class.ascendable && (
