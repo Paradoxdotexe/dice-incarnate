@@ -25,6 +25,7 @@ export const CharacterClassFeatureCard: React.FC<
   const character = useCharacter();
 
   let isLocked = false;
+  // check if locked by attribute requirement
   if (
     character &&
     props.feature.attributeRequirement &&
@@ -34,6 +35,7 @@ export const CharacterClassFeatureCard: React.FC<
       10 + character!.getAttributeBonus(props.class.attributeKey);
     isLocked = props.feature.attributeRequirement > attributeScore;
   }
+  // check if locked by ascension requirement
   if (character && props.feature.ascensionRequirement) {
     if (props.classState) {
       isLocked =
@@ -41,6 +43,10 @@ export const CharacterClassFeatureCard: React.FC<
     } else {
       isLocked = true;
     }
+  }
+  // check if locked by an already-acquired max rune
+  if (!props.isAcquired && !!props.classState?.featureKeys.find(key => key.includes('_R5_')) && props.feature.key.includes('_R5_')) {
+    isLocked = true;
   }
 
   const isAcquirable = props.isAcquirable && !isLocked;
