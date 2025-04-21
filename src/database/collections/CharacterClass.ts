@@ -93,7 +93,7 @@ const characterClassMethods: CharacterClassMethods = {
         const feature = this.features.find(
           (feature) => feature.key === maxRuneKey
         )!;
-        return /This weapon becomes "(.+?)"\./.exec(feature.description)![1];
+        return /becomes "(.+?)"\./.exec(feature.description)![1];
       }
     }
 

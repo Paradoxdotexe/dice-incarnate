@@ -85,7 +85,7 @@ export const CharacterClassCard: React.FC<CharacterClassCardProps> = (
             {props.class.getName(props.classState)}
           </div>
 
-          <NFlex gap={3}>
+          <NFlex gap={3} wrap>
             {props.classState?.featureKeys.map((featureKey) => (
               <CharacterAbilityIcon key={featureKey} color={color} />
             ))}
