@@ -50,7 +50,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
       (feature) =>
         `${attributeName.toUpperCase()} ${feature.attributeRequirement} PERKS`
     );
-  } else if (props.class.type === "WEAPON") {
+  } else if (props.class.type === "WEAPON" || props.class.type === "ARMOR") {
     featureAreas = groupBy(
       props.class.features,
       (feature) => feature.getRuneType() ?? ""

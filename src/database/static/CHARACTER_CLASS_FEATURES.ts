@@ -558,7 +558,8 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'ARMOR_HEAVY_F1',
     name: 'Heavy Armor',
-    description: 'Your Armor Class is increased by [2*A].',
+    description:
+      'Your Armor Class is increased by [2*A] and your Movement Speed is reduced by 5ft.',
     order: 1,
   },
   {
@@ -566,6 +567,199 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     name: 'Soul Steel',
     description: 'You have resistance to Bludgeoning damage.',
     order: 2,
+  },
+  {
+    key: 'WEAPON_HEAVY_R1_STONE',
+    name: 'Rune of Stone Plate',
+    description: 'Your Armor Class is increased by 1.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_HEAVY_R2_STONE',
+    name: 'Rune of Stone Shell',
+    description:
+      'Spend 1 Mana to harden this armor. You have resistance against the next attack that hits you.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_HEAVY_R3_STONE',
+    name: 'Rune of Stone Anchor',
+    description: 'While wearing this armor, you cannot be moved by another creature.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_HEAVY_R4_STONE',
+    name: 'Rune of Stone Charge',
+    description:
+      'Once per Rest, you can turn this armor into solid diamond. Until your next turn, you gain Invulnerability but cannot move.',
+    order: 4,
+    ascensionRequirement: 4,
+  },
+  {
+    key: 'WEAPON_HEAVY_R5_STONE',
+    name: 'Rune of Stone Spines',
+    description:
+      'This armor becomes "Stone Spine". When a creature hits you with a melee attack, this armor deals half the amount of damage back on them as Stone damage.',
+    order: 5,
+    ascensionRequirement: 5,
+  },
+  {
+    key: 'WEAPON_HEAVY_R1_SKY',
+    name: 'Rune of Sky Plate',
+    description: 'This armor no longer reduces your Movement Speed.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_HEAVY_R2_SKY',
+    name: 'Rune of Sky Shell',
+    description:
+      'Spend 1 Mana to imbue this armor with Sky magic. Until your next turn, your movement does not prompt opportunity attacks and your Movement Speed is doubled.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_HEAVY_R3_SKY',
+    name: 'Rune of Sky Anchor',
+    description: 'While wearing this armor, you cannot be knocked Prone.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_HEAVY_R4_SKY',
+    name: 'Rune of Sky Charge',
+    description:
+      'Once per Rest, you can leap 10ft into the air. When you land, all creatures within 5ft take 1d6 Sky damage.',
+    order: 4,
+    ascensionRequirement: 4,
+  },
+  {
+    key: 'WEAPON_HEAVY_R5_SKY',
+    name: 'Rune of Sky Storm',
+    description:
+      'This armor becomes "Sky Storm". When a creature ends its turn within 5ft of you, roll an Agility check. If you hit their WC, they take 1d6 Sky damage and are (optionally) pushed back 5ft.',
+    order: 5,
+    ascensionRequirement: 5,
+  },
+  {
+    key: 'WEAPON_HEAVY_R1_SUN',
+    name: 'Rune of Sun Plate',
+    description: 'Your Ward Class is increased by 1.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_HEAVY_R2_SUN',
+    name: 'Rune of Sun Shell',
+    description:
+      'Spend 1 Mana to blind creatures within 5ft with searing sunlight. Roll a Knowledge check. If you hit their WC, they are Blinded until the end of their next turn.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_HEAVY_R3_SUN',
+    name: 'Rune of Sun Anchor',
+    description: 'While wearing this armor, you can see through illusions created by Moon magic.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_HEAVY_R4_SUN',
+    name: 'Rune of Sun Charge',
+    description:
+      'Once per Rest, you can determine the AC, WC, and HP of all creatures within 15ft.',
+    order: 4,
+    ascensionRequirement: 4,
+  },
+  {
+    key: 'WEAPON_HEAVY_R5_SUN',
+    name: 'Rune of the Sun Seer',
+    description:
+      'This armor becomes "Sun Seer". While wearing this armor, you cannot be Blinded or Flanked.',
+    order: 5,
+    ascensionRequirement: 5,
+  },
+  {
+    key: 'WEAPON_HEAVY_R1_MOON',
+    name: 'Rune of Moon Plate',
+    description:
+      'This armor is rendered invisible until you are first attacked in combat. While your armor is invisible, attacks are guaranteed to miss.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_HEAVY_R2_MOON',
+    name: 'Rune of Moon Shell',
+    description: 'Spend 1 Mana to blur your form. Until you move, you are Obscured.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_HEAVY_R3_MOON',
+    name: 'Rune of Moon Anchor',
+    description:
+      'While wearing this armor, your movement is distorted. Opportunity attacks against you have disadvantage.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_HEAVY_R4_MOON',
+    name: 'Rune of Moon Charge',
+    description:
+      'Once per Rest, you can create a flickering illusion of yourself within 15ft. This illusion has the same AC and WC as you, but only one hit point.',
+    order: 4,
+    ascensionRequirement: 4,
+  },
+  {
+    key: 'WEAPON_HEAVY_R5_MOON',
+    name: 'Rune of Moon Mirage',
+    description:
+      'This amor becomes "Moon Mirage". When your illusion is destroyed, you can immediately create a new one.',
+    order: 5,
+    ascensionRequirement: 5,
+  },
+  {
+    key: 'WEAPON_HEAVY_R1_SPIRIT',
+    name: 'Rune of Spirit Plate',
+    description:
+      'This armor is a bridge between the Spirit Plane and Natural Plane. When you are incapacitated, roll an Instinct check. On a natural 20, you return to 1 hit point.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_HEAVY_R2_SPIRIT',
+    name: 'Rune of Spirit Shell',
+    description:
+      'Spend 1 Mana to imbue this armor with Spirit magic. The next attack against you heals you for half the amount of damage that would have been dealt.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_HEAVY_R3_SPIRIT',
+    name: 'Rune of Spirit Anchor',
+    description:
+      'When you are reduced to 0 hit points, this armor releases a surge of Spirit energy. All enemies within 5ft take 1d12 Spirit damage.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_HEAVY_R4_SPIRIT',
+    name: 'Rune of Spirit Charge',
+    description:
+      'Once per Rest, you can consume the soul of an enemy that dies within 5ft. You heal 1d12 hit points.',
+    order: 4,
+    ascensionRequirement: 4,
+  },
+  {
+    key: 'WEAPON_HEAVY_R5_SPIRIT',
+    name: 'Rune of Spirit Mooring',
+    description:
+      'This armor becomes "Spirit Moor". When you are reduced to 0 hit points for the first time in a combat, you return to 1 hit point with Invulnerability until the end of your next turn.',
+    order: 5,
+    ascensionRequirement: 5,
   },
   {
     key: 'ARMOR_LIGHT_F1',
