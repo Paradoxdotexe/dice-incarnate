@@ -81,7 +81,7 @@ type CharacterMethods = {
 type CharacterDocument = RxDocument<Character, CharacterMethods>;
 
 export const BASE_XP_PER_SHARD = 100;
-export const SHARDS_PER_LEVEL = 5;
+export const SHARDS_PER_LEVEL = 3;
 
 const _sumShards = (classStates: CharacterClassState[]) =>
   classStates.reduce(
@@ -178,9 +178,9 @@ const characterMethods: CharacterMethods = {
     const attributeShards = _sumShards(attributeClassStates);
     const attributeAscension = _sumAscension(attributeClassStates);
 
-    // 2 EXPERIENCE = +1 BONUS
-    // 1 ASCENSION (5 EXPERIENCE) = +2 BONUS
-    return Math.floor(attributeShards / 2 + attributeAscension * 2);
+    // 1 EXPERIENCE = +1 BONUS
+    // 1 ASCENSION = +2 BONUS
+    return Math.floor(attributeShards + attributeAscension * 2);
   },
   getLevel: function (this: CharacterDocument) {
     const shardedExperience = _getShardedExperience(this.experience);

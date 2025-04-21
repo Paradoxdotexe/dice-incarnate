@@ -91,7 +91,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'AGI_GENERAL_F3',
     name: 'Slippery',
-    description: '*Missed me!* Opportunity attacks against you have disadvantage.',
+    description: '*Missed me!* If an enemy misses an attack against you, you can immediately move 5ft without incurring an opportunity attack.',
     order: 5,
     attributeRequirement: 15,
   },
@@ -256,46 +256,46 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     order: 7,
     attributeRequirement: 20,
   },
-  // WIS - Storm Sage
+  // AGI - Storm Sage
   {
-    key: 'WIS_SAGE1_F1',
+    key: 'AGI_SAGE1_F1',
     name: 'Tempest Strike',
     description:
       'Roll a DC 5 Instinct check. On a success, spend 1 Mana to channel wind into a weapon attack. That attack deals an additional 1d12 Sky damage.',
     order: 1,
   },
   {
-    key: 'WIS_SAGE1_F2',
+    key: 'AGI_SAGE1_F2',
     name: 'Tempest Surge',
     description:
       'Roll an Instinct check to surge wind towards a creature within 15ft. If you hit their WC, spend 2 Mana. That creature takes 2d12 Sky damage and is pushed back 15ft.',
     order: 2,
   },
   {
-    key: 'WIS_SAGE1_F3',
+    key: 'AGI_SAGE1_F3',
     name: 'Tempest Storm',
     description:
       'Roll an Instinct check to envelope a creature within 60ft in a wind vortex. If you hit their WC, spend 3 Mana. That creature takes 2d12 Sky damage and loses 1 Mana.',
     order: 3,
   },
   {
-    key: 'WIS_SAGE1_F4',
+    key: 'AGI_SAGE1_F4',
     name: 'Veil of the Storm',
     description:
       'The winds protect you with a swirling barrier. Ranged attacks against you have disadvantage.',
     order: 4,
   },
   {
-    key: 'WIS_SAGE1_F5',
+    key: 'AGI_SAGE1_F5',
     name: 'Grace of the Storm',
     description: 'You fall at half the rate of normal. Your fall damage is reduced by half.',
     order: 5,
   },
   {
-    key: 'WIS_SAGE1_F6',
+    key: 'AGI_SAGE1_F6',
     name: 'Eye of the Storm',
     description:
-      'If you spend 0 Mana three turns in a row, the calm of the wind restores you. You heal gain a Healing Surge.',
+      'If you spend 0 Mana three turns in a row, the calm of the wind restores you. You heal 1d6 hit points.',
     order: 6,
   },
   // WIS - Beast Druid
@@ -717,7 +717,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_HEAVY_R5_MOON',
     name: 'Rune of Moon Mirage',
     description:
-      'This amor becomes "Moon Mirage". When your illusion is destroyed, you can immediately create a new one.',
+      'This armor becomes "Moon Mirage". When your illusion is destroyed, you can immediately create a new one.',
     order: 5,
     ascensionRequirement: 5,
   },

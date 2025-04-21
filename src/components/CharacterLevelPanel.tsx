@@ -21,7 +21,7 @@ export const CharacterLevelPanel: React.FC = () => {
         Incarnate {ROMAN_NUMERALS[character.getLevel() - 1]}
       </div>
       <NFlex gap={3}>
-        {arrayOf(5).map((i) => {
+        {arrayOf(SHARDS_PER_LEVEL).map((i) => {
           const shardCostStart = shardCost * i;
           const fillRatio = Math.min(
             1,
@@ -32,7 +32,7 @@ export const CharacterLevelPanel: React.FC = () => {
               key={i}
               style={{
                 height: 6,
-                width: 60,
+                width: 300 / SHARDS_PER_LEVEL,
                 background: "#707070",
                 borderRadius: 2,
                 position: "relative",
