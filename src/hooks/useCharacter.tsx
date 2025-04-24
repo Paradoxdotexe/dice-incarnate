@@ -16,7 +16,7 @@ export const useCharacter = () => {
         if (count === 0) {
           charactersCollection.insert({
             id: uuid(),
-            experience: 13500,
+            experience: 3000,
             classStates: [],
           });
         }

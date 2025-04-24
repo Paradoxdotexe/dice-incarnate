@@ -102,7 +102,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     order: 6,
     attributeRequirement: 15,
   },
-  // INT - Knowledgable
+  // INT - Knowledgeable
   {
     key: 'INT_GENERAL_F1',
     name: 'Historian',
@@ -303,21 +303,21 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WIS_DRUID1_F1',
     name: 'Attack Beast',
     description:
-      'Roll a DC 5 Instinct check. On a success, spend 1 Mana to command your tamed beast to attack a creature within 30ft. That creature takes 1d12 damage and can be dragged 5ft in any direction.',
+      'Roll an Instinct check to command your beast to attack a creature within 30ft. If you hit their AC, spend 1 Mana. That creature takes 1d12 Piercing damage and can be dragged 5ft in any direction.',
     order: 1,
   },
   {
     key: 'WIS_DRUID1_F2',
     name: 'Guard Beast',
     description:
-      'Roll a DC 10 Instinct check. On a success, spend 2 Mana to command your tamed beast to defend you. The next time you are hit with a melee attack, your tamed beast will deflect 2d12 damage.',
+      'Roll a DC 10 Instinct check to command your beast to defend you. On a success, spend 2 Mana. The next time you are hit with a melee attack, your beast will deflect 2d12 damage.',
     order: 2,
   },
   {
     key: 'WIS_DRUID1_F3',
     name: 'Mercy Beast',
     description:
-      'Roll a DC 15 Instinct check. On a success, spend 3 Mana to command your tamed beast to help an incapacitated creature within 60ft. That creature is stabilized with 3d12 health.',
+      'Roll a DC 15 Instinct check to command your tamed beast to help an incapacitated creature within 60ft. On a success, spend 3 Mana. That creature is stabilized with 3d12 health.',
     order: 3,
   },
   {
