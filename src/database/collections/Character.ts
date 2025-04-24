@@ -4,57 +4,55 @@ import {
   RxCollectionCreator,
   RxDocument,
   RxJsonSchema,
-} from "rxdb";
-import { CharacterAttributeKey } from "./CharacterClass";
-import { flatten, sum } from "lodash-es";
+} from 'rxdb';
+import { CharacterAttributeKey } from './CharacterClass';
+import { flatten, sum } from 'lodash-es';
 
 const _characterSchema = {
-  title: "Character",
-  description: "",
+  title: 'Character',
+  description: '',
   version: 0,
-  primaryKey: "id",
-  type: "object",
+  primaryKey: 'id',
+  type: 'object',
   properties: {
     id: {
-      type: "string",
+      type: 'string',
       maxLength: 36,
     },
     experience: {
-      type: "number",
+      type: 'number',
       minimum: 0,
     },
     classStates: {
-      type: "array",
+      type: 'array',
       items: {
-        type: "object",
+        type: 'object',
         properties: {
           key: {
-            type: "string",
+            type: 'string',
           },
           featureKeys: {
-            type: "array",
+            type: 'array',
             items: {
-              type: "string",
+              type: 'string',
             },
           },
           ascension: {
-            type: "number",
+            type: 'number',
             minimum: 1,
             maximum: 5,
           },
         },
-        required: ["key", "featureKeys", "ascension"],
+        required: ['key', 'featureKeys', 'ascension'],
       },
     },
   },
-  required: ["id", "experience", "classStates"],
+  required: ['id', 'experience', 'classStates'],
 } as const;
 
-type Character = ExtractDocumentTypeFromTypedRxJsonSchema<
-  typeof _characterSchema
->;
+type Character = ExtractDocumentTypeFromTypedRxJsonSchema<typeof _characterSchema>;
 
-export type CharacterClassState = Character["classStates"][number];
+export type CharacterClassState = Character['classStates'][number];
 
 const characterSchema: RxJsonSchema<Character> = _characterSchema;
 
@@ -84,14 +82,24 @@ export const BASE_XP_PER_SHARD = 100;
 export const SHARDS_PER_LEVEL = 3;
 
 const _sumShards = (classStates: CharacterClassState[]) =>
-  classStates.reduce(
-    (shards, classState) => shards + classState.featureKeys.length,
-    0
-  );
+  classStates.reduce((shards, classState) => shards + classState.featureKeys.length, 0);
 
 const _sumAscension = (classStates: CharacterClassState[]) =>
+  classStates.reduce((ascension, classState) => ascension + (classState.ascension - 1), 0);
+
+const ATTRIBUTE_KEY_TO_RUNE_KEY = {
+  STR: 'STONE',
+  AGI: 'SKY',
+  INT: 'SUN',
+  CHA: 'MOON',
+  WIS: 'SPIRIT',
+};
+
+const _sumRunes = (classStates: CharacterClassState[], runeKey: string) =>
   classStates.reduce(
-    (ascension, classState) => ascension + (classState.ascension - 1),
+    (runes, classState) =>
+      runes +
+      classState.featureKeys.filter((key) => key.includes('_R') && key.endsWith(runeKey)).length,
     0
   );
 
@@ -135,11 +143,7 @@ const characterMethods: CharacterMethods = {
   getClassState: function (this: CharacterDocument, classKey: string) {
     return this.classStates.find((classState) => classState.key === classKey);
   },
-  acquireClassTrait: function (
-    this: CharacterDocument,
-    classKey: string,
-    featureKey: string
-  ) {
+  acquireClassTrait: function (this: CharacterDocument, classKey: string, featureKey: string) {
     this.modify((character) => {
       const patchedClassStates = structuredClone(this.classStates);
       let classState = patchedClassStates.find((ccs) => ccs.key == classKey);
@@ -168,19 +172,21 @@ const characterMethods: CharacterMethods = {
       return { ...character, classStates: patchedClassStates };
     });
   },
-  getAttributeBonus: function (
-    this: CharacterDocument,
-    attributeKey: CharacterAttributeKey
-  ) {
+  getAttributeBonus: function (this: CharacterDocument, attributeKey: CharacterAttributeKey) {
     const attributeClassStates = this.classStates.filter(
       (classState) => classState.key.slice(0, 3) === attributeKey
     );
     const attributeShards = _sumShards(attributeClassStates);
     const attributeAscension = _sumAscension(attributeClassStates);
 
+    const runicClassStates = this.classStates.filter(
+      (classState) => classState.key.startsWith('WEAPON') || classState.key.startsWith('ARMOR')
+    );
+    const runicShards = _sumRunes(runicClassStates, ATTRIBUTE_KEY_TO_RUNE_KEY[attributeKey]);
+
     // 1 EXPERIENCE = +1 BONUS
     // 1 ASCENSION = +2 BONUS
-    return Math.floor(attributeShards + attributeAscension * 2);
+    return Math.floor(attributeShards + runicShards + attributeAscension * 2);
   },
   getLevel: function (this: CharacterDocument) {
     const shardedExperience = _getShardedExperience(this.experience);
@@ -188,9 +194,7 @@ const characterMethods: CharacterMethods = {
   },
   getLevelExperience: function (this: CharacterDocument) {
     const shardedExperience = _getShardedExperience(this.experience);
-    const pastLevelExperience = sum(
-      flatten(shardedExperience.slice(0, this.getLevel() - 1))
-    );
+    const pastLevelExperience = sum(flatten(shardedExperience.slice(0, this.getLevel() - 1)));
     return this.experience - pastLevelExperience;
   },
   getLevelShardCost: function (this: CharacterDocument) {
