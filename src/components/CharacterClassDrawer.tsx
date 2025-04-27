@@ -35,7 +35,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
   const color = props.class.color;
 
   const ascension = props.classState?.ascension ?? 1;
-  const maxAscension = props.class.type === "CLASS" ? 3 : 5;
+  const maxAscension = props.class.type === "ARMOR" ? 5 : 3;
   const isMaxAscension = ascension === maxAscension;
 
   let featureAreas: { [area: string]: CharacterClassFeatureDocument[] } = {};

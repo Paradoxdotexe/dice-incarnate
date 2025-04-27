@@ -91,14 +91,16 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'AGI_GENERAL_F3',
     name: 'Slippery',
-    description: '*Missed me!* If an enemy misses an attack against you, you can immediately move 5ft without incurring an opportunity attack.',
+    description:
+      '*Missed me!* If an enemy misses an attack against you, you can immediately move 5ft without incurring an opportunity attack.',
     order: 5,
     attributeRequirement: 15,
   },
   {
     key: 'AGI_GENERAL_F6',
     name: 'Quick Draw',
-    description: '*Too slow!* You can draw your weapon on the first turn of combat for 0 Mana.',
+    description:
+      '*Too slow!* You can draw your weapon on the first turn of combat without an Action.',
     order: 6,
     attributeRequirement: 15,
   },
@@ -256,88 +258,405 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     order: 7,
     attributeRequirement: 20,
   },
-  // AGI - Storm Sage
   {
-    key: 'AGI_SAGE1_F1',
-    name: 'Tempest Strike',
+    key: 'STR_KNIGHT_F1',
+    name: 'Valiant Duel',
     description:
-      'Roll a DC 5 Instinct check. On a success, spend 1 Mana to channel wind into a weapon attack. That attack deals an additional 1d12 Sky damage.',
+      'Roll a DC 5 Strength check to compel a creature within 5ft to duel. On a success, spend 1 Mana. That creature can only attack you on their next turn and attacks with disadvantage.',
     order: 1,
   },
   {
-    key: 'AGI_SAGE1_F2',
+    key: 'STR_KNIGHT_F2',
+    name: 'Valiant Defense',
+    description:
+      'Roll a DC 10 Strength check as a Reaction to parry an incoming melee attack. On a success, spend 2 Mana. You deflect 2d12 damage.',
+    order: 2,
+  },
+  {
+    key: 'STR_KNIGHT_F3',
+    name: 'Valiant Charge',
+    description:
+      'Roll a Strength check to charge a creature within 5ft. If you hit their AC, spend 3 Mana. That creature takes 3d12 Bludgeoning damage, is pushed back 5ft, and is knocked Prone.',
+    order: 3,
+  },
+  {
+    key: 'STR_KNIGHT_F4',
+    name: 'Armor Training',
+    description: 'While wearing Heavy or Light Armor, your Armor Class is increased by [A].',
+    order: 4,
+  },
+  {
+    key: 'STR_KNIGHT_F5',
+    name: 'Martial Training',
+    description: 'Your melee attacks deal an additional 1d6 damage.',
+    order: 5,
+  },
+  {
+    key: 'STR_KNIGHT_F6',
+    name: 'Leadership Training',
+    description: 'All allies within 5ft have advantage on attack rolls.',
+    order: 6,
+  },
+  {
+    key: 'STR_BARBARIAN_F1',
+    name: 'Blood Havoc',
+    description:
+      'Roll a Strength check to grab and throw a chunk of earth or structure at a creature within 15ft. If you hit their AC, spend 1 Mana. That creature takes 1d12 Bludgeoning damage.',
+    order: 1,
+  },
+  {
+    key: 'STR_BARBARIAN_F2',
+    name: 'Blood Rage',
+    description:
+      'Roll a DC 10 Strength check to enter a rage. On a success, spend 2 Mana. Until the end of your next turn, your melee attacks deal an additional 1d12 Bludgeoning damage.',
+    order: 2,
+  },
+  {
+    key: 'STR_BARBARIAN_F3',
+    name: 'Blood Frenzy',
+    description:
+      'Roll a DC 15 Strength check to enter a frenzy. On a success, spend 3 Mana. Your Movement Speed is doubled, you gain three Actions, and your melee attacks deal max damage.',
+    order: 3,
+  },
+  {
+    key: 'STR_BARBARIAN_F4',
+    name: 'Unescapable',
+    description: 'Your range for opportunity attacks is extended to 10ft.',
+    order: 4,
+  },
+  {
+    key: 'STR_BARBARIAN_F5',
+    name: 'Unkillable',
+    description: 'Your hit points is increased by [10*A].',
+    order: 5,
+  },
+  {
+    key: 'STR_BARBARIAN_F6',
+    name: 'Unstoppable',
+    description: 'When you are Bloodied, your melee attacks have advantage.',
+    order: 6,
+  },
+  {
+    key: 'AGI_SAGE_F1',
+    name: 'Tempest Strike',
+    description:
+      'Roll a DC 5 Instinct check to channel wind into a weapon attack. On a success, spend 1 Mana. That attack deals an additional 1d12 Sky damage.',
+    order: 1,
+  },
+  {
+    key: 'AGI_SAGE_F2',
     name: 'Tempest Surge',
     description:
       'Roll an Instinct check to surge wind towards a creature within 15ft. If you hit their WC, spend 2 Mana. That creature takes 2d12 Sky damage and is pushed back 15ft.',
     order: 2,
   },
   {
-    key: 'AGI_SAGE1_F3',
+    key: 'AGI_SAGE_F3',
     name: 'Tempest Storm',
     description:
-      'Roll an Instinct check to envelope a creature within 60ft in a wind vortex. If you hit their WC, spend 3 Mana. That creature takes 2d12 Sky damage and loses 1 Mana.',
+      'Roll an Instinct check to envelope a creature within 60ft in a wind vortex. If you hit their WC, spend 3 Mana. That creature takes 2d12 Sky damage, loses 1 Mana, and is Blinded until your next turn.',
     order: 3,
   },
   {
-    key: 'AGI_SAGE1_F4',
+    key: 'AGI_SAGE_F4',
     name: 'Veil of the Storm',
     description:
       'The winds protect you with a swirling barrier. Ranged attacks against you have disadvantage.',
     order: 4,
   },
   {
-    key: 'AGI_SAGE1_F5',
+    key: 'AGI_SAGE_F5',
     name: 'Grace of the Storm',
     description: 'You fall at half the rate of normal. Your fall damage is reduced by half.',
     order: 5,
   },
   {
-    key: 'AGI_SAGE1_F6',
+    key: 'AGI_SAGE_F6',
     name: 'Eye of the Storm',
     description:
       'If you spend 0 Mana three turns in a row, the calm of the wind restores you. You heal 1d6 hit points.',
     order: 6,
   },
-  // WIS - Beast Druid
   {
-    key: 'WIS_DRUID1_F1',
+    key: 'AGI_RANGER_F1',
+    name: "Hunter's Mark",
+    description:
+      'Roll a DC 5 Agility check to mark a creature within 60ft as your quarry. On a success, spend 1 Mana. Until that creature is dead, your ranged attacks against them deal an additional 1d6 Sky damage.',
+    order: 1,
+  },
+  {
+    key: 'AGI_RANGER_F2',
+    name: "Hunter's Headshot",
+    description:
+      'Roll an Agility check to focus a ranged attack against a creature within range. On a success, spend 2 Mana. That creature takes 2d12 Sky damage.',
+    order: 2,
+  },
+  {
+    key: 'AGI_RANGER_F3',
+    name: "Hunter's Barrage",
+    description:
+      'Roll a DC 15 Agility check to knock your bow with multiple arrows. On a success, spend 3 Mana. You gain four Actions and your ranged attacks are guaranteed to hit.',
+    order: 3,
+  },
+  {
+    key: 'AGI_RANGER_F4',
+    name: 'Survival Shelter',
+    description:
+      'When resting in an Adventuring Camp, you get the bonus of Simple Lodging. You can lend this bonus to one other creature.',
+    order: 4,
+  },
+  {
+    key: 'AGI_RANGER_F5',
+    name: 'Survival Tonic',
+    description:
+      'Once per Rest, you can boost your senses temporarily. You have advantage on Agility and Instinct checks for the next 10 minutes.',
+    order: 5,
+  },
+  {
+    key: 'AGI_RANGER_F6',
+    name: 'Survival Salve',
+    description: 'Once per Rest, you can heal you or another creature 1d12 hit points.',
+    order: 6,
+  },
+  {
+    key: 'INT_MAGE_F1',
+    name: 'Solar Shield',
+    description:
+      'Roll a DC 5 Knowledge check to create a magical shield around you or another creature within 30ft. On a success, spend 1 Mana. The shield deflects 1d12 damage from the next attack against the creature.',
+    order: 1,
+  },
+  {
+    key: 'INT_MAGE_F2',
+    name: 'Solar Ward',
+    description:
+      "Roll a DC 10 Knowledge check to create a magical barrier around you or another creature within 30ft. On a success, spend 2 Mana. The barrier increases the creature's AC by 2 and WC by 4 until the end of combat.",
+    order: 2,
+  },
+  {
+    key: 'INT_MAGE_F3',
+    name: 'Solar Sanctum',
+    description:
+      'Roll a DC 15 Knowledge check to create a magical dome around you with a 10ft radius. On a success, spend 3 Mana. The dome prevents all magic except yours from passing through it. It dissipates after you move.',
+    order: 3,
+  },
+  {
+    key: 'INT_MAGE_F4',
+    name: 'Gift of Light',
+    description: "You start combat with two additional Mana if you're in direct sunlight.",
+    order: 4,
+  },
+  {
+    key: 'INT_MAGE_F5',
+    name: 'Tether of Light',
+    description:
+      'If a creature being shielded by you is incapacitated, you can attempt to stabilize them from wherever you are.',
+    order: 5,
+  },
+  {
+    key: 'INT_MAGE_F6',
+    name: 'Warmth of Light',
+    description:
+      'If your Solar Sanctum contains no enemies on your turn, all allies within it heal 1d6 hit points.',
+    order: 6,
+  },
+  {
+    key: 'INT_MANCER_F1',
+    name: 'Arcane Grenade',
+    description:
+      'Roll a DC 5 Knowledge check to construct and throw a magical grenade up to 30ft. On a success, spend 1 Mana. The grenade deals 1d6 Sun damage to all creatures within 5ft.',
+    order: 1,
+  },
+  {
+    key: 'INT_MANCER_F2',
+    name: 'Arcane Turret',
+    description:
+      'Roll a DC 10 Knowledge check to construct a magical turret. On a success, spend 2 Mana. On your turn, the turret can deal 1d12 Sun damage to a creature within 15ft. It has an AC and WC of 15 and deconstructs after taking 1 damage.',
+    order: 2,
+  },
+  {
+    key: 'INT_MANCER_F3',
+    name: 'Arcane Automaton',
+    description:
+      'Roll a DC 15 Knowledge check to construct a magical automaton. On a success, spend 3 Mana. On your turn, the automaton can move 15ft and deal 1d12 Sun damage to a creature within 5ft. It has an AC and WC of 20 and deconstructs after taking 1 damage.',
+    order: 3,
+  },
+  {
+    key: 'INT_MANCER_F4',
+    name: 'Grappler Blueprint',
+    description:
+      'Once per Rest, you can construct a magical grappling line that can ascend a creature up to 60ft.',
+    order: 4,
+  },
+  {
+    key: 'INT_MANCER_F5',
+    name: 'Drone Blueprint',
+    description:
+      'Once per Rest, you can construct a magical floating drone. You can see and hear through the drone up to 120ft away. It requires a DC 20 Instinct check to detect.',
+    order: 5,
+  },
+  {
+    key: 'INT_MANCER_F6',
+    name: 'Masterkey Blueprint',
+    description: 'Once per Rest, you can construct a magical key that can open any lock.',
+    order: 6,
+  },
+  {
+    key: 'CHA_HERALD_F1',
+    name: 'Voice of Power',
+    description:
+      "Roll a DC 5 Charisma check to empower an ally within 30ft. On a success, spend 1 Mana. On that ally's next attack, they deal an additional 1d12 damage.",
+    order: 1,
+  },
+  {
+    key: 'CHA_HERALD_F2',
+    name: 'Voice of Inspiration',
+    description:
+      'Roll a DC 10 Charisma check to inspire an ally within 30ft. On a success, spend 2 Mana. That ally gains 2 Mana.',
+    order: 2,
+  },
+  {
+    key: 'CHA_HERALD_F3',
+    name: 'Voice of Command',
+    description:
+      'Roll a DC 15 Charisma check to command an ally within 30ft. On a success, spend 3 Mana. On their next turn, that ally gains four Actions that have advantage.',
+    order: 3,
+  },
+  {
+    key: 'CHA_HERALD_F4',
+    name: 'Diplomatic Relations',
+    description: 'You have advantage on Charisma and Instinct checks to diffuse conflict.',
+    order: 4,
+  },
+  {
+    key: 'CHA_HERALD_F5',
+    name: 'Diplomatic Immunity',
+    description: 'Before you attack in combat, all attacks against you have disadvantage.',
+    order: 5,
+  },
+  {
+    key: 'CHA_HERALD_F6',
+    name: 'Diplomatic Security',
+    description: 'All allies within 5ft deal an additional 1d6 damage on melee attacks.',
+    order: 6,
+  },
+  {
+    key: 'CHA_CHANTER_F1',
+    name: 'Mind Charm',
+    description:
+      'Roll a Charisma check to charm up to two creatures within 15ft. If you hit their WC, spend 1 Mana. Until the end of their next turn, those creatures regard you as an ally.',
+    order: 1,
+  },
+  {
+    key: 'CHA_CHANTER_F2',
+    name: 'Mind Cloud',
+    description:
+      'Roll a Charisma check to confuse a creature within 15ft. If you hit their WC, spend 2 Mana. Until the end of their next turn, that creature is Blinded and cannot move.',
+    order: 2,
+  },
+  {
+    key: 'CHA_CHANTER_F3',
+    name: 'Mind Wither',
+    description:
+      'Roll a Charisma check to wither the mind of a creature within 15ft. If you hit their WC, spend 3 Mana. That creature takes 3d12 Moon damage.',
+    order: 3,
+  },
+  {
+    key: 'CHA_CHANTER_F4',
+    name: 'Thoughts of Truth',
+    description: 'Once per Rest, you can steal one truth from the mind of a creature within 5ft.',
+    order: 4,
+  },
+  {
+    key: 'CHA_CHANTER_F5',
+    name: 'Thoughts of Unity',
+    description:
+      'You can form a mind link between you and up to five other creatures, allowing the group to communicate telepathically.',
+    order: 5,
+  },
+  {
+    key: 'CHA_CHANTER_F6',
+    name: 'Thoughts of Death',
+    description: 'When you use Mind Wither, you heal 1d12 hit points.',
+    order: 6,
+  },
+  {
+    key: 'WIS_DRUID_F1',
     name: 'Attack Beast',
     description:
       'Roll an Instinct check to command your beast to attack a creature within 30ft. If you hit their AC, spend 1 Mana. That creature takes 1d12 Piercing damage and can be dragged 5ft in any direction.',
     order: 1,
   },
   {
-    key: 'WIS_DRUID1_F2',
+    key: 'WIS_DRUID_F2',
     name: 'Guard Beast',
     description:
       'Roll a DC 10 Instinct check to command your beast to defend you. On a success, spend 2 Mana. The next time you are hit with a melee attack, your beast will deflect 2d12 damage.',
     order: 2,
   },
   {
-    key: 'WIS_DRUID1_F3',
+    key: 'WIS_DRUID_F3',
     name: 'Mercy Beast',
     description:
-      'Roll a DC 15 Instinct check to command your tamed beast to help an incapacitated creature within 60ft. On a success, spend 3 Mana. That creature is stabilized with 3d12 health.',
+      'Roll a DC 15 Instinct check to command your beast to help an incapacitated creature within 60ft. On a success, spend 3 Mana. That creature is stabilized with 3d12 health.',
     order: 3,
   },
   {
-    key: 'WIS_DRUID1_F4',
+    key: 'WIS_DRUID_F4',
     name: 'Beast Speech',
     description:
       'You can communicate with beasts through their unique visual and auditory cues. You are effectively limited to single words or basic phrases, such as "threat" or "go that way".',
     order: 4,
   },
   {
-    key: 'WIS_DRUID1_F5',
+    key: 'WIS_DRUID_F5',
     name: 'Beast Sight',
-    description: 'You can look through the eyes of your tamed beast while they are within 120ft.',
+    description: 'You can look through the eyes of your beast while they are within 120ft.',
     order: 5,
   },
   {
-    key: 'WIS_DRUID1_F6',
+    key: 'WIS_DRUID_F6',
     name: 'Beast Shape',
     description:
-      'You can transform into the same animal as your tamed beast for up to 1 hour. You can only do this once per Rest.',
+      'You can transform into the same animal as your beast for up to 1 hour. You can only do this once per Rest.',
+    order: 6,
+  },
+  {
+    key: 'WIS_MONK_F1',
+    name: 'Force Deflection',
+    description:
+      'Roll a DC 5 Instinct check as a Reaction to deflect an incoming attack. On a success, spend 1 Mana. You deflect 1d12 damage.',
+    order: 1,
+  },
+  {
+    key: 'WIS_MONK_F2',
+    name: 'Force Absorption',
+    description:
+      'Roll a DC 10 Instinct check as a Reaction to absorb the energy of an incoming attack. On a success, spend 2 Mana. You absorb up to 2d12 or 4d6 damage dice and can add that damage dice to your next attack.',
+    order: 2,
+  },
+  {
+    key: 'WIS_MONK_F3',
+    name: 'Force Meditation',
+    description:
+      'Roll a DC 15 Instinct check to meditate while at least 60ft away from the nearest enemy. On a success, spend 3 Mana. You heal 3d12 hit points.',
+    order: 3,
+  },
+  {
+    key: 'WIS_MONK_F4',
+    name: 'Mastery of Body',
+    description: 'When you forgo an Action, gain a Reaction.',
+    order: 4,
+  },
+  {
+    key: 'WIS_MONK_F5',
+    name: 'Mastery of Mind',
+    description: 'When you forgo two Actions, gain 1 Mana.',
+    order: 5,
+  },
+  {
+    key: 'WIS_MONK_F6',
+    name: 'Mastery of Soul',
+    description: 'When you are healed, you heal an additional 1d6 hit points.',
     order: 6,
   },
   {
