@@ -77,7 +77,7 @@ function App() {
               <NFlex key={attribute.key} gap={ROW_GAP}>
                 <CharacterAttributeScore
                   attribute={attribute}
-                  score={10 + character.getAttributeBonus(attribute.key)}
+                  score={10 + character.getAttributeBonus(attribute.key!)}
                 />
                 {attributeClasses.map((cc) => {
                   const classState = character.getClassState(cc.key);

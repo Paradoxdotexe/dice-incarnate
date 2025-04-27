@@ -347,14 +347,14 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'AGI_SAGE_F2',
     name: 'Tempest Surge',
     description:
-      'Roll an Instinct check to surge wind towards a creature within 15ft. If you hit their WC, spend 2 Mana. That creature takes 2d12 Sky damage and is pushed back 15ft.',
+      'Roll an Instinct check to surge wind towards a creature within 15ft. If you hit their MC, spend 2 Mana. That creature takes 2d12 Sky damage and is pushed back 15ft.',
     order: 2,
   },
   {
     key: 'AGI_SAGE_F3',
     name: 'Tempest Storm',
     description:
-      'Roll an Instinct check to envelope a creature within 60ft in a wind vortex. If you hit their WC, spend 3 Mana. That creature takes 2d12 Sky damage, loses 1 Mana, and is Blinded until your next turn.',
+      'Roll an Instinct check to envelope a creature within 60ft in a wind vortex. If you hit their MC, spend 3 Mana. That creature takes 2d12 Sky damage, loses 1 Mana, and is Blinded until your next turn.',
     order: 3,
   },
   {
@@ -429,7 +429,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'INT_MAGE_F2',
     name: 'Solar Ward',
     description:
-      "Roll a DC 10 Knowledge check to create a magical barrier around you or another creature within 30ft. On a success, spend 2 Mana. The barrier increases the creature's AC by 2 and WC by 4 until the end of combat.",
+      "Roll a DC 10 Knowledge check to create a magical barrier around you or another creature within 30ft. On a success, spend 2 Mana. The barrier increases the creature's AC by 2 and MC by 4 until the end of combat.",
     order: 2,
   },
   {
@@ -470,14 +470,14 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'INT_MANCER_F2',
     name: 'Arcane Turret',
     description:
-      'Roll a DC 10 Knowledge check to construct a magical turret. On a success, spend 2 Mana. On your turn, the turret can deal 1d12 Sun damage to a creature within 15ft. It has an AC and WC of 15 and deconstructs after taking 1 damage.',
+      'Roll a DC 10 Knowledge check to construct a magical turret. On a success, spend 2 Mana. On your turn, the turret can deal 1d12 Sun damage to a creature within 15ft. It has an AC and MC of 15 and deconstructs after taking 1 damage.',
     order: 2,
   },
   {
     key: 'INT_MANCER_F3',
     name: 'Arcane Automaton',
     description:
-      'Roll a DC 15 Knowledge check to construct a magical automaton. On a success, spend 3 Mana. On your turn, the automaton can move 15ft and deal 1d12 Sun damage to a creature within 5ft. It has an AC and WC of 20 and deconstructs after taking 1 damage.',
+      'Roll a DC 15 Knowledge check to construct a magical automaton. On a success, spend 3 Mana. On your turn, the automaton can move 15ft and deal 1d12 Sun damage to a creature within 5ft. It has an AC and MC of 20 and deconstructs after taking 1 damage.',
     order: 3,
   },
   {
@@ -543,21 +543,21 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'CHA_CHANTER_F1',
     name: 'Mind Charm',
     description:
-      'Roll a Charisma check to charm up to two creatures within 15ft. If you hit their WC, spend 1 Mana. Until the end of their next turn, those creatures regard you as an ally.',
+      'Roll a Charisma check to charm up to two creatures within 15ft. If you hit their MC, spend 1 Mana. Until the end of their next turn, those creatures regard you as an ally.',
     order: 1,
   },
   {
     key: 'CHA_CHANTER_F2',
     name: 'Mind Cloud',
     description:
-      'Roll a Charisma check to confuse a creature within 15ft. If you hit their WC, spend 2 Mana. Until the end of their next turn, that creature is Blinded and cannot move.',
+      'Roll a Charisma check to confuse a creature within 15ft. If you hit their MC, spend 2 Mana. Until the end of their next turn, that creature is Blinded and cannot move.',
     order: 2,
   },
   {
     key: 'CHA_CHANTER_F3',
     name: 'Mind Wither',
     description:
-      'Roll a Charisma check to wither the mind of a creature within 15ft. If you hit their WC, spend 3 Mana. That creature takes 3d12 Moon damage.',
+      'Roll a Charisma check to wither the mind of a creature within 15ft. If you hit their MC, spend 3 Mana. That creature takes 3d12 Moon damage.',
     order: 3,
   },
   {
@@ -692,7 +692,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R4_STONE',
     name: 'Rune of Stone Surge',
     description:
-      'Once per Rest, you can roll a Strength check to shatter the earth under all creatures within 5ft. If you hit their WC, they take 1d12 Stone damage and are knocked Prone.',
+      'Once per Rest, you can roll a Strength check to shatter the earth under all creatures within 5ft. If you hit their MC, they take 1d12 Stone damage and are knocked Prone.',
     order: 4,
     ascensionRequirement: 4,
   },
@@ -730,7 +730,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R4_SKY',
     name: 'Rune of Sky Surge',
     description:
-      'Once per Rest, you can roll an Agility check to burst forward up to 30ft. If you hit the WC of any creatures in your path, they take 1d12 Sky damage and are knocked Prone.',
+      'Once per Rest, you can roll an Agility check to burst forward up to 30ft. If you hit the MC of any creatures in your path, they take 1d12 Sky damage and are knocked Prone.',
     order: 4,
     ascensionRequirement: 4,
   },
@@ -809,7 +809,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R4_MOON',
     name: 'Rune of Moon Surge',
     description:
-      'Once per Rest, you can roll a DC 15 Charisma check to reappear behind a creature within 15ft. If you hit their WC, the take 1d12 Moon damage.',
+      'Once per Rest, you can roll a DC 15 Charisma check to reappear behind a creature within 15ft. If you hit their MC, the take 1d12 Moon damage.',
     order: 4,
     ascensionRequirement: 4,
   },
@@ -960,14 +960,14 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_HEAVY_R5_SKY',
     name: 'Rune of Sky Storm',
     description:
-      'This armor becomes "Sky Storm". When a creature ends its turn within 5ft of you, roll an Agility check. If you hit their WC, they take 1d6 Sky damage and are (optionally) pushed back 5ft.',
+      'This armor becomes "Sky Storm". When a creature ends its turn within 5ft of you, roll an Agility check. If you hit their MC, they take 1d6 Sky damage and are (optionally) pushed back 5ft.',
     order: 5,
     ascensionRequirement: 5,
   },
   {
     key: 'WEAPON_HEAVY_R1_SUN',
     name: 'Rune of Sun Plate',
-    description: 'Your Ward Class is increased by 1.',
+    description: 'Your Magic Class is increased by 1.',
     order: 1,
     ascensionRequirement: 1,
   },
@@ -975,7 +975,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_HEAVY_R2_SUN',
     name: 'Rune of Sun Shell',
     description:
-      'Spend 1 Mana to blind creatures within 5ft with searing sunlight. Roll a Knowledge check. If you hit their WC, they are Blinded until the end of their next turn.',
+      'Spend 1 Mana to blind creatures within 5ft with searing sunlight. Roll a Knowledge check. If you hit their MC, they are Blinded until the end of their next turn.',
     order: 2,
     ascensionRequirement: 2,
   },
@@ -990,7 +990,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_HEAVY_R4_SUN',
     name: 'Rune of Sun Charge',
     description:
-      'Once per Rest, you can determine the AC, WC, and HP of all creatures within 15ft.',
+      'Once per Rest, you can determine the AC, MC, and HP of all creatures within 15ft.',
     order: 4,
     ascensionRequirement: 4,
   },
@@ -1029,7 +1029,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_HEAVY_R4_MOON',
     name: 'Rune of Moon Charge',
     description:
-      'Once per Rest, you can create a flickering illusion of yourself within 15ft. This illusion has the same AC and WC as you, but only one hit point.',
+      'Once per Rest, you can create a flickering illusion of yourself within 15ft. This illusion has the same AC and MC as you, but only one hit point.',
     order: 4,
     ascensionRequirement: 4,
   },
@@ -1089,7 +1089,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'ARMOR_LIGHT_F2',
     name: 'Simple Ward',
-    description: 'Your Ward Class is increased by [A].',
+    description: 'Your Magic Class is increased by [A].',
     order: 2,
   },
   {
@@ -1101,7 +1101,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'ARMOR_NONE_F1',
     name: 'Supreme Ward',
-    description: 'Your Ward Class is increased by [2*A].',
+    description: 'Your Magic Class is increased by [2*A].',
     order: 1,
   },
   {
