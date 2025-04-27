@@ -21,7 +21,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'STR_GENERAL_F4',
     name: 'Pack Mule',
-    description: '*Let me carry that for you!* Your carrying capacity is doubled.',
+    description: '*You never know!* You can carry a second weapon and armor.',
     order: 3,
     attributeRequirement: 10,
   },
