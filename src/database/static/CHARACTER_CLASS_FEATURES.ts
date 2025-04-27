@@ -800,7 +800,8 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'WEAPON_SWORD_R3_MOON',
     name: 'Rune of Moon Stance',
-    description: 'While wielding this weapon, opportunity attacks against you have disadvantage.',
+    description:
+      'While wielding this weapon, you can parry an incoming attack with an illusion. As a Reaction, give an incoming melee attack disadvantage.',
     order: 3,
     ascensionRequirement: 3,
   },
@@ -816,7 +817,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R5_MOON',
     name: 'Rune of Moon Shadow',
     description:
-      'This weapon becomes "Moon Shadow". As an Action, you can render yourself partially invisible. Until you move, you are Obscured.',
+      'This weapon becomes "Moon Shadow". After landing an attack with this weapon, you become Obscured until you deal or take damage.',
     order: 5,
     ascensionRequirement: 5,
   },
@@ -832,7 +833,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R2_SPIRIT',
     name: 'Rune of Spirit Smite',
     description:
-      'Spend 1 Mana to imbue this weapon with Spirit magic. Your next attack deals Spirit damage instead of Slashing damage. If you kill a creature with this attack, you gain Invulnerability for one round.',
+      'Spend 1 Mana to imbue this weapon with Spirit magic. Your next attack deals Spirit damage instead of Slashing damage. If you kill a creature with this attack, you gain Invulnerability until your next turn.',
     order: 2,
     ascensionRequirement: 2,
   },
@@ -1043,8 +1044,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'WEAPON_HEAVY_R1_SPIRIT',
     name: 'Rune of Spirit Plate',
-    description:
-      'This armor is a bridge between the Spirit Plane and Natural Plane. When you are incapacitated, roll an Instinct check. On a natural 20, you return to 1 hit point.',
+    description: 'You have advantage on injury rolls.',
     order: 1,
     ascensionRequirement: 1,
   },
@@ -1076,7 +1076,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_HEAVY_R5_SPIRIT',
     name: 'Rune of Spirit Mooring',
     description:
-      'This armor becomes "Spirit Moor". When you are reduced to 0 hit points for the first time in a combat, you return to 1 hit point with Invulnerability until the end of your next turn.',
+      'This armor becomes "Spirit Moor". When you are incapacitated for the first time in combat, you stabilize with 1 hit point and gain Invulnerability until the end of your next turn.',
     order: 5,
     ascensionRequirement: 5,
   },

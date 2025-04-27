@@ -1,29 +1,29 @@
 const input = `
-Heavy	Stone	1	Rune of Stone Plate	Your Armor Class is increased by 1.
-Heavy	Stone	2	Rune of Stone Shell	Spend 1 Mana to harden this armor. You have resistance against the next attack that hits you.
-Heavy	Stone	3	Rune of Stone Anchor	While wearing this armor, you cannot be moved by another creature.
-Heavy	Stone	4	Rune of Stone Charge	Once per Rest, you can turn this armor into solid diamond. Until your next turn, you gain Invulnerability but cannot move.
-Heavy	Stone	5	Rune of Stone Spines	This armor becomes "Stone Spine". When a creature hits you with a melee attack, this armor deals half the amount of damage back on them as Stone damage.
-Heavy	Sky	1	Rune of Sky Plate	This armor no longer reduces your Movement Speed.
-Heavy	Sky	2	Rune of Sky Shell	Spend 1 Mana to imbue this armor with Sky magic. Until your next turn, your movement does not prompt opportunity attacks and your Movement Speed is doubled.
-Heavy	Sky	3	Rune of Sky Anchor	While wearing this armor, you cannot be knocked Prone.
-Heavy	Sky	4	Rune of Sky Charge	Once per Rest, you can leap 10ft into the air. When you land, all creatures within 5ft take 1d6 Sky damage.
-Heavy	Sky	5	Rune of Sky Storm	This armor becomes "Sky Storm". When a creature ends its turn within 5ft of you, roll an Agility check. If you hit their WC, they take 1d6 Sky damage and are (optionally) pushed back 5ft.
-Heavy	Sun	1	Rune of Sun Plate	Your Ward Class is increased by 1.
-Heavy	Sun	2	Rune of Sun Shell	Spend 1 Mana to blind creatures within 5ft with searing sunlight. Roll a Knowledge check. If you hit their WC, they are Blinded until the end of their next turn.
-Heavy	Sun	3	Rune of Sun Anchor	While wearing this armor, you can see through illusions created by Moon magic.
-Heavy	Sun	4	Rune of Sun Charge	Once per Rest, you can determine the AC, WC, and HP of all creatures within 15ft.
-Heavy	Sun	5	Rune of the Sun Seer	This armor becomes "Sun Seer". While wearing this armor, you cannot be Blinded or Flanked.
-Heavy	Moon	1	Rune of Moon Plate	This armor is rendered invisible until you are first attacked in combat. While your armor is invisible, attacks are guaranteed to miss.
-Heavy	Moon	2	Rune of Moon Shell	Spend 1 Mana to blur your form. Until you move, you are Obscured.
-Heavy	Moon	3	Rune of Moon Anchor	While wearing this armor, your movement is distorted. Opportunity attacks against you have disadvantage.
-Heavy	Moon	4	Rune of Moon Charge	Once per Rest, you can create a flickering illusion of yourself within 15ft. This illusion has the same AC and WC as you, but only one hit point.
-Heavy	Moon	5	Rune of Moon Mirage	This amor becomes "Moon Mirage". When your illusion is destroyed, you can immediately create a new one.
-Heavy	Spirit	1	Rune of Spirit Plate	This armor is a bridge between the Spirit Plane and Natural Plane. When you are incapacitated, roll an Instinct check. On a natural 20, you return to 1 hit point.
-Heavy	Spirit	2	Rune of Spirit Shell	Spend 1 Mana to imbue this armor with Spirit magic. The next attack against you heals you for half the amount of damage that would have been dealt.
-Heavy	Spirit	3	Rune of Spirit Anchor	When you are reduced to 0 hit points, this armor releases a surge of Spirit energy. All enemies within 5ft take 1d12 Spirit damage.
-Heavy	Spirit	4	Rune of Spirit Charge	Once per Rest, you can consume the soul of an enemy that dies within 5ft. You heal 1d12 hit points.
-Heavy	Spirit	5	Rune of Spirit Mooring	This armor becomes "Spirit Moor". When you are reduced to 0 hit points for the first time in a combat, you return to 1 hit point with Invulnerability until the end of your next turn.
+Sword	Stone	1	Rune of Stone Edge	This weapon deals max damage against objects.
+Sword	Stone	2	Rune of Stone Smite	Spend 1 Mana to turn this weapon's blade into diamond. Your next attack deals max damage.
+Sword	Stone	3	Rune of Stone Stance	While wielding this weapon in combat, your AC is increased by 1.
+Sword	Stone	4	Rune of Stone Surge	Once per Rest, you can roll a Strength check to shatter the earth under all creatures within 5ft. If you hit their WC, they take 1d12 Stone damage and are knocked Prone.
+Sword	Stone	5	Rune of Stone Splitting	This weapon becomes "Stone Splitter". It requires two hands to wield and deals an additional 1d6 Stone damage on each hit.
+Sword	Sky	1	Rune of Sky Edge	This weapon does not require an Action to draw or stow.
+Sword	Sky	2	Rune of Sky Smite	Spend 1 Mana to make this weapon weightless. Your next attack does not consume an Action.
+Sword	Sky	3	Rune of Sky Stance	While wielding this weapon in combat, your Movement Speed is increased by 5ft.
+Sword	Sky	4	Rune of Sky Surge	Once per Rest, you can roll an Agility check to burst forward up to 30ft. If you hit the WC of any creatures in your path, they take 1d12 Sky damage and are knocked Prone.
+Sword	Sky	5	Rune of Sky Slicing	This weapon becomes "Sky Slice". If you consumed Mana this turn, you can attack once with this weapon without consuming an Action.
+Sword	Sun	1	Rune of Sun Edge	This weapon negates resistance to Slashing damage.
+Sword	Sun	2	Rune of Sun Smite	Spend 1 Mana to guide this weapon towards a creature's weakness. Your next attack is a critical hit.
+Sword	Sun	3	Rune of Sun Stance	While wielding this weapon, you can better read the fighting style of your opponent. After being hit by a creature, you have advantage on your next attack against them.
+Sword	Sun	4	Rune of Sun Surge	Once per Rest, you can roll a DC 15 Knowledge check. On a success, the next skill check made by you or your allies have advantage.
+Sword	Sun	5	Rune of Sun Vision	This weapon becomes "Sun Spot". While wielding this weapon, the penalties of Blinded, Obscured, and Flanked do not affect you.
+Sword	Moon	1	Rune of Moon Edge	This weapon is rendered invisible until your first attack in combat. While your weapon is invisible, attacks are guaranteed to hit.
+Sword	Moon	2	Rune of Moon Smite	Spend 1 Mana to turn this weapon invisible. Your next attack is guaranteed to hit.
+Sword	Moon	3	Rune of Moon Stance	While wielding this weapon, you can parry an incoming attack with an illusion. As a Reaction, give an incoming melee attack disadvantage.
+Sword	Moon	4	Rune of Moon Surge	Once per Rest, you can roll a DC 15 Charisma check to reappear behind a creature within 15ft. If you hit their WC, the take 1d12 Moon damage.
+Sword	Moon	5	Rune of Moon Shadow	This weapon becomes "Moon Shadow". After landing an attack with this weapon, you become Obscured until you deal or take damage.
+Sword	Spirit	1	Rune of Spirit Edge	This weapon is a vessel for lost souls. Creatures killed by this weapon cannot be revived or resurrected.
+Sword	Spirit	2	Rune of Spirit Smite	Spend 1 Mana to imbue this weapon with Spirit magic. Your next attack deals Spirit damage instead of Slashing damage. If you kill a creature with this attack, you gain Invulnerability until your next turn.
+Sword	Spirit	3	Rune of Spirit Stance	While wielding this weapon, the damage applied to allies within 5ft is redirected to you instead.
+Sword	Spirit	4	Rune of Spirit Surge	Once per Rest, you can roll a DC 15 Instinct check. On a success, you consume a soul captured by this weapon and heal 1d12 hit points.
+Sword	Spirit	5	Rune of the Spirit Eater	This weapon becomes "Spirit Eater". When this weapon deals Spirit damage, you heal the same amount of damage dealt.
 `.trim();
 
 const lines = input.split("\n");
