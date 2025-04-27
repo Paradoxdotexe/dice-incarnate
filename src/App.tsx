@@ -1,25 +1,25 @@
-import { ReactNode, useState } from "react";
-import "./App.css";
-import { NFlex } from "./common/NFlex";
+import { ReactNode, useState } from 'react';
+import './App.css';
+import { NFlex } from './common/NFlex';
 import {
   CHARACTER_CLASS_CARD_HEIGHT,
   CHARACTER_CLASS_CARD_WIDTH,
   CharacterClassCard,
-} from "./components/CharacterClassCard";
+} from './components/CharacterClassCard';
 import {
   CHARACTER_ATTRIBUTE_SCORE_WIDTH,
   CharacterAttributeScore,
-} from "./components/CharacterAttributeScore";
-import { CharacterClassDrawer } from "./components/CharacterClassDrawer";
-import { CHARACTER_ATTRIBUTES } from "./appendix/CharacterAttribute";
-import { useCharacter } from "./hooks/useCharacter";
-import { NDrawer } from "./common/NDrawer";
-import PlusIcon from "./assets/icons/Plus.svg?react";
-import { useCharacterClasses } from "./hooks/useCharacterClasses";
-import { Header } from "./components/Header";
-import { capitalize } from "lodash-es";
-import { CharacterClassDocument } from "./database/collections/CharacterClass";
-import { CharacterLevelPanel } from "./components/CharacterLevelPanel";
+} from './components/CharacterAttributeScore';
+import { CharacterClassDrawer } from './components/CharacterClassDrawer';
+import { CHARACTER_ATTRIBUTES } from './appendix/CharacterAttribute';
+import { useCharacter } from './hooks/useCharacter';
+import { NDrawer } from './common/NDrawer';
+import PlusIcon from './assets/icons/Plus.svg?react';
+import { useCharacterClasses } from './hooks/useCharacterClasses';
+import { Header } from './components/Header';
+import { capitalize } from 'lodash-es';
+import { CharacterClassDocument } from './database/collections/CharacterClass';
+import { CharacterLevelPanel } from './components/CharacterLevelPanel';
 
 const ROW_GAP = 18;
 
@@ -28,16 +28,13 @@ function App() {
   const characterClasses = useCharacterClasses();
 
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
-  const [choosableClasses, setChoosableClasses] =
-    useState<CharacterClassDocument[]>();
+  const [choosableClasses, setChoosableClasses] = useState<CharacterClassDocument[]>();
 
   if (!character || !characterClasses) {
     return null;
   }
 
-  const selectedClass = characterClasses.find(
-    (cc) => cc.key === selectedClassKey
-  );
+  const selectedClass = characterClasses.find((cc) => cc.key === selectedClassKey);
   const selectedClassState = selectedClassKey
     ? character.getClassState(selectedClassKey)
     : undefined;
@@ -59,9 +56,7 @@ function App() {
       </NFlex>
 
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
-        <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>
-          SKILLS
-        </Header>
+        <Header style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }}>SKILLS</Header>
         <Header align="left" style={{ width: CHARACTER_CLASS_CARD_WIDTH }}>
           PERKS
         </Header>
@@ -76,8 +71,7 @@ function App() {
             const attributeClasses = characterClasses.filter(
               (cc) =>
                 cc.attributeKey === attribute.key &&
-                (cc.type === "PERK" ||
-                  (cc.type === "CLASS" && !!character.getClassState(cc.key)))
+                (cc.type === 'PERK' || (cc.type === 'CLASS' && !!character.getClassState(cc.key)))
             );
             return (
               <NFlex key={attribute.key} gap={ROW_GAP}>
@@ -103,7 +97,7 @@ function App() {
                         characterClasses.filter(
                           (cc) =>
                             cc.attributeKey === attribute.key &&
-                            cc.type === "CLASS" &&
+                            cc.type === 'CLASS' &&
                             !character.getClassState(cc.key)
                         )
                       )
@@ -133,7 +127,7 @@ function App() {
 
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>
         <div style={{ width: CHARACTER_ATTRIBUTE_SCORE_WIDTH }} />
-        {["WEAPON", "ARMOR", "ITEM"].map((classType) => {
+        {['WEAPON', 'ARMOR', 'ITEM'].map((classType) => {
           const classes = characterClasses.filter(
             (cc) => cc.type === classType && !!character.getClassState(cc.key)
           );
@@ -159,9 +153,7 @@ function App() {
                 onClick={() =>
                   setChoosableClasses(
                     characterClasses.filter(
-                      (cc) =>
-                        cc.type === classType &&
-                        !character.getClassState(cc.key)
+                      (cc) => cc.type === classType && !character.getClassState(cc.key)
                     )
                   )
                 }
@@ -184,7 +176,6 @@ function App() {
               key={cc.key}
               class={cc}
               onClick={() => {
-                setChoosableClasses(undefined);
                 setSelectedClassKey(cc.key);
               }}
             />
@@ -202,6 +193,7 @@ function App() {
           onClick={() => setSelectedClassKey(selectedClass.key)}
           onAcquire={(featureKey) => {
             character.acquireClassTrait(selectedClass.key, featureKey);
+            setChoosableClasses(undefined);
           }}
           acquireDisabled={character.getAvailableShards() <= 0}
           onAscend={() => {
@@ -214,9 +206,7 @@ function App() {
   );
 }
 
-const AddClassCard: React.FC<{ onClick: () => void; children: ReactNode }> = (
-  props
-) => {
+const AddClassCard: React.FC<{ onClick: () => void; children: ReactNode }> = (props) => {
   return (
     <NFlex
       vertical
@@ -227,9 +217,9 @@ const AddClassCard: React.FC<{ onClick: () => void; children: ReactNode }> = (
         width: CHARACTER_CLASS_CARD_WIDTH,
         height: CHARACTER_CLASS_CARD_HEIGHT,
         border: `2px solid #494949`,
-        color: "#808080",
+        color: '#808080',
         borderRadius: 12,
-        cursor: "pointer",
+        cursor: 'pointer',
       }}
       css={`
         opacity: 0.5;
