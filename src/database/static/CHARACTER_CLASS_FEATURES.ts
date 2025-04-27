@@ -282,7 +282,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'STR_KNIGHT_F4',
     name: 'Armor Training',
-    description: 'While wearing Heavy or Light Armor, your Armor Class is increased by [A].',
+    description: 'While wearing Heavy Armor or Light Armor, your Armor Class is increased by [A].',
     order: 4,
   },
   {

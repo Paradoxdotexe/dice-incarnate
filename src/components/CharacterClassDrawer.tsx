@@ -1,21 +1,18 @@
-import { opacify } from "polished";
-import { NFlex } from "../common/NFlex";
-import { NDrawer } from "../common/NDrawer";
-import { NButton } from "../common/NButton";
-import { CharacterClassState } from "../database/collections/Character";
-import { CharacterClassDocument } from "../database/collections/CharacterClass";
-import { CharacterClassFeatureCard } from "./CharacterClassFeatureCard";
-import { CharacterClassFeatureDocument } from "../database/collections/CharacterClassFeature";
-import { groupBy, keyBy } from "lodash-es";
-import { Header } from "./Header";
-import {
-  CHARACTER_ATTRIBUTES,
-  ROMAN_NUMERALS,
-} from "../appendix/CharacterAttribute";
+import { opacify } from 'polished';
+import { NFlex } from '../common/NFlex';
+import { NDrawer } from '../common/NDrawer';
+import { NButton } from '../common/NButton';
+import { CharacterClassState } from '../database/collections/Character';
+import { CharacterClassDocument } from '../database/collections/CharacterClass';
+import { CharacterClassFeatureCard } from './CharacterClassFeatureCard';
+import { CharacterClassFeatureDocument } from '../database/collections/CharacterClassFeature';
+import { groupBy, keyBy } from 'lodash-es';
+import { Header } from './Header';
+import { CHARACTER_ATTRIBUTES } from '../appendix/CharacterAttribute';
 
 const PANEL_WIDTH = 600;
 
-const ATTRIBUTE_BY_KEY = keyBy(CHARACTER_ATTRIBUTES, "key");
+const ATTRIBUTE_BY_KEY = keyBy(CHARACTER_ATTRIBUTES, 'key');
 
 type CharacterClassDrawerProps = {
   open: boolean;
@@ -29,34 +26,28 @@ type CharacterClassDrawerProps = {
   ascendDisabled?: boolean;
 };
 
-export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
-  props
-) => {
+export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (props) => {
   const color = props.class.color;
 
   const ascension = props.classState?.ascension ?? 1;
-  const maxAscension = props.class.type === "ARMOR" ? 5 : 3;
+  const maxAscension = props.class.type === 'ARMOR' ? 5 : 3;
   const isMaxAscension = ascension === maxAscension;
 
   let featureAreas: { [area: string]: CharacterClassFeatureDocument[] } = {};
-  if (props.class.type === "CLASS") {
+  if (props.class.type === 'CLASS') {
     featureAreas = groupBy(props.class.features, (feature) =>
-      !!feature.getMana() ? "ABILITIES" : "PERKS"
+      !!feature.getMana() ? 'ABILITIES' : 'PERKS'
     );
-  } else if (props.class.type === "PERK") {
+  } else if (props.class.type === 'PERK') {
     const attributeName = ATTRIBUTE_BY_KEY[props.class.attributeKey!].name;
     featureAreas = groupBy(
       props.class.features,
-      (feature) =>
-        `${attributeName.toUpperCase()} ${feature.attributeRequirement} PERKS`
+      (feature) => `${attributeName.toUpperCase()} ${feature.attributeRequirement} PERKS`
     );
-  } else if (props.class.type === "WEAPON" || props.class.type === "ARMOR") {
-    featureAreas = groupBy(
-      props.class.features,
-      (feature) => feature.getRuneType() ?? ""
-    );
+  } else if (props.class.type === 'WEAPON' || props.class.type === 'ARMOR') {
+    featureAreas = groupBy(props.class.features, (feature) => feature.getRuneType() ?? '');
   } else {
-    featureAreas = { "": props.class.features };
+    featureAreas = { '': props.class.features };
   }
 
   return (
@@ -67,34 +58,42 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
         style={{
           background: opacify(-0.97, color),
           borderLeft: `2px solid ${color}`,
-          height: "100%",
+          height: '100%',
           padding: 24,
-          overflowY: "auto",
+          overflowY: 'auto',
         }}
       >
-        <NFlex justify="space-between" align="center">
-          <div
-            style={{
-              fontFamily: "Grenze",
-              fontSize: 32,
-              color: "white",
-              fontWeight: 500,
-            }}
-          >
-            {props.class.getName(props.classState)}
-          </div>
+        <NFlex justify="space-between">
+          <NFlex vertical gap={12}>
+            <div
+              style={{
+                fontFamily: 'Grenze',
+                fontSize: 32,
+                color: 'white',
+                fontWeight: 500,
+              }}
+            >
+              {props.class.getName(props.classState)}
+            </div>
+            <div
+              style={{
+                fontSize: 15,
+                color: 'white',
+              }}
+            >
+              {props.class.description}
+            </div>
+          </NFlex>
 
           {props.class.ascendable && (
             <NButton
               color={color}
               onClick={props.onAscend}
               disabled={
-                isMaxAscension ||
-                props.ascendDisabled ||
-                !props.classState?.featureKeys.length
+                isMaxAscension || props.ascendDisabled || !props.classState?.featureKeys.length
               }
             >
-              {isMaxAscension ? "Max Level" : "Surge"}
+              {isMaxAscension ? 'Max Level' : 'Surge'}
             </NButton>
           )}
         </NFlex>
@@ -104,8 +103,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (
             <NFlex vertical gap={12}>
               {area && <Header align="left">{area}</Header>}
               {features.map((feature) => {
-                const isAcquired =
-                  props.classState?.featureKeys.includes(feature.key) ?? false;
+                const isAcquired = props.classState?.featureKeys.includes(feature.key) ?? false;
                 const isAcquirable = !isAcquired && !props.acquireDisabled;
                 return (
                   <CharacterClassFeatureCard

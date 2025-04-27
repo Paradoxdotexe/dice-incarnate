@@ -31,6 +31,9 @@ const _characterClassSchema = {
     name: {
       type: 'string',
     },
+    description: {
+      type: 'string',
+    },
     color: {
       type: 'string',
     },
