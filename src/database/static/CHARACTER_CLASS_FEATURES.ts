@@ -677,32 +677,17 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R2_STONE',
     name: 'Rune of Stone Smite',
     description:
-      "Spend 1 Mana to turn this weapon's blade into diamond. Your next attack deals max damage.",
+      'Roll a Strength check to shatter the earth under all creatures within 5ft. If you hit their MC, they take 1d12 Stone damage and are knocked Prone. This can only be done once per Rest.',
     order: 2,
     ascensionRequirement: 2,
   },
   {
     key: 'WEAPON_SWORD_R3_STONE',
-    name: 'Rune of Stone Stance',
-    description: 'While wielding this weapon in combat, your AC is increased by 1.',
-    order: 3,
-    ascensionRequirement: 3,
-  },
-  {
-    key: 'WEAPON_SWORD_R4_STONE',
-    name: 'Rune of Stone Surge',
-    description:
-      'Once per Rest, you can roll a Strength check to shatter the earth under all creatures within 5ft. If you hit their MC, they take 1d12 Stone damage and are knocked Prone.',
-    order: 4,
-    ascensionRequirement: 4,
-  },
-  {
-    key: 'WEAPON_SWORD_R5_STONE',
     name: 'Rune of Stone Splitting',
     description:
       'This weapon becomes "Stone Splitter". It requires two hands to wield and deals an additional 1d6 Stone damage on each hit.',
-    order: 5,
-    ascensionRequirement: 5,
+    order: 3,
+    ascensionRequirement: 3,
   },
   {
     key: 'WEAPON_SWORD_R1_SKY',
@@ -715,32 +700,17 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R2_SKY',
     name: 'Rune of Sky Smite',
     description:
-      'Spend 1 Mana to make this weapon weightless. Your next attack does not consume an Action.',
+      'Roll an Agility check to burst forward 30ft through any creatures in your path. If you hit their MC, they take 1d12 Sky damage and are knocked Prone. This can only be done once per Rest.',
     order: 2,
     ascensionRequirement: 2,
   },
   {
     key: 'WEAPON_SWORD_R3_SKY',
-    name: 'Rune of Sky Stance',
-    description: 'While wielding this weapon in combat, your Movement Speed is increased by 5ft.',
-    order: 3,
-    ascensionRequirement: 3,
-  },
-  {
-    key: 'WEAPON_SWORD_R4_SKY',
-    name: 'Rune of Sky Surge',
-    description:
-      'Once per Rest, you can roll an Agility check to burst forward up to 30ft. If you hit the MC of any creatures in your path, they take 1d12 Sky damage and are knocked Prone.',
-    order: 4,
-    ascensionRequirement: 4,
-  },
-  {
-    key: 'WEAPON_SWORD_R5_SKY',
     name: 'Rune of Sky Slicing',
     description:
-      'This weapon becomes "Sky Slice". If you consumed Mana this turn, you can attack once with this weapon without consuming an Action.',
-    order: 5,
-    ascensionRequirement: 5,
+      'This weapon becomes "Sky Slice". If you attacked with this weapon twice this turn, you can attack again without requiring an Action.',
+    order: 3,
+    ascensionRequirement: 3,
   },
   {
     key: 'WEAPON_SWORD_R1_SUN',
@@ -753,39 +723,23 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R2_SUN',
     name: 'Rune of Sun Smite',
     description:
-      "Spend 1 Mana to guide this weapon towards a creature's weakness. Your next attack is a critical hit.",
+      'Roll a Knowledge check to analyze the fighting style of a creature within 30ft. If you hit their MC, you gain advantage on melee attacks against them until the end of combat. This can only be done once per Rest.',
     order: 2,
     ascensionRequirement: 2,
   },
   {
     key: 'WEAPON_SWORD_R3_SUN',
-    name: 'Rune of Sun Stance',
+    name: 'Rune of Sun Spotting',
     description:
-      'While wielding this weapon, you can better read the fighting style of your opponent. After being hit by a creature, you have advantage on your next attack against them.',
+      'This weapon becomes "Sun Spot". While wielding this weapon, you cannot become Flanked or Blinded.',
     order: 3,
     ascensionRequirement: 3,
-  },
-  {
-    key: 'WEAPON_SWORD_R4_SUN',
-    name: 'Rune of Sun Surge',
-    description:
-      'Once per Rest, you can roll a DC 15 Knowledge check. On a success, the next skill check made by you or your allies have advantage.',
-    order: 4,
-    ascensionRequirement: 4,
-  },
-  {
-    key: 'WEAPON_SWORD_R5_SUN',
-    name: 'Rune of Sun Vision',
-    description:
-      'This weapon becomes "Sun Spot". While wielding this weapon, the penalties of Blinded, Obscured, and Flanked do not affect you.',
-    order: 5,
-    ascensionRequirement: 5,
   },
   {
     key: 'WEAPON_SWORD_R1_MOON',
     name: 'Rune of Moon Edge',
     description:
-      'This weapon is rendered invisible until your first attack in combat. While your weapon is invisible, attacks are guaranteed to hit.',
+      'This weapon is rendered invisible until your first attack in combat. While your weapon is invisible, attacks with it are guaranteed to hit.',
     order: 1,
     ascensionRequirement: 1,
   },
@@ -793,39 +747,23 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R2_MOON',
     name: 'Rune of Moon Smite',
     description:
-      'Spend 1 Mana to turn this weapon invisible. Your next attack is guaranteed to hit.',
+      'Roll a Charisma check to teleport behind a creature within 30ft. If you hit their MC, your next melee attack against them is guaranteed to hit. This can only be done once per Rest.',
     order: 2,
     ascensionRequirement: 2,
   },
   {
     key: 'WEAPON_SWORD_R3_MOON',
-    name: 'Rune of Moon Stance',
-    description:
-      'While wielding this weapon, you can parry an incoming attack with an illusion. As a Reaction, give an incoming melee attack disadvantage.',
-    order: 3,
-    ascensionRequirement: 3,
-  },
-  {
-    key: 'WEAPON_SWORD_R4_MOON',
-    name: 'Rune of Moon Surge',
-    description:
-      'Once per Rest, you can roll a DC 15 Charisma check to reappear behind a creature within 15ft. If you hit their MC, the take 1d12 Moon damage.',
-    order: 4,
-    ascensionRequirement: 4,
-  },
-  {
-    key: 'WEAPON_SWORD_R5_MOON',
     name: 'Rune of Moon Shadow',
     description:
-      'This weapon becomes "Moon Shadow". After landing an attack with this weapon, you become Obscured until you deal or take damage.',
-    order: 5,
-    ascensionRequirement: 5,
+      'This weapon becomes "Moon Shadow". When you Disengage, you become Obscured until you take damage.',
+    order: 3,
+    ascensionRequirement: 3,
   },
   {
     key: 'WEAPON_SWORD_R1_SPIRIT',
     name: 'Rune of Spirit Edge',
     description:
-      'This weapon is a vessel for lost souls. Creatures killed by this weapon cannot be revived or resurrected.',
+      'This weapon is a vessel for lost souls. Creatures killed by this weapon cannot be resurrected.',
     order: 1,
     ascensionRequirement: 1,
   },
@@ -833,33 +771,250 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_SWORD_R2_SPIRIT',
     name: 'Rune of Spirit Smite',
     description:
-      'Spend 1 Mana to imbue this weapon with Spirit magic. Your next attack deals Spirit damage instead of Slashing damage. If you kill a creature with this attack, you gain Invulnerability until your next turn.',
+      'Roll an Instinct check to smite the soul of a creature within 5ft. If you hit their MC, they take 1d12 Spirit damage and are Paralyzed until the end of their next turn. This can only be done once per Rest.',
     order: 2,
     ascensionRequirement: 2,
   },
   {
     key: 'WEAPON_SWORD_R3_SPIRIT',
-    name: 'Rune of Spirit Stance',
+    name: 'Rune of the Spirit Eater',
     description:
-      'While wielding this weapon, the damage applied to allies within 5ft is redirected to you instead.',
+      'This weapon becomes "Spirit Eater". When you kill a creature with this weapon, you heal 1d12 hit points.',
     order: 3,
     ascensionRequirement: 3,
   },
   {
-    key: 'WEAPON_SWORD_R4_SPIRIT',
-    name: 'Rune of Spirit Surge',
-    description:
-      'Once per Rest, you can roll a DC 15 Instinct check. On a success, you consume a soul captured by this weapon and heal 1d12 hit points.',
-    order: 4,
-    ascensionRequirement: 4,
+    key: 'WEAPON_BOW_R1_STONE',
+    name: 'Rune of Stone String',
+    description: 'This weapon can be used as a melee weapon with a 5ft range.',
+    order: 1,
+    ascensionRequirement: 1,
   },
   {
-    key: 'WEAPON_SWORD_R5_SPIRIT',
-    name: 'Rune of the Spirit Eater',
+    key: 'WEAPON_BOW_R2_STONE',
+    name: 'Rune of Stone Arrow',
     description:
-      'This weapon becomes "Spirit Eater". When this weapon deals Spirit damage, you heal the same amount of damage dealt.',
-    order: 5,
-    ascensionRequirement: 5,
+      "Roll a Strength check to fire a weighted arrow at a creature or object within range. If it hits a creature's MC, they take 1d12 Stone damage and cannot move on their next turn. If it hits an object, it deals 2d12 Stone damage. This can only be done once per Rest.",
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_BOW_R3_STONE',
+    name: 'Rune of Stone Piercing',
+    description:
+      'This weapon becomes "Stone Piercer". Arrows fired from this weapon continue through their first target and can hit another target behind them. This collateral attack does not require an Action.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_BOW_R1_SKY',
+    name: 'Rune of Sky String',
+    description: 'This weapon has an extended range of 120ft.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_BOW_R2_SKY',
+    name: 'Rune of Sky Arrow',
+    description:
+      'Roll an Agility check to fire a lightning arrow at a spot within range, sparking any creatures within 5ft. If you hit their MC, they take 1d12 Sky damage. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_BOW_R3_SKY',
+    name: 'Rune of Sky Spark',
+    description:
+      'This weapon becomes "Sky Spark". When an enemy comes within 15ft of you, you can roll an Agility check to spark lightning towards them as a Reaction. If you hit their WC, they take 1d12 Sky damage.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_BOW_R1_SUN',
+    name: 'Rune of Sun String',
+    description: 'This weapon negates resistance to Piercing damage.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_BOW_R2_SUN',
+    name: 'Rune of Sun Arrow',
+    description:
+      'Roll a DC 15 Knowledge check to nock a magically guided arrow. Your next attack is guaranteed to hit three creatures that have line of sight between one another. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_BOW_R3_SUN',
+    name: 'Rune of Sun Seeking',
+    description:
+      'This weapon becomes "Sun Seeker". You can attack creatures that are Obscured or Covered without penalty.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_BOW_R1_MOON',
+    name: 'Rune of Moon String',
+    description:
+      'This weapon is silent when fired. Attacking a creature at least 30ft away does not remove the Obscured condition.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_BOW_R2_MOON',
+    name: 'Rune of Moon Arrow',
+    description:
+      'Roll a DC 15 Charisma check to spawn an illusory double at a spot within range. You can speak and attack through this double. This double has 1d12 hit points and shares your AC and MC. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_BOW_R3_MOON',
+    name: 'Rune of Moon Veil',
+    description:
+      'This weapon becomes "Moon Veil". While wielding this weapon, you have advantage on Agility checks to obscure yourself.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_BOW_R1_SPIRIT',
+    name: 'Rune of Spirit String',
+    description: 'This weapon can detect the exact hit points of a creature it hits.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_BOW_R2_SPIRIT',
+    name: 'Rune of Spirit Arrow',
+    description:
+      'Roll a DC 15 Instinct check to fire a soul-bounded arrow at a creature within range. If you hit their MC, you become Soul Bound. When either of you take damage, the other one heals in the same amount. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_BOW_R3_SPIRIT',
+    name: 'Rune of Spirit Shift',
+    description:
+      'This weapon becomes "Spirit Shift". When you hit a creature with an attack, you can choose to switch places with that creature.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_STAFF_R1_STONE',
+    name: 'Rune of Stone Wood',
+    description: 'This weapon increases your AC by 1.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_STAFF_R2_STONE',
+    name: 'Rune of Stone Sweep',
+    description:
+      'Roll a DC 15 Strength check to lift a 5ft by 15ft wall from the earth. This wall is 10ft tall and has 1d12 hit points. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_STAFF_R3_STONE',
+    name: 'Rune of Stone Stanchion',
+    description:
+      'This weapon becomes "Stone Stanchion". While wielding this weapon, you cannot be moved or knocked Prone.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_STAFF_R1_SKY',
+    name: 'Rune of Sky Wood',
+    description: 'This weapon increases your Movement Speed by 5ft.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_STAFF_R2_SKY',
+    name: 'Rune of Sky Sweep',
+    description:
+      'Roll an Agility check to sweep wind towards all creatures within 10ft. If you hit their WC, they take 1d6 Sky damage, are pushed back 15ft, and are knocked Prone. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_STAFF_R3_SKY',
+    name: 'Rune of Sky Squall',
+    description:
+      'This weapon becomes "Sky Squall". When you are hit by a melee attack, you can attack back as a Reaction.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_STAFF_R1_SUN',
+    name: 'Rune of Sun Wood',
+    description: 'This weapon negates resistance to Bludgeoning damage.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_STAFF_R2_SUN',
+    name: 'Rune of Sun Sweep',
+    description:
+      'Roll a DC 15 Knowledge check to split this weapon in half—one to block and one to attack. While split, your range is reduced to 5ft but your AC is increased by 2. You can restore this weapon at any time. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_STAFF_R3_SUN',
+    name: 'Rune of Sun Shroud',
+    description:
+      'This weapon becomes "Sun Shroud". When you are attacked by a melee or ranged weapon, you can block as a Reaction. The incoming attack has disadvantage.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_STAFF_R1_MOON',
+    name: 'Rune of Moon Wood',
+    description:
+      'This weapon creates illusory imagery when you move. If you end your turn with no Movement Speed and not Engaged, attacks against you have disadvantage.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_STAFF_R2_MOON',
+    name: 'Rune of Moon Sweep',
+    description:
+      'Roll a DC 15 Charisma check to create an illusory fog that spreads 15ft in all directions. Enemies inside the fog are Blinded. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_STAFF_R3_MOON',
+    name: 'Rune of Moon Mist',
+    description:
+      'This weapon becomes "Moon Mist". While wielding this weapon, when you become Obscured, you become Invisible.',
+    order: 3,
+    ascensionRequirement: 3,
+  },
+  {
+    key: 'WEAPON_STAFF_R1_SPIRIT',
+    name: 'Rune of Spirit Wood',
+    description:
+      'This weapon thrums with life. While wielding this weapon, you have advantage to stabilize an incapacitated creature.',
+    order: 1,
+    ascensionRequirement: 1,
+  },
+  {
+    key: 'WEAPON_STAFF_R2_SPIRIT',
+    name: 'Rune of Spirit Sweep',
+    description:
+      'Roll a DC 15 Instinct check to teleport to an incapacitated creature within 120ft. This can only be done once per Rest.',
+    order: 2,
+    ascensionRequirement: 2,
+  },
+  {
+    key: 'WEAPON_STAFF_R3_SPIRIT',
+    name: 'Rune of Spirit Bloom',
+    description:
+      'This weapon becomes "Spirit Bloom". If you did not move this turn, all allies within 5ft heal 1d6 hit points.',
+    order: 3,
+    ascensionRequirement: 3,
   },
   {
     key: 'WEAPON_BOW_F1',
