@@ -16,7 +16,7 @@ export const useCharacter = () => {
         if (count === 0) {
           charactersCollection.insert({
             id: uuid(),
-            experience: 3000,
+            experience: 300 + 600 + 900 + 1200 + 1500 + 1800, // total experience for level 7
             classStates: [],
           });
         }

@@ -62,6 +62,9 @@ const characterClassSchema: RxJsonSchema<CharacterClass> = _characterClassSchema
 
 type CharacterClassMethods = {
   getName: (classState?: CharacterClassState) => string;
+  getAcquiredMaxRune: (
+    classState: CharacterClassState
+  ) => CharacterClassFeatureDocument | undefined;
 };
 
 export type UnpopulatedCharacterClassDocument = RxDocument<CharacterClass, CharacterClassMethods>;
@@ -78,16 +81,26 @@ const characterClassMethods: CharacterClassMethods = {
       name += ` ${ROMAN_NUMERALS[classState?.ascension - 1]}`;
     }
 
-    // use the name of Tier 5 Rune if applicable
+    // use the name of max tier rune if applicable
     if (classState) {
-      const maxRuneKey = classState.featureKeys.find((key) => key.includes('_R5_'));
-      if (maxRuneKey) {
-        const feature = this.features.find((feature) => feature.key === maxRuneKey)!;
-        return /becomes "(.+?)"\./.exec(feature.description)![1];
+      const maxRune = this.getAcquiredMaxRune(classState);
+      if (maxRune) {
+        const nameMatch = /becomes "(.+?)"\./.exec(maxRune.description);
+        if (nameMatch) {
+          return nameMatch[1];
+        }
       }
     }
 
     return name;
+  },
+
+  getAcquiredMaxRune: function (this: CharacterClassDocument, classState: CharacterClassState) {
+    return this.features.find(
+      (feature) =>
+        classState.featureKeys.includes(feature.key) &&
+        feature.key.includes(this.type === 'WEAPON' ? '_R3_' : '_R5')
+    );
   },
 };
 
