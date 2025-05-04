@@ -6,7 +6,6 @@ import { useDatabaseQuery } from '../database/useDatabaseQuery';
 import { v4 as uuid } from 'uuid';
 import { useCharacterClasses } from '../hooks/useCharacterClasses';
 import { keyBy } from 'lodash-es';
-import { ROMAN_NUMERALS } from '../appendix/CharacterAttribute';
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
