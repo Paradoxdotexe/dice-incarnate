@@ -62,7 +62,7 @@ const initFirestore = () => {
     projectId: 'dice-incarnate',
     storageBucket: 'dice-incarnate.firebasestorage.app',
     messagingSenderId: '37402429798',
-    appId: '1:37402429798:web:90c36e5a52c7ddfb5b20a7',
+    appId: '1:37402429798:web:e3deed058a11d4c35b20a7',
   };
 
   const firebase = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
