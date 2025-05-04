@@ -4,7 +4,6 @@ import { CharacterAbilityIcon } from "./CharacterAbilityIcon";
 import { NFlex } from "../common/NFlex";
 import { CharacterClassState } from "../database/collections/Character";
 import { CharacterClassDocument } from "../database/collections/CharacterClass";
-import { ROMAN_NUMERALS } from "../appendix/CharacterAttribute";
 
 export const CHARACTER_CLASS_CARD_WIDTH = 240; // 36 * 6 + 24
 export const CHARACTER_CLASS_CARD_HEIGHT = 120;

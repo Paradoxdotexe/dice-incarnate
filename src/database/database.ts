@@ -26,7 +26,9 @@ export type DatabaseCollections = {
 export type Database = RxDatabase<DatabaseCollections>;
 
 export const initDatabase = async () => {
-  addRxPlugin(RxDBDevModePlugin);
+  if (import.meta.env.VITE_ENV === 'DEV') {
+    addRxPlugin(RxDBDevModePlugin);
+  }
   addRxPlugin(RxDBMigrationSchemaPlugin);
   addRxPlugin(RxDBQueryBuilderPlugin);
   addRxPlugin(RxDBLeaderElectionPlugin);
@@ -34,9 +36,6 @@ export const initDatabase = async () => {
   const db = await createRxDatabase<DatabaseCollections>({
     name: 'dice-incarnate-database',
     storage: wrappedValidateAjvStorage({ storage: getRxStorageDexie() }),
-    cleanupPolicy: {
-      minimumDeletedTime: 1000 * 60 * 60 * 24, // one day
-    },
   });
 
   await db.addCollections({
@@ -45,15 +44,19 @@ export const initDatabase = async () => {
     characterClassFeature: CHARACTER_CLASS_FEATURE_COLLECTION,
   });
 
-  // upsert static data
-  db.collections.characterClass.bulkUpsert(CHARACTER_CLASSES);
-  db.collections.characterClassFeature.bulkUpsert(CHARACTER_CLASS_FEATURES);
-
   // replicate collections to Firestore
   const firestore = initFirestore();
-  Object.values(db.collections).forEach((collection) => {
-    replicateCollection(firestore, collection);
-  });
+  await replicateCollection(firestore, db.collections.character);
+  if (import.meta.env.VITE_ENV === 'DEV') {
+    await replicateCollection(firestore, db.collections.characterClass);
+    await replicateCollection(firestore, db.collections.characterClassFeature);
+  }
+
+  // upsert static data
+  if (import.meta.env.VITE_ENV === 'DEV') {
+    db.collections.characterClass.bulkUpsert(CHARACTER_CLASSES);
+    db.collections.characterClassFeature.bulkUpsert(CHARACTER_CLASS_FEATURES);
+  }
 
   return db;
 };
@@ -73,8 +76,8 @@ const initFirestore = () => {
   return getFirestore(firebase);
 };
 
-const replicateCollection = (firestore: Firestore, collection: RxCollection) => {
-  replicateFirestore({
+const replicateCollection = async (firestore: Firestore, collection: RxCollection) => {
+  const replicationState = replicateFirestore({
     replicationIdentifier: `${collection.name}-replication`,
     collection,
     firestore: {
@@ -82,9 +85,10 @@ const replicateCollection = (firestore: Firestore, collection: RxCollection) => 
       database: firestore,
       collection: getFirestoreCollection(firestore, collection.name),
     },
-    pull: { batchSize: 10 },
-    push: { batchSize: 10 },
+    live: true,
     deletedField: '_deleted',
     serverTimestampField: 'serverTimestamp',
   });
+
+  await replicationState.startPromise;
 };
