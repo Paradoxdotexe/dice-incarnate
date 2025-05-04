@@ -1,14 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
-import { TestDatabaseCollections } from "./database";
-import { useDatabaseCollection } from "./useDatabaseCollection";
+import { useEffect, useState } from 'react';
+import { DatabaseCollections } from './database';
+import { useDatabaseCollection } from './useDatabaseCollection';
 
 export const useDatabaseQuery = <
-  TCollectionKey extends keyof TestDatabaseCollections,
-  TCollection extends TestDatabaseCollections[TCollectionKey],
-  TCollectionQuery extends Parameters<TCollection["find"]>[0],
-  TDocuments extends Awaited<
-    ReturnType<ReturnType<TCollection["find"]>["exec"]>
-  >
+  TCollectionKey extends keyof DatabaseCollections,
+  TCollection extends DatabaseCollections[TCollectionKey],
+  TCollectionQuery extends Parameters<TCollection['find']>[0],
+  TDocuments extends Awaited<ReturnType<ReturnType<TCollection['find']>['exec']>>
 >(
   collectionKey: TCollectionKey,
   queryObj?: TCollectionQuery
@@ -20,9 +18,8 @@ export const useDatabaseQuery = <
   useEffect(() => {
     const query = collection.find(queryObj);
 
-    const subscription = query.$.subscribe((documents) =>
-      setDocuments(documents as TDocuments)
-    );
+    // @ts-ignore
+    const subscription = query.$.subscribe((documents) => setDocuments(documents as TDocuments));
 
     return () => {
       subscription.unsubscribe();

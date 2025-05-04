@@ -34,6 +34,9 @@ export const initDatabase = async () => {
   const db = await createRxDatabase<DatabaseCollections>({
     name: 'dice-incarnate-database',
     storage: wrappedValidateAjvStorage({ storage: getRxStorageDexie() }),
+    cleanupPolicy: {
+      minimumDeletedTime: 1000 * 60 * 60 * 24, // one day
+    },
   });
 
   await db.addCollections({

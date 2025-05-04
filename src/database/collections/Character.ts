@@ -11,13 +11,16 @@ import { flatten, sum } from 'lodash-es';
 const _characterSchema = {
   title: 'Character',
   description: '',
-  version: 0,
+  version: 1,
   primaryKey: 'id',
   type: 'object',
   properties: {
     id: {
       type: 'string',
       maxLength: 36,
+    },
+    name: {
+      type: 'string',
     },
     experience: {
       type: 'number',
@@ -47,7 +50,7 @@ const _characterSchema = {
       },
     },
   },
-  required: ['id', 'experience', 'classStates'],
+  required: ['id', 'name', 'experience', 'classStates'],
 } as const;
 
 type Character = ExtractDocumentTypeFromTypedRxJsonSchema<typeof _characterSchema>;
@@ -226,4 +229,12 @@ export type CharacterCollection = RxCollection<Character, CharacterMethods>;
 export const CHARACTER_COLLECTION: RxCollectionCreator<Character> = {
   schema: characterSchema,
   methods: characterMethods,
+  migrationStrategies: {
+    1: (oldDoc) => {
+      return {
+        ...oldDoc,
+        name: 'Unnamed Character',
+      };
+    },
+  },
 };

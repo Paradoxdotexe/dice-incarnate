@@ -1,29 +1,28 @@
 import { ReactNode, useState } from 'react';
-import './App.css';
-import { NFlex } from './common/NFlex';
+import { NFlex } from '../common/NFlex';
 import {
   CHARACTER_CLASS_CARD_HEIGHT,
   CHARACTER_CLASS_CARD_WIDTH,
   CharacterClassCard,
-} from './components/CharacterClassCard';
+} from '../components/CharacterClassCard';
 import {
   CHARACTER_ATTRIBUTE_SCORE_WIDTH,
   CharacterAttributeScore,
-} from './components/CharacterAttributeScore';
-import { CharacterClassDrawer } from './components/CharacterClassDrawer';
-import { CHARACTER_ATTRIBUTES } from './appendix/CharacterAttribute';
-import { useCharacter } from './hooks/useCharacter';
-import { NDrawer } from './common/NDrawer';
-import PlusIcon from './assets/icons/Plus.svg?react';
-import { useCharacterClasses } from './hooks/useCharacterClasses';
-import { Header } from './components/Header';
+} from '../components/CharacterAttributeScore';
+import { CharacterClassDrawer } from '../components/CharacterClassDrawer';
+import { CHARACTER_ATTRIBUTES } from '../appendix/CharacterAttribute';
+import { useCharacter } from '../hooks/useCharacter';
+import { NDrawer } from '../common/NDrawer';
+import PlusIcon from '../assets/icons/Plus.svg?react';
+import { useCharacterClasses } from '../hooks/useCharacterClasses';
+import { Header } from '../components/Header';
 import { capitalize } from 'lodash-es';
-import { CharacterClassDocument } from './database/collections/CharacterClass';
-import { CharacterLevelPanel } from './components/CharacterLevelPanel';
+import { CharacterClassDocument } from '../database/collections/CharacterClass';
+import { CharacterLevelPanel } from '../components/CharacterLevelPanel';
 
 const ROW_GAP = 18;
 
-function App() {
+export const CharacterPage: React.FC = () => {
   const character = useCharacter();
   const characterClasses = useCharacterClasses();
 
@@ -204,7 +203,7 @@ function App() {
       )}
     </NFlex>
   );
-}
+};
 
 const AddClassCard: React.FC<{ onClick: () => void; children: ReactNode }> = (props) => {
   return (
@@ -235,5 +234,3 @@ const AddClassCard: React.FC<{ onClick: () => void; children: ReactNode }> = (pr
     </NFlex>
   );
 };
-
-export default App;
