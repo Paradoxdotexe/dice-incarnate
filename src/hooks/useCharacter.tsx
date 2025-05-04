@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
 import { useDatabaseQuery } from '../database/useDatabaseQuery';
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 
 export const useCharacter = () => {
   const { characterId } = useParams();
-  const navigate = useNavigate();
 
   const characters = useDatabaseQuery('character', {
     selector: {
@@ -13,12 +11,6 @@ export const useCharacter = () => {
       },
     },
   });
-
-  useEffect(() => {
-    if (characters?.length === 0) {
-      navigate('/');
-    }
-  }, [characters]);
 
   return characters?.[0];
 };

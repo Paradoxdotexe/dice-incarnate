@@ -46,11 +46,9 @@ export const initDatabase = async () => {
 
   // replicate collections to Firestore
   const firestore = initFirestore();
-  await replicateCollection(firestore, db.collections.character);
-  if (import.meta.env.VITE_ENV === 'DEV') {
-    await replicateCollection(firestore, db.collections.characterClass);
-    await replicateCollection(firestore, db.collections.characterClassFeature);
-  }
+  await Promise.all(
+    Object.values(db.collections).map((collection) => replicateCollection(firestore, collection))
+  );
 
   // upsert static data
   if (import.meta.env.VITE_ENV === 'DEV') {
@@ -88,6 +86,14 @@ const replicateCollection = async (firestore: Firestore, collection: RxCollectio
     live: true,
     deletedField: '_deleted',
     serverTimestampField: 'serverTimestamp',
+    // replicate from Firestore to IndexedDB
+    pull: {
+      batchSize: 10,
+    },
+    // replicate from IndexedDB to Firestore
+    push: {
+      batchSize: 10,
+    },
   });
 
   await replicationState.startPromise;
