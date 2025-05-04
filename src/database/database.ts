@@ -16,6 +16,7 @@ import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore, collection as getFirestoreCollection, Firestore } from 'firebase/firestore';
 import { replicateFirestore } from 'rxdb/plugins/replication-firestore';
 import { RxDBLeaderElectionPlugin } from 'rxdb/plugins/leader-election';
+import { isDev } from '../utils/isDev';
 
 export type DatabaseCollections = {
   character: CharacterCollection;
@@ -26,7 +27,7 @@ export type DatabaseCollections = {
 export type Database = RxDatabase<DatabaseCollections>;
 
 export const initDatabase = async () => {
-  if (import.meta.env.VITE_ENV === 'DEV') {
+  if (isDev()) {
     addRxPlugin(RxDBDevModePlugin);
   }
   addRxPlugin(RxDBMigrationSchemaPlugin);
@@ -51,7 +52,7 @@ export const initDatabase = async () => {
   );
 
   // upsert static data
-  if (import.meta.env.VITE_ENV === 'DEV') {
+  if (isDev()) {
     db.collections.characterClass.bulkUpsert(CHARACTER_CLASSES);
     db.collections.characterClassFeature.bulkUpsert(CHARACTER_CLASS_FEATURES);
   }
@@ -61,7 +62,7 @@ export const initDatabase = async () => {
 
 const initFirestore = () => {
   const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    apiKey: 'AIzaSyCFKPvTBPaTOj416NpAt8UtuqPv4jz6ffo',
     authDomain: 'dice-incarnate.firebaseapp.com',
     projectId: 'dice-incarnate',
     storageBucket: 'dice-incarnate.firebasestorage.app',
