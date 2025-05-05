@@ -190,9 +190,12 @@ export const CharacterPage: React.FC = () => {
           class={selectedClass}
           classState={selectedClassState}
           onClick={() => setSelectedClassKey(selectedClass.key)}
-          onAcquire={(featureKey) => {
-            character.acquireClassTrait(selectedClass.key, featureKey);
+          onAdd={(featureKey) => {
+            character.addClassFeature(selectedClass.key, featureKey);
             setChoosableClasses(undefined);
+          }}
+          onRemove={(featureKey) => {
+            character.removeClassFeature(selectedClass.key, featureKey);
           }}
           acquireDisabled={character.getAvailableShards() <= 0}
           onAscend={() => {

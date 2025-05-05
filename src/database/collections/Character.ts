@@ -61,7 +61,8 @@ const characterSchema: RxJsonSchema<Character> = _characterSchema;
 
 type CharacterMethods = {
   getClassState: (classKey: string) => CharacterClassState | undefined;
-  acquireClassTrait: (classKey: string, featureKey: string) => void;
+  addClassFeature: (classKey: string, featureKey: string) => void;
+  removeClassFeature: (classKey: string, featureKey: string) => void;
   ascendClass: (classKey: string) => void;
 
   getAttributeBonus: (attributeKey: CharacterAttributeKey) => number;
@@ -146,7 +147,7 @@ const characterMethods: CharacterMethods = {
   getClassState: function (this: CharacterDocument, classKey: string) {
     return this.classStates.find((classState) => classState.key === classKey);
   },
-  acquireClassTrait: function (this: CharacterDocument, classKey: string, featureKey: string) {
+  addClassFeature: function (this: CharacterDocument, classKey: string, featureKey: string) {
     this.modify((character) => {
       const patchedClassStates = structuredClone(this.classStates);
       let classState = patchedClassStates.find((ccs) => ccs.key == classKey);
@@ -158,6 +159,27 @@ const characterMethods: CharacterMethods = {
       }
 
       classState.featureKeys.push(featureKey);
+      return { ...character, classStates: patchedClassStates };
+    });
+  },
+  removeClassFeature: function (this: CharacterDocument, classKey: string, featureKey: string) {
+    this.modify((character) => {
+      const patchedClassStates = structuredClone(this.classStates);
+      const classStateIndex = patchedClassStates.findIndex((ccs) => ccs.key == classKey);
+
+      // classState not found, nothing to remove
+      if (classStateIndex === -1) {
+        return character;
+      }
+
+      const classState = patchedClassStates[classStateIndex];
+      classState.featureKeys = classState.featureKeys.filter((key) => key !== featureKey);
+
+      // remove the classState if no features are left
+      if (classState.featureKeys.length === 0) {
+        patchedClassStates.splice(classStateIndex, 1);
+      }
+
       return { ...character, classStates: patchedClassStates };
     });
   },

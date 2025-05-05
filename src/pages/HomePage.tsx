@@ -56,9 +56,17 @@ export const HomePage: React.FC = () => {
             onClick={() => navigate(`/character/${character.id}`)}
           >
             <strong style={{ fontSize: 28, fontFamily: 'Grenze' }}>{character.name}</strong>
-            <div style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+            <div
+              style={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
               {[...character.classStates]
                 .sort((a, b) => b.ascension - a.ascension)
+                .filter((classState) => classByKey[classState.key].type === 'CLASS')
                 .map((classState) => {
                   const cc = classByKey[classState.key];
                   return cc.getName(classState);

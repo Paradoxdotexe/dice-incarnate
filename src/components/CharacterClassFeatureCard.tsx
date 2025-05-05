@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { CharacterClassDocument } from '../database/collections/CharacterClass';
 import { CharacterClassFeatureDocument } from '../database/collections/CharacterClassFeature';
 import LockIcon from '../assets/icons/Lock.svg?react';
+import RemoveIcon from '../assets/icons/Remove.svg?react';
 import { CharacterClassState } from '../database/collections/Character';
 
 type CharacterClassFeatureCardProps = {
@@ -15,7 +16,8 @@ type CharacterClassFeatureCardProps = {
   feature: CharacterClassFeatureDocument;
   isAcquired: boolean;
   isAcquirable: boolean;
-  onClick: () => void;
+  onAdd: () => void;
+  onRemove: () => void;
   ascension: number;
 };
 
@@ -45,19 +47,19 @@ export const CharacterClassFeatureCard: React.FC<CharacterClassFeatureCardProps>
     isLocked = true;
   }
   // check if locked by not having the previous rune
-  if (!props.isAcquired && props.classState) {
-    const runeLevelMatch = /_R(\d)_/.exec(props.feature.key);
-    if (runeLevelMatch) {
-      const runeLevel = parseInt(runeLevelMatch[1]);
-      const runeType = props.feature.key.split('_').at(-1);
-      if (
-        runeLevel > 1 &&
-        !props.classState.featureKeys.find((key) => key.includes(`_R${runeLevel - 1}_${runeType}`))
-      ) {
-        isLocked = true;
-      }
-    }
-  }
+  // if (!props.isAcquired && props.classState) {
+  //   const runeLevelMatch = /_R(\d)_/.exec(props.feature.key);
+  //   if (runeLevelMatch) {
+  //     const runeLevel = parseInt(runeLevelMatch[1]);
+  //     const runeType = props.feature.key.split('_').at(-1);
+  //     if (
+  //       runeLevel > 1 &&
+  //       !props.classState.featureKeys.find((key) => key.includes(`_R${runeLevel - 1}_${runeType}`))
+  //     ) {
+  //       isLocked = true;
+  //     }
+  //   }
+  // }
 
   const isAcquirable = props.isAcquirable && !isLocked;
 
@@ -65,7 +67,7 @@ export const CharacterClassFeatureCard: React.FC<CharacterClassFeatureCardProps>
     <NFlex
       vertical
       gap={12}
-      onClick={isAcquirable ? props.onClick : undefined}
+      onClick={isAcquirable ? props.onAdd : undefined}
       className={classNames({
         acquired: props.isAcquired,
         acquirable: isAcquirable,
@@ -98,6 +100,22 @@ export const CharacterClassFeatureCard: React.FC<CharacterClassFeatureCardProps>
             rgba(255, 255, 255, 0.07) 20px
           );
         }
+
+        .icon--remove {
+          font-size: 15px;
+          color: rgba(255, 255, 255, 0.7);
+          cursor: pointer;
+        }
+
+        .icon--remove:hover {
+          color: white;
+        }
+
+        &:not(:hover) {
+          .icon--remove {
+            display: none;
+          }
+        }
       `}
     >
       <NFlex gap={9} align="start">
@@ -107,11 +125,8 @@ export const CharacterClassFeatureCard: React.FC<CharacterClassFeatureCardProps>
             <div style={{ fontSize: 20, fontWeight: 700, lineHeight: '25px' }}>
               {props.feature.name}
             </div>
-            {isLocked && (
-              <NFlex gap={6} align="center">
-                <LockIcon style={{ fontSize: 15 }} />
-              </NFlex>
-            )}
+            {props.isAcquired && <RemoveIcon className="icon--remove" onClick={props.onRemove} />}
+            {isLocked && <LockIcon style={{ fontSize: 15 }} />}
           </NFlex>
           <FeatureClassDescription
             class={props.class}

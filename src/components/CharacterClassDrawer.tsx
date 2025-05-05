@@ -20,7 +20,8 @@ type CharacterClassDrawerProps = {
   class: CharacterClassDocument;
   classState?: CharacterClassState;
   onClick?: () => void;
-  onAcquire: (featureKey: string) => void;
+  onAdd: (featureKey: string) => void;
+  onRemove: (featureKey: string) => void;
   acquireDisabled?: boolean;
   onAscend?: () => void;
   ascendDisabled?: boolean;
@@ -113,7 +114,8 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (props)
                     feature={feature}
                     isAcquired={isAcquired}
                     isAcquirable={isAcquirable}
-                    onClick={() => props.onAcquire(feature.key)}
+                    onAdd={() => props.onAdd(feature.key)}
+                    onRemove={() => props.onRemove(feature.key)}
                     ascension={ascension}
                   />
                 );
