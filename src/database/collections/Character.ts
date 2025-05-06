@@ -64,6 +64,7 @@ type CharacterMethods = {
   addClassFeature: (classKey: string, featureKey: string) => void;
   removeClassFeature: (classKey: string, featureKey: string) => void;
   ascendClass: (classKey: string) => void;
+  descendClass: (classKey: string) => void;
 
   getAttributeBonus: (attributeKey: CharacterAttributeKey) => number;
 
@@ -194,6 +195,20 @@ const characterMethods: CharacterMethods = {
       }
 
       classState.ascension += 1;
+      return { ...character, classStates: patchedClassStates };
+    });
+  },
+  descendClass: function (this: CharacterDocument, classKey: string) {
+    this.modify((character) => {
+      const patchedClassStates = structuredClone(this.classStates);
+      const classState = patchedClassStates.find((ccs) => ccs.key == classKey);
+
+      // unexpected
+      if (!classState) {
+        return character;
+      }
+
+      classState.ascension -= 1;
       return { ...character, classStates: patchedClassStates };
     });
   },

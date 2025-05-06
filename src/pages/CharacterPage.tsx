@@ -318,6 +318,9 @@ export const CharacterPage: React.FC = () => {
           onAscend={() => {
             character.ascendClass(selectedClass.key);
           }}
+          onDescend={() => {
+            character.descendClass(selectedClass.key);
+          }}
           ascendDisabled={character.getAvailableSurges() <= 0}
         />
       )}

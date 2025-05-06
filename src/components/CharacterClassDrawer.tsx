@@ -23,7 +23,8 @@ type CharacterClassDrawerProps = {
   onAdd: (featureKey: string) => void;
   onRemove: (featureKey: string) => void;
   acquireDisabled?: boolean;
-  onAscend?: () => void;
+  onAscend: () => void;
+  onDescend: () => void;
   ascendDisabled?: boolean;
 };
 
@@ -87,17 +88,24 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (props)
             </div>
           </NFlex>
 
-          {props.class.ascendable && (
-            <NButton
-              color={color}
-              onClick={props.onAscend}
-              disabled={
-                isMaxAscension || props.ascendDisabled || !props.classState?.featureKeys.length
-              }
-            >
-              {isMaxAscension ? 'Max Level' : 'Surge'}
-            </NButton>
-          )}
+          <NFlex gap={6}>
+            {ascension > 1 && (
+              <NButton type="outline" onClick={props.onDescend}>
+                Unsurge
+              </NButton>
+            )}
+            {props.class.ascendable && (
+              <NButton
+                color={opacify(-0.25, color)}
+                onClick={props.onAscend}
+                disabled={
+                  isMaxAscension || props.ascendDisabled || !props.classState?.featureKeys.length
+                }
+              >
+                {isMaxAscension ? 'Max Level' : 'Surge'}
+              </NButton>
+            )}
+          </NFlex>
         </NFlex>
 
         <NFlex vertical gap={18}>
