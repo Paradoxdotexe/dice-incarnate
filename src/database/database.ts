@@ -47,14 +47,16 @@ export const initDatabase = async () => {
 
   // replicate collections to Firestore
   const firestore = initFirestore();
-  await Promise.all(
-    Object.values(db.collections).map((collection) => replicateCollection(firestore, collection))
-  );
+  Object.values(db.collections).forEach((collection) => replicateCollection(firestore, collection));
 
-  // upsert static data
   if (isDev()) {
-    db.collections.characterClass.bulkUpsert(CHARACTER_CLASSES);
-    db.collections.characterClassFeature.bulkUpsert(CHARACTER_CLASS_FEATURES);
+    // @ts-ignore
+    window.sync_static = async () => {
+      console.log('Syncing static data...');
+      await db.collections.characterClass.bulkUpsert(CHARACTER_CLASSES);
+      await db.collections.characterClassFeature.bulkUpsert(CHARACTER_CLASS_FEATURES);
+      console.log('Done.');
+    };
   }
 
   return db;
@@ -76,7 +78,7 @@ const initFirestore = () => {
 };
 
 const replicateCollection = async (firestore: Firestore, collection: RxCollection) => {
-  const replicationState = replicateFirestore({
+  replicateFirestore({
     replicationIdentifier: `${collection.name}-replication`,
     collection,
     firestore: {
@@ -96,6 +98,4 @@ const replicateCollection = async (firestore: Firestore, collection: RxCollectio
       batchSize: 10,
     },
   });
-
-  await replicationState.startPromise;
 };
