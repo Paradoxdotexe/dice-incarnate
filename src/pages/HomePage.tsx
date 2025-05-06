@@ -21,7 +21,7 @@ export const HomePage: React.FC = () => {
       .insert({
         id,
         name: 'Unnamed Character',
-        experience: 300 + 600 + 900 + 1200 + 1500 + 1800, // total experience for level 7
+        experience: 300 + 600 + 900 + 1200 + 1500 + 1800 + 2100, // total experience for level 8
         classStates: [],
       })
       .then(() => navigate(`/character/${id}`));
@@ -71,7 +71,7 @@ export const HomePage: React.FC = () => {
                   const cc = classByKey[classState.key];
                   return cc.getName(classState);
                 })
-                .join(' / ')}
+                .join(' / ') || 'Undetermined'}
             </div>
           </NFlex>
         ))}

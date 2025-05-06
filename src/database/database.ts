@@ -17,6 +17,8 @@ import { getFirestore, collection as getFirestoreCollection, Firestore } from 'f
 import { replicateFirestore } from 'rxdb/plugins/replication-firestore';
 import { RxDBLeaderElectionPlugin } from 'rxdb/plugins/leader-election';
 import { isDev } from '../utils/isDev';
+import { disableWarnings } from 'rxdb/plugins/dev-mode';
+import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 
 export type DatabaseCollections = {
   character: CharacterCollection;
@@ -28,15 +30,18 @@ export type Database = RxDatabase<DatabaseCollections>;
 
 export const initDatabase = async () => {
   if (isDev()) {
+    disableWarnings();
     addRxPlugin(RxDBDevModePlugin);
   }
   addRxPlugin(RxDBMigrationSchemaPlugin);
   addRxPlugin(RxDBQueryBuilderPlugin);
   addRxPlugin(RxDBLeaderElectionPlugin);
+  addRxPlugin(RxDBUpdatePlugin);
 
   const db = await createRxDatabase<DatabaseCollections>({
     name: 'dice-incarnate-database',
     storage: wrappedValidateAjvStorage({ storage: getRxStorageDexie() }),
+    closeDuplicates: true,
   });
 
   await db.addCollections({
@@ -55,6 +60,13 @@ export const initDatabase = async () => {
       console.log('Syncing static data...');
       await db.collections.characterClass.bulkUpsert(CHARACTER_CLASSES);
       await db.collections.characterClassFeature.bulkUpsert(CHARACTER_CLASS_FEATURES);
+      console.log('Done.');
+    };
+
+    // @ts-ignore
+    window.purge_characters = async () => {
+      console.log('Purging character data...');
+      await db.collections.character.find().remove();
       console.log('Done.');
     };
   }
