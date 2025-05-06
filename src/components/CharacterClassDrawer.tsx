@@ -80,6 +80,7 @@ export const CharacterClassDrawer: React.FC<CharacterClassDrawerProps> = (props)
               style={{
                 fontSize: 15,
                 color: 'white',
+                whiteSpace: 'nowrap',
               }}
             >
               {props.class.description}

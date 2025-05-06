@@ -155,7 +155,7 @@ const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (props) 
 
   // italicize
   let description = reactStringReplace(
-    props.feature.description,
+    props.feature.getDescription(props.ascension),
     /\*(.+?)\*/g,
     (str, _, offset) => <em key={`EM#${props.feature.key}#${offset}`}>{str}&nbsp;</em>
   );
@@ -180,12 +180,6 @@ const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (props) 
         {attributeBonus ? ` + ${attributeBonus}` : ''}
       </NTag>
     );
-  });
-
-  // parse math expression
-  description = reactStringReplace(description, /\[(.+?)\]/g, (str) => {
-    str = str.replace('A', props.ascension.toString());
-    return eval(str);
   });
 
   return (

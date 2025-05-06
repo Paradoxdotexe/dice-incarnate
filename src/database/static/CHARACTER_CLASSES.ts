@@ -340,7 +340,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: 'ARMOR_HEAVY',
     type: 'ARMOR',
-    name: 'Heavy',
+    name: 'Heavy Armor',
     description: 'Heavy armor that is strong against physical attacks.',
     color: '#888888',
     order: 1,
@@ -378,7 +378,7 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: 'ARMOR_LIGHT',
     type: 'ARMOR',
-    name: 'Light',
+    name: 'Light Armor',
     description: 'Light armor that is balanced against both physical and magical attacks.',
     color: '#888888',
     order: 2,
@@ -416,10 +416,11 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
   {
     key: 'ARMOR_MAGIC',
     type: 'ARMOR',
-    name: 'Magic',
+    name: 'Magic Armor',
     description: 'Magic armor that is strong against magical attacks.',
     color: '#888888',
     order: 3,
+    ascendable: true,
     featureKeys: [
       'ARMOR_MAGIC_F1',
       'ARMOR_MAGIC_R1_STONE',

@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import { NFlex } from '../common/NFlex';
 import {
   CHARACTER_CLASS_CARD_HEIGHT,
@@ -16,18 +16,58 @@ import { NDrawer } from '../common/NDrawer';
 import PlusIcon from '../assets/icons/Plus.svg?react';
 import { useCharacterClasses } from '../hooks/useCharacterClasses';
 import { Header } from '../components/Header';
-import { capitalize } from 'lodash-es';
+import { capitalize, keyBy } from 'lodash-es';
 import { CharacterClassDocument } from '../database/collections/CharacterClass';
 import { CharacterLevelPanel } from '../components/CharacterLevelPanel';
+import ShieldIcon from '../assets/icons/Shield.svg?react';
 
 const ROW_GAP = 18;
 
 export const CharacterPage: React.FC = () => {
   const character = useCharacter();
   const characterClasses = useCharacterClasses();
+  const characterClassByKey = keyBy(characterClasses, 'key');
 
   const [selectedClassKey, setSelectedClassKey] = useState<string>();
   const [choosableClasses, setChoosableClasses] = useState<CharacterClassDocument[]>();
+
+  const [armorClass, magicClass] = useMemo(() => {
+    let [armorClass, magicClass] = [10, 10];
+
+    if (!character || !characterClasses) {
+      return [armorClass, magicClass];
+    }
+
+    for (const classState of character.classStates) {
+      const cc = characterClassByKey[classState.key];
+      const featureByKey = keyBy(cc.features, 'key');
+      for (const featureKey of classState.featureKeys) {
+        const feature = featureByKey[featureKey];
+        const description = feature.getDescription(classState.ascension);
+
+        const armorClassBonusMatch = /Armor Class is increased by (\d+)/.exec(description);
+        if (armorClassBonusMatch) {
+          if (feature.name === 'Armor Training') {
+            if (
+              !character.classStates.find(
+                (classState) => classState.key === 'ARMOR_HEAVY' || classState.key === 'ARMOR_LIGHT'
+              )
+            ) {
+              continue;
+            }
+          }
+          armorClass += parseInt(armorClassBonusMatch[1]);
+        }
+
+        const magicClassBonusMatch = /Magic Class is increased by (\d+)/.exec(description);
+        if (magicClassBonusMatch) {
+          magicClass += parseInt(magicClassBonusMatch[1]);
+        }
+      }
+    }
+
+    return [armorClass, magicClass];
+  }, [character, characterClasses]);
 
   if (!character || !characterClasses) {
     return null;
@@ -50,8 +90,30 @@ export const CharacterPage: React.FC = () => {
       `}
       gap={15}
     >
-      <NFlex style={{ width: 894, paddingBottom: 48 }}>
+      <NFlex justify="space-between" style={{ width: 894, paddingBottom: 48 }}>
         <CharacterLevelPanel />
+
+        <NFlex gap={12}>
+          <NFlex vertical align="center" gap={6}>
+            <div style={{ fontSize: 12 }}>Armor Class</div>
+            <NFlex vertical align="center" justify="center">
+              <ShieldIcon style={{ width: 48, color: '#1f82f3' }} />
+              <div style={{ fontSize: 24, fontWeight: 'bold', position: 'absolute' }}>
+                {armorClass}
+              </div>
+            </NFlex>
+          </NFlex>
+
+          <NFlex vertical align="center" gap={6}>
+            <div style={{ fontSize: 12 }}>Magic Class</div>
+            <NFlex vertical align="center" justify="center">
+              <ShieldIcon style={{ width: 48, color: '#f31f9b' }} />
+              <div style={{ fontSize: 24, fontWeight: 'bold', position: 'absolute' }}>
+                {magicClass}
+              </div>
+            </NFlex>
+          </NFlex>
+        </NFlex>
       </NFlex>
 
       <NFlex style={{ width: 894 }} gap={ROW_GAP}>

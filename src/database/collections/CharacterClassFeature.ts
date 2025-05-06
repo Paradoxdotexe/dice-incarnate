@@ -4,36 +4,37 @@ import {
   RxCollectionCreator,
   RxDocument,
   RxJsonSchema,
-} from "rxdb";
+} from 'rxdb';
+import reactStringReplace from 'react-string-replace';
 
 const _characterClassFeatureSchema = {
-  title: "CharacterClassFeature",
-  description: "",
+  title: 'CharacterClassFeature',
+  description: '',
   version: 0,
-  primaryKey: "key",
-  type: "object",
+  primaryKey: 'key',
+  type: 'object',
   properties: {
     key: {
-      type: "string",
+      type: 'string',
       maxLength: 36,
     },
     name: {
-      type: "string",
+      type: 'string',
     },
     description: {
-      type: "string",
+      type: 'string',
     },
     order: {
-      type: "number",
+      type: 'number',
     },
     attributeRequirement: {
-      type: "number",
+      type: 'number',
     },
     ascensionRequirement: {
-      type: "number",
+      type: 'number',
     },
   },
-  required: ["key", "name", "description", "order"],
+  required: ['key', 'name', 'description', 'order'],
 } as const;
 
 export type CharacterClassFeature = ExtractDocumentTypeFromTypedRxJsonSchema<
@@ -44,6 +45,7 @@ const characterClassFeatureSchema: RxJsonSchema<CharacterClassFeature> =
   _characterClassFeatureSchema;
 
 type CharacterClassFeatureMethods = {
+  getDescription: (ascension: number) => string;
   getMana: () => number | undefined;
   getRuneType: () => string | undefined;
 };
@@ -54,13 +56,19 @@ export type CharacterClassFeatureDocument = RxDocument<
 >;
 
 const characterClassFeatureMethods: CharacterClassFeatureMethods = {
+  getDescription: function (this: CharacterClassFeatureDocument, ascension: number) {
+    return reactStringReplace(this.description, /\[(.+?)\]/g, (str) => {
+      str = str.replace('A', ascension.toString());
+      return eval(str);
+    }).join('');
+  },
   getMana: function (this: CharacterClassFeatureDocument) {
     const match = /spend (\d) Mana/g.exec(this.description);
     return match ? parseInt(match[1]) : undefined;
   },
   getRuneType: function (this: CharacterClassFeatureDocument) {
-    if (this.key.includes("_R")) {
-      return this.key.split("_").at(-1);
+    if (this.key.includes('_R')) {
+      return this.key.split('_').at(-1);
     }
   },
 };
@@ -70,8 +78,7 @@ export type CharacterClassFeatureCollection = RxCollection<
   CharacterClassFeatureMethods
 >;
 
-export const CHARACTER_CLASS_FEATURE_COLLECTION: RxCollectionCreator<CharacterClassFeature> =
-  {
-    schema: characterClassFeatureSchema,
-    methods: characterClassFeatureMethods,
-  };
+export const CHARACTER_CLASS_FEATURE_COLLECTION: RxCollectionCreator<CharacterClassFeature> = {
+  schema: characterClassFeatureSchema,
+  methods: characterClassFeatureMethods,
+};

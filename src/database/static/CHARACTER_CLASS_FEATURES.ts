@@ -915,7 +915,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'WEAPON_STAFF_R1_STONE',
     name: 'Rune of Stone Wood',
-    description: 'This weapon increases your AC by 1.',
+    description: 'Your Armor Class is increased by 1.',
     order: 1,
     ascensionRequirement: 1,
   },
