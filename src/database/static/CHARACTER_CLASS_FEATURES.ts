@@ -938,7 +938,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'WEAPON_STAFF_R1_SKY',
     name: 'Rune of Sky Wood',
-    description: 'This weapon increases your Max Movement by 5ft.',
+    description: 'Your Max Movement is increased by 5ft.',
     order: 1,
     ascensionRequirement: 1,
   },

@@ -69,6 +69,33 @@ export const CharacterPage: React.FC = () => {
     return [armorClass, magicClass];
   }, [character, characterClasses]);
 
+  const maxMovement = useMemo(() => {
+    if (!character || !characterClasses) {
+      return 20;
+    }
+
+    let maxMovement =
+      Math.floor(
+        (20 + character.getAttributeBonus('STR') + character.getAttributeBonus('AGI')) / 5
+      ) * 5;
+
+    for (const classState of character.classStates) {
+      const cc = characterClassByKey[classState.key];
+      const featureByKey = keyBy(cc.features, 'key');
+      for (const featureKey of classState.featureKeys) {
+        const feature = featureByKey[featureKey];
+        const description = feature.getDescription(classState.ascension);
+
+        const movementBonusMatch = /Max Movement is increased by (\d+)/.exec(description);
+        if (movementBonusMatch) {
+          maxMovement += parseInt(movementBonusMatch[1]);
+        }
+      }
+    }
+
+    return maxMovement;
+  }, [character, characterClasses]);
+
   if (!character || !characterClasses) {
     return null;
   }
@@ -93,12 +120,22 @@ export const CharacterPage: React.FC = () => {
       <NFlex justify="space-between" style={{ width: 894, paddingBottom: 48 }}>
         <CharacterLevelPanel />
 
-        <NFlex gap={12}>
+        <NFlex gap={18}>
+          <NFlex vertical align="center" gap={6}>
+            <div style={{ fontSize: 12 }}>Movement</div>
+            <NFlex vertical align="center" justify="center">
+              <ShieldIcon style={{ width: 48, color: 'transparent' }} />
+              <div style={{ fontSize: 28, fontWeight: 'bold', position: 'absolute' }}>
+                {maxMovement}
+              </div>
+            </NFlex>
+          </NFlex>
+
           <NFlex vertical align="center" gap={6}>
             <div style={{ fontSize: 12 }}>Armor Class</div>
             <NFlex vertical align="center" justify="center">
               <ShieldIcon style={{ width: 48, color: '#1f82f3' }} />
-              <div style={{ fontSize: 24, fontWeight: 'bold', position: 'absolute' }}>
+              <div style={{ fontSize: 28, fontWeight: 'bold', position: 'absolute' }}>
                 {armorClass}
               </div>
             </NFlex>
@@ -108,7 +145,7 @@ export const CharacterPage: React.FC = () => {
             <div style={{ fontSize: 12 }}>Magic Class</div>
             <NFlex vertical align="center" justify="center">
               <ShieldIcon style={{ width: 48, color: '#f31f9b' }} />
-              <div style={{ fontSize: 24, fontWeight: 'bold', position: 'absolute' }}>
+              <div style={{ fontSize: 28, fontWeight: 'bold', position: 'absolute' }}>
                 {magicClass}
               </div>
             </NFlex>
