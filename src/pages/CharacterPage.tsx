@@ -96,6 +96,14 @@ export const CharacterPage: React.FC = () => {
     return maxMovement;
   }, [character, characterClasses]);
 
+  const maxHitPoints = useMemo(() => {
+    if (!character) {
+      return 50;
+    }
+
+    return (10 + character.getAttributeBonus('STR')) * 5;
+  }, [character]);
+
   if (!character || !characterClasses) {
     return null;
   }
@@ -121,6 +129,16 @@ export const CharacterPage: React.FC = () => {
         <CharacterLevelPanel />
 
         <NFlex gap={18}>
+          <NFlex vertical align="center" gap={6}>
+            <div style={{ fontSize: 12 }}>Hit Points</div>
+            <NFlex vertical align="center" justify="center">
+              <ShieldIcon style={{ width: 48, color: 'transparent' }} />
+              <div style={{ fontSize: 28, fontWeight: 'bold', position: 'absolute' }}>
+                {maxHitPoints}
+              </div>
+            </NFlex>
+          </NFlex>
+
           <NFlex vertical align="center" gap={6}>
             <div style={{ fontSize: 12 }}>Movement</div>
             <NFlex vertical align="center" justify="center">
