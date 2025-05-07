@@ -39,12 +39,20 @@ export const CharacterClassFeatureCard: React.FC<CharacterClassFeatureCardProps>
     }
   }
   // check if locked by an already-acquired max rune
-  if (
-    !props.isAcquired &&
-    !!props.classState?.featureKeys.find((key) => key.includes('_R5_')) &&
-    props.feature.key.includes('_R5_')
-  ) {
-    isLocked = true;
+  if (!props.isAcquired && props.classState?.featureKeys) {
+    if (
+      props.class.type === 'WEAPON' &&
+      props.classState.featureKeys.find((key) => key.includes('_R3_')) &&
+      props.feature.key.includes('_R3_')
+    ) {
+      isLocked = true;
+    } else if (
+      props.class.type === 'ARMOR' &&
+      props.classState.featureKeys.find((key) => key.includes('_R5_')) &&
+      props.feature.key.includes('_R5_')
+    ) {
+      isLocked = true;
+    }
   }
   // check if locked by not having the previous rune
   // if (!props.isAcquired && props.classState) {
