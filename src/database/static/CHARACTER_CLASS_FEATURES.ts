@@ -327,7 +327,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'STR_BARBARIAN_F5',
     name: 'Unkillable',
-    description: 'Your hit points is increased by [10*A].',
+    description: 'Your Max Hit Points is increased by [10*A].',
     order: 5,
   },
   {

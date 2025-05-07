@@ -97,12 +97,28 @@ export const CharacterPage: React.FC = () => {
   }, [character, characterClasses]);
 
   const maxHitPoints = useMemo(() => {
-    if (!character) {
+    if (!character || !characterClasses) {
       return 50;
     }
 
-    return (10 + character.getAttributeBonus('STR')) * 5;
-  }, [character]);
+    let maxHitPoints = (10 + character.getAttributeBonus('STR')) * 5;
+
+    for (const classState of character.classStates) {
+      const cc = characterClassByKey[classState.key];
+      const featureByKey = keyBy(cc.features, 'key');
+      for (const featureKey of classState.featureKeys) {
+        const feature = featureByKey[featureKey];
+        const description = feature.getDescription(classState.ascension);
+
+        const hpBonusMatch = /Max Hit Points is increased by (\d+)/.exec(description);
+        if (hpBonusMatch) {
+          maxHitPoints += parseInt(hpBonusMatch[1]);
+        }
+      }
+    }
+
+    return maxHitPoints;
+  }, [character, characterClasses]);
 
   if (!character || !characterClasses) {
     return null;
