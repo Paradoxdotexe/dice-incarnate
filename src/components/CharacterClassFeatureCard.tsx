@@ -171,13 +171,12 @@ const FeatureClassDescription: React.FC<FeatureClassDescriptionProps> = (props) 
   ));
 
   // parse dice expressions
-  description = reactStringReplace(description, /(\dd\d{1,2})/g, (str, _, offset) => {
+  description = reactStringReplace(description, /(\dd\d{1,2}(?: \+ B)?)/g, (str, _, offset) => {
     const diceCount = parseInt(str[0]) * props.ascension;
     return (
       <NTag key={`DICE#${props.feature.key}#${offset}`}>
         {diceCount}
-        {str.slice(1)}
-        {attributeBonus ? ` + ${attributeBonus}` : ''}
+        {str.slice(1).replace(' + B', attributeBonus ? ` + ${attributeBonus}` : '')}
       </NTag>
     );
   });

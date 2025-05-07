@@ -288,7 +288,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'STR_KNIGHT_F5',
     name: 'Martial Training',
-    description: 'Your melee attacks deal an additional 1d6 damage.',
+    description: 'The lowest you can roll on a melee attack roll is a 5.',
     order: 5,
   },
   {
@@ -1084,7 +1084,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'ARMOR_HEAVY_R4_STONE',
     name: 'Rune of Stone Shell',
     description:
-      'Roll a DC 15 Strength check to turn this armor into an indestructible metal. Until the start of your next turn, your Armor Class is increased by 5. You can continue this effect with an Action. This can only be done once per Rest.',
+      'Roll a DC 15 Strength check to turn this armor into an indestructible metal. Until the start of your next turn, your AC is increased by 5. You can continue this effect with an Action. This can only be done once per Rest.',
     order: 4,
     ascensionRequirement: 4,
   },
@@ -1278,7 +1278,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'ARMOR_LIGHT_R5_STONE',
     name: 'Rune of Stone Warden',
     description:
-      'This armor becomes "Stone Warden". If you consume no movement on your turn, your Armor Class is increased by 2 until you move again.',
+      'This armor becomes "Stone Warden". If you consume no movement on your turn, your AC is increased by 2 until you move again.',
     order: 5,
     ascensionRequirement: 5,
   },

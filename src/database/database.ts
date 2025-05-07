@@ -64,9 +64,17 @@ export const initDatabase = async () => {
     };
 
     // @ts-ignore
-    window.purge_characters = async () => {
+    window.purge_character = async (id: string) => {
       console.log('Purging character data...');
-      await db.collections.character.find().remove();
+      await db.collections.character
+        .find({
+          selector: {
+            id: {
+              $eq: id,
+            },
+          },
+        })
+        .remove();
       console.log('Done.');
     };
   }
