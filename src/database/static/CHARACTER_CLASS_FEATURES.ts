@@ -470,14 +470,14 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'INT_MANCER_F2',
     name: 'Arcane Turret',
     description:
-      'Roll a DC 10 Knowledge check to construct a magical turret. On a success, spend 2 Mana. On your turn, the turret can deal 1d12 Sun damage to a creature within 15ft. It has an AC and MC of 15 and deconstructs after taking 1 damage.',
+      'Roll a DC 10 Knowledge check to construct a magical turret. On a success, spend 2 Mana. On your turn, the turret can deal 1d12 Sun damage to a creature within 30ft. It has an AC and MC of 15 and deconstructs after taking 1 damage.',
     order: 2,
   },
   {
     key: 'INT_MANCER_F3',
     name: 'Arcane Automaton',
     description:
-      'Roll a DC 15 Knowledge check to construct a magical automaton. On a success, spend 3 Mana. On your turn, the automaton can move 15ft and deal 1d12 Sun damage to a creature within 5ft. It has an AC and MC of 20 and deconstructs after taking 1 damage.',
+      'Roll a DC 15 Knowledge check to construct a magical automaton. On a success, spend 3 Mana. On your turn, the automaton can move 20ft and deal 1d12 Sun damage to a creature within 5ft. It has an AC and MC of 20 and deconstructs after taking 1 damage.',
     order: 3,
   },
   {
@@ -807,7 +807,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_BOW_R2_STONE',
     name: 'Rune of Stone Arrow',
     description:
-      "Roll a Strength check to fire a weighted arrow at a creature or object within range. If it hits a creature's MC, they take 2d12 Stone damage and cannot move on their next turn. If it hits an object, it deals 2d12 Stone damage. This can only be done once per Rest.",
+      "Roll a Strength check to fire a weighted arrow at a creature or object within range. If it hits a creature's MC, they take 2d12 Stone damage and cannot move on their next turn. If it hits an object, it deals 3d12 Stone damage. This can only be done once per Rest.",
     order: 2,
     ascensionRequirement: 2,
   },
