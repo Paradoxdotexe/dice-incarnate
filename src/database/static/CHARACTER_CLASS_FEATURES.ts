@@ -92,7 +92,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'AGI_GENERAL_F3',
     name: 'Slippery',
     description:
-      '*Missed me!* If an enemy misses an attack against you, you can immediately move 5ft without incurring an opportunity attack.',
+      '*Missed me!* If an enemy misses an attack against you, you can Disengage and move 5ft as a Free Action.',
     order: 5,
     attributeRequirement: 15,
   },
@@ -262,7 +262,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'STR_KNIGHT_F1',
     name: 'Valiant Duel',
     description:
-      'Roll a DC 5 Strength check to compel a creature within 5ft to duel. On a success, spend 1 Mana. That creature can only attack you on their next turn and attacks with disadvantage.',
+      'Roll a DC 5 Strength check to compel a creature within 15ft to duel. On a success, spend 1 Mana. That creature can only attack you on their next turn and attacks with disadvantage.',
     order: 1,
   },
   {
@@ -294,7 +294,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'STR_KNIGHT_F6',
     name: 'Leadership Training',
-    description: 'All allies within 5ft have advantage on attack rolls.',
+    description: 'All allies within 15ft have advantage on attack rolls.',
     order: 6,
   },
   {
@@ -321,7 +321,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
   {
     key: 'STR_BARBARIAN_F4',
     name: 'Unescapable',
-    description: 'Your range for opportunity attacks is extended to 10ft.',
+    description: 'If a creature comes within 10ft of you, they automatically become Engaged. Your range for opportunity attacks is extended to 10ft.',
     order: 4,
   },
   {
@@ -463,21 +463,21 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'INT_MANCER_F1',
     name: 'Arcane Grenade',
     description:
-      'Roll a DC 5 Knowledge check to construct and throw a magical grenade up to 30ft. On a success, spend 1 Mana. The grenade deals 1d6 Sun damage to all creatures within 5ft.',
+      'Roll a Knowledge check to construct and throw a magical grenade at a spot within 30ft, flashing any creatures within 5ft. On a success, spend 1 Mana. The grenade deals 1d6 Sun damage to all creatures within 5ft.',
     order: 1,
   },
   {
     key: 'INT_MANCER_F2',
     name: 'Arcane Turret',
     description:
-      'Roll a DC 10 Knowledge check to construct a magical turret. On a success, spend 2 Mana. On your turn, the turret can deal 1d12 Sun damage to a creature within 30ft. It has an AC and MC of 15 and deconstructs after taking 1 damage.',
+      'Roll a DC 10 Knowledge check to construct a magical turret. On a success, spend 2 Mana. On your turn, the turret can deal 1d12 Sun damage to a creature within 30ft. It has an AC and MC of 15 and deconstructs after taking 10 damage.',
     order: 2,
   },
   {
     key: 'INT_MANCER_F3',
     name: 'Arcane Automaton',
     description:
-      'Roll a DC 15 Knowledge check to construct a magical automaton. On a success, spend 3 Mana. On your turn, the automaton can move 20ft and deal 1d12 Sun damage to a creature within 5ft. It has an AC and MC of 20 and deconstructs after taking 1 damage.',
+      'Roll a DC 15 Knowledge check to construct a magical automaton. On a success, spend 3 Mana. On your turn, the automaton can move 20ft and deal 1d12 Sun damage to a creature within 5ft. It has an AC and MC of 20 and deconstructs after taking 10 damage.',
     order: 3,
   },
   {
@@ -815,7 +815,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_BOW_R3_STONE',
     name: 'Rune of Stone Piercing',
     description:
-      'This weapon becomes "Stone Piercer". Arrows fired from this weapon continue through their first target and can hit another target behind them. This collateral attack does not require an Action.',
+      'This weapon becomes "Stone Piercer". Arrows fired from this weapon continue through their first target and can hit another target behind them. This collateral attack is a Free Action.',
     order: 3,
     ascensionRequirement: 3,
   },
@@ -877,7 +877,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'WEAPON_BOW_R2_MOON',
     name: 'Rune of Moon Arrow',
     description:
-      'Roll a DC 15 Charisma check to spawn an illusory double at a spot within range. You can speak and attack through this double. This double has 1d12 hit points and shares your AC and MC. This can only be done once per Rest.',
+      'Roll a DC 15 Charisma check to spawn an illusory double at a spot within range. You can speak and attack through this double. This double has 30 hit points and shares your AC and MC. This can only be done once per Rest.',
     order: 2,
     ascensionRequirement: 2,
   },
