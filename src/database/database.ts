@@ -110,12 +110,8 @@ const replicateCollection = async (firestore: Firestore, collection: RxCollectio
     deletedField: '_deleted',
     serverTimestampField: 'serverTimestamp',
     // replicate from Firestore to IndexedDB
-    pull: {
-      batchSize: 10,
-    },
-    // replicate from IndexedDB to Firestore
-    push: {
-      batchSize: 10,
-    },
+    pull: { batchSize: 10 },
+    // replicate from IndexedDB to Firestore (only in DEV MODE)
+    push: isDev() ? { batchSize: 10 } : undefined,
   });
 };

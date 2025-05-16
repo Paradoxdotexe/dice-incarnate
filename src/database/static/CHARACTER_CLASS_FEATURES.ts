@@ -388,7 +388,7 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'AGI_RANGER_F2',
     name: "Hunter's Headshot",
     description:
-      'Roll an Agility check to focus a ranged attack against a creature within range. On a success, spend 2 Mana. That creature takes 2d12 Sky damage.',
+      'Roll an Agility check to focus a ranged attack against a creature within range. If you hit their MC, spend 2 Mana. That creature takes 2d12 Sky damage.',
     order: 2,
   },
   {
