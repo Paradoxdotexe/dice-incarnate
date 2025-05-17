@@ -340,21 +340,21 @@ export const CHARACTER_CLASS_FEATURES: CharacterClassFeature[] = [
     key: 'AGI_SAGE_F1',
     name: 'Tempest Strike',
     description:
-      'Roll a DC 5 Instinct check to channel wind into a weapon attack. On a success, spend 1 Mana. That attack deals an additional 1d12 Sky damage.',
+      'Roll a DC 5 Agility check to channel wind into a weapon attack. On a success, spend 1 Mana. That attack deals an additional 1d12 Sky damage.',
     order: 1,
   },
   {
     key: 'AGI_SAGE_F2',
     name: 'Tempest Surge',
     description:
-      'Roll an Instinct check to surge wind towards a creature within 15ft. If you hit their MC, spend 2 Mana. That creature takes 2d12 Sky damage and is pushed back 15ft.',
+      'Roll an Agility check to surge wind towards a creature within 15ft. If you hit their MC, spend 2 Mana. That creature takes 2d12 Sky damage and is pushed back 15ft.',
     order: 2,
   },
   {
     key: 'AGI_SAGE_F3',
     name: 'Tempest Storm',
     description:
-      'Roll an Instinct check to envelope a creature within 60ft in a wind vortex. If you hit their MC, spend 3 Mana. That creature takes 2d12 Sky damage, loses 1 Mana, and is Blinded until your next turn.',
+      'Roll an Agility check to envelope a creature within 60ft in a wind vortex. If you hit their MC, spend 3 Mana. That creature takes 2d12 Sky damage, loses 1 Mana, and is Blinded until your next turn.',
     order: 3,
   },
   {
