@@ -120,6 +120,28 @@ export const CharacterPage: React.FC = () => {
     return maxHitPoints;
   }, [character, characterClasses]);
 
+  const initiative = useMemo(() => {
+    if (!character || !characterClasses) {
+      return 0;
+    }
+
+    let initiative = character.getAttributeBonus('AGI') + character.getAttributeBonus('WIS');
+
+    for (const classState of character.classStates) {
+      const cc = characterClassByKey[classState.key];
+      const featureByKey = keyBy(cc.features, 'key');
+      for (const featureKey of classState.featureKeys) {
+        const feature = featureByKey[featureKey];
+
+        if (feature.name === 'Aggressor') {
+          initiative += character.getAttributeBonus('STR');
+        }
+      }
+    }
+
+    return initiative;
+  }, [character, characterClasses]);
+
   if (!character || !characterClasses) {
     return null;
   }
@@ -145,6 +167,16 @@ export const CharacterPage: React.FC = () => {
         <CharacterLevelPanel />
 
         <NFlex gap={18}>
+          <NFlex vertical align="center" gap={6}>
+            <div style={{ fontSize: 12 }}>Initiative</div>
+            <NFlex vertical align="center" justify="center">
+              <ShieldIcon style={{ width: 48, color: 'transparent' }} />
+              <div style={{ fontSize: 28, fontWeight: 'bold', position: 'absolute' }}>
+                {initiative}
+              </div>
+            </NFlex>
+          </NFlex>
+
           <NFlex vertical align="center" gap={6}>
             <div style={{ fontSize: 12 }}>Hit Points</div>
             <NFlex vertical align="center" justify="center">
