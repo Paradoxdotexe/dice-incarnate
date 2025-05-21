@@ -52,7 +52,9 @@ export const initDatabase = async () => {
 
   // replicate collections to Firestore
   const firestore = initFirestore();
-  Object.values(db.collections).forEach((collection) => replicateCollection(firestore, collection));
+  replicateCollection(firestore, db.collections.character);
+  replicateCollection(firestore, db.collections.characterClass, isDev());
+  replicateCollection(firestore, db.collections.characterClassFeature, isDev());
 
   if (isDev()) {
     // @ts-ignore
@@ -97,7 +99,11 @@ const initFirestore = () => {
   return getFirestore(firebase);
 };
 
-const replicateCollection = async (firestore: Firestore, collection: RxCollection) => {
+const replicateCollection = async (
+  firestore: Firestore,
+  collection: RxCollection,
+  pushEnabled = true
+) => {
   replicateFirestore({
     replicationIdentifier: `${collection.name}-replication`,
     collection,
@@ -111,7 +117,7 @@ const replicateCollection = async (firestore: Firestore, collection: RxCollectio
     serverTimestampField: 'serverTimestamp',
     // replicate from Firestore to IndexedDB
     pull: { batchSize: 10 },
-    // replicate from IndexedDB to Firestore (only in DEV MODE)
-    push: isDev() ? { batchSize: 10 } : undefined,
+    // replicate from IndexedDB to Firestore
+    push: pushEnabled ? { batchSize: 10 } : undefined,
   });
 };
